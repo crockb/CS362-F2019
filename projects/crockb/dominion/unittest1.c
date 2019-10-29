@@ -25,7 +25,7 @@ int testPlayBaron()
     initializeGame(2, k, randomSeed, &G);
 
 	// print out the results of the hand
-	printf("numPlayers: %d\n", state->numPlayers);
+	printf("numPlayers: %d\n", G->numPlayers);
 
 /*
 	int numPlayers; //number of players
