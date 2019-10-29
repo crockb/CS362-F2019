@@ -27,5 +27,8 @@ player: player.c interface.o
 
 all: playdom player 
 
+unittest1: dominion.o unittest1.c
+	gcc -o unittest1 unittest1.c -g dominion.o $(CFLAGS)
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
