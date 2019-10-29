@@ -17,15 +17,15 @@ int testPlayBaron()
 	// initialize variables
 	// needs - baron, minion, ambassador, tribute, mine.  replaced adventurer, embargo
 	int randomSeed = 1;
-	struct gameState G;
+	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
 
-    initializeGame(2, k, randomSeed, &G);
+    initializeGame(2, k, randomSeed, &state);
 
 	// print out the results of the hand
-	printf("numPlayers: %d\n", G->numPlayers);
+	printf("numPlayers: %d\n", state->numPlayers);
 
 /*
 	int numPlayers; //number of players
