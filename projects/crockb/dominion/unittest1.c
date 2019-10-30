@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "dominion.h"
 #include "dominion_helpers.h"
+#include "rngs.h"
 
 // 1.	Omitted a necessary step(s) to “discardCard” when the estate card was found.  
 // This will cause the player’s hand to incorrectly retain an estate during gameplay.
@@ -11,6 +12,53 @@
 // 2.	Decremented the supplyCount of estates after executing the gainCard() function 
 // (duplicative reduction of supplyCount).  May cause the game to end too soon by over 
 // removing estate cards when referenced in the Baron cards.
+
+void printGameStateVariables(struct gameState *state)
+{
+
+	int i;
+
+    // print out the results of the game state
+	printf("numPlayers: %d\n", state.numPlayers);
+	printf("supplyCount (baron): %d\n", state.supplyCount[baron]);
+	printf("supplyCount (gardens): %d\n", state.supplyCount[gardens]);
+	printf("supplyCount (ambassador): %d\n", state.supplyCount[ambassador]);
+	printf("supplyCount (village): %d\n", state.supplyCount[village]);
+	printf("supplyCount (minion): %d\n", state.supplyCount[minion]);
+	printf("supplyCount (mine): %d\n", state.supplyCount[mine]);
+	printf("supplyCount (sea_hag): %d\n", state.supplyCount[sea_hag]);
+	printf("supplyCount (tribute): %d\n", state.supplyCount[tribute]);
+	printf("supplyCount (smithy): %d\n", state.supplyCount[smithy]);
+	printf("whosTurn (1): %d\n", state.whosTurn);
+	printf("phase: %d\n", state.phase);
+	printf("numActions: %d\n", state.numActions);
+	printf("numBuys: %d\n", state.numBuys);
+
+	printf("Player 1's hand:\n");
+	for (i = 0; i < state.handCount[0]; i++)
+		printf("  Card #%d: %d\n", i+1, state.hand[0][i]);
+
+	printf("Player 2's hand:\n");
+	for (i = 0; i < state.handCount[1]; i++)
+		printf("  Card #%d: %d\n", i+1, state.hand[1][i]);
+
+	printf("Player 1's deck:\n");
+	for (i = 0; i < state.deckCount[0]; i++)
+		printf("  Card #%d: %d\n", i+1, state.deck[0][i]);
+
+	printf("Player 2's deck:\n");
+	for (i = 0; i < state.deckCount[1]; i++)
+		printf("  Card #%d: %d\n", i+1, state.deck[1][i]);
+
+	printf("Player 1's disards:\n");
+	for (i = 0; i < state.deckCount[0]; i++)
+		printf("  Card #%d: %d\n", i+1, state.discard[0][i]);
+
+	printf("Player 2's deck:\n");
+	for (i = 0; i < state.deckCount[1]; i++)
+		printf("  Card #%d: %d\n", i+1, state.discard[1][i]);
+
+}
 
 
 int testPlayBaron()
@@ -26,30 +74,7 @@ int testPlayBaron()
 
     initializeGame(2, k, randomSeed, &state);
 
-	// print out the results of the hand
-	printf("numPlayers: %d\n", state.numPlayers);
-
-/*
-	int numPlayers; //number of players
-    int supplyCount[treasure_map+1];  //this is the amount of a specific type of card given a specific number.
-    int embargoTokens[treasure_map+1];
-    int outpostPlayed; // flag indicating if an outpost was played during the turn
-    int outpostTurn; // 
-    int whoseTurn; // set to the current player's turn
-    int phase; // keeps track of the phase number within the game
-    int numActions; // Starts at 1 each turn 
-    int coins; // Use as you see fit! 
-    int numBuys; // Starts at 1 each turn 
-    int hand[MAX_PLAYERS][MAX_HAND];  // holds the cards within each player's hand
-    int handCount[MAX_PLAYERS]; // holds the number of cards within each player's hand
-    int deck[MAX_PLAYERS][MAX_DECK]; // holds the cards within each player's deck
-    int deckCount[MAX_PLAYERS]; // holds the number of cards in each player's deck
-    int discard[MAX_PLAYERS][MAX_DECK]; // holds the cards within each player's discard pile
-    int discardCount[MAX_PLAYERS]; // holds the number of cards in each player's discard pile
-    int playedCards[MAX_DECK]; // 
-    int playedCardCount;
-*/
-
+    printGameStateVariables(&state);
 
 
 	// assert the results
