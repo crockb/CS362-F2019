@@ -1,6 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 #include "dominion.h"
+#include "dominion_helpers.h"
 
 // 1.	Omitted a necessary step(s) to “discardCard” when the estate card was found.  
 // This will cause the player’s hand to incorrectly retain an estate during gameplay.
@@ -17,7 +19,7 @@ int testPlayBaron()
 	// initialize variables
 	// needs - baron, minion, ambassador, tribute, mine.  replaced adventurer, embargo
 	int randomSeed = 1;
-	struct gameState *state;
+	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
@@ -25,7 +27,7 @@ int testPlayBaron()
     initializeGame(2, k, randomSeed, &state);
 
 	// print out the results of the hand
-	printf("numPlayers: %d\n", state->numPlayers);
+	printf("numPlayers: %d\n", state.numPlayers);
 
 /*
 	int numPlayers; //number of players
