@@ -17,7 +17,7 @@ int testPlayBaron()
 	// initialize variables
 	// needs - baron, minion, ambassador, tribute, mine.  replaced adventurer, embargo
 	int randomSeed = 1;
-	struct gameState state;
+	struct gameState *state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
