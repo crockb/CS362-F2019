@@ -13,6 +13,44 @@
 // (duplicative reduction of supplyCount).  May cause the game to end too soon by over 
 // removing estate cards when referenced in the Baron cards.
 
+
+// helper function signatures
+void printGameStateVariables(struct gameState *state);
+
+
+int testPlayBaron()
+{
+
+	// initialize variables
+	// needs - baron, minion, ambassador, tribute, mine.  replaced adventurer, embargo
+	int randomSeed = 1;
+	struct gameState state;
+	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
+               sea_hag, tribute, smithy
+            };
+
+    initializeGame(2, k, randomSeed, &state);
+
+    printGameStateVariables(&state);
+
+
+	// assert the results
+
+
+	return 0;
+}
+
+
+// call unittest1
+int main()
+{
+    testPlayBaron();
+    return 0;
+}
+
+
+// helper functions for unittest1
+
 void printGameStateVariables(struct gameState *state)
 {
 
@@ -50,7 +88,7 @@ void printGameStateVariables(struct gameState *state)
 	for (i = 0; i < state->deckCount[1]; i++)
 		printf("  Card #%d: %d\n", i+1, state->deck[1][i]);
 
-	printf("Player 1's disards:\n");
+	printf("Player 1's discards:\n");
 	for (i = 0; i < state->deckCount[0]; i++)
 		printf("  Card #%d: %d\n", i+1, state->discard[0][i]);
 
@@ -58,35 +96,4 @@ void printGameStateVariables(struct gameState *state)
 	for (i = 0; i < state->deckCount[1]; i++)
 		printf("  Card #%d: %d\n", i+1, state->discard[1][i]);
 
-}
-
-
-int testPlayBaron()
-{
-
-	// initialize variables
-	// needs - baron, minion, ambassador, tribute, mine.  replaced adventurer, embargo
-	int randomSeed = 1;
-	struct gameState state;
-	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
-               sea_hag, tribute, smithy
-            };
-
-    initializeGame(2, k, randomSeed, &state);
-
-    printGameStateVariables(&state);
-
-
-	// assert the results
-
-
-	return 0;
-}
-
-
-// call unittest1
-int main()
-{
-    testPlayBaron();
-    return 0;
 }
