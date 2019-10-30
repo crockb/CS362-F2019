@@ -37,9 +37,9 @@ int testPlayBaron()
     int outpostTurn; // 
     int whoseTurn; // set to the current player's turn
     int phase; // keeps track of the phase number within the game
-    int numActions; /* Starts at 1 each turn 
-    int coins; /* Use as you see fit! 
-    int numBuys; /* Starts at 1 each turn 
+    int numActions; // Starts at 1 each turn 
+    int coins; // Use as you see fit! 
+    int numBuys; // Starts at 1 each turn 
     int hand[MAX_PLAYERS][MAX_HAND];  // holds the cards within each player's hand
     int handCount[MAX_PLAYERS]; // holds the number of cards within each player's hand
     int deck[MAX_PLAYERS][MAX_DECK]; // holds the cards within each player's deck
