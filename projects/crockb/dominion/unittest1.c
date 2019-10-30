@@ -29,7 +29,7 @@ void printGameStateVariables(struct gameState *state)
 	printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
 	printf("supplyCount (tribute): %d\n", state->supplyCount[tribute]);
 	printf("supplyCount (smithy): %d\n", state->supplyCount[smithy]);
-	printf("whosTurn (1): %d\n", state->whosTurn);
+	printf("whoseTurn (1): %d\n", state->whoseTurn);
 	printf("phase: %d\n", state->phase);
 	printf("numActions: %d\n", state->numActions);
 	printf("numBuys: %d\n", state->numBuys);
