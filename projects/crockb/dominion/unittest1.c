@@ -62,7 +62,7 @@ int testPlayBaron()
     // provide player1 with a baron card
     throwAwayCard = state.hand[player1][0];
     state.hand[player1][0] = baron;
-    supplyCount[baron]--;
+    state.supplyCount[baron]--;
 
     // print the gamestate
     printGameStateVariables(&state);
