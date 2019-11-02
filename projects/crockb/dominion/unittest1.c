@@ -1,17 +1,26 @@
+/* unittest1.c
+   Author/Date:  Bryant Crock  11/1/19
+   Description:  Test the outcomes of the refactored baron card playBaron(choice1, state, handPos);
+   Business Requirements for Baron:
+		 1. +1 Buy
+		 2. Choice 1:  Discard an Estate for +4 coins.  If no Estate, receive an Estate
+		 3. Choice 2:  Receive an Estate
+
+   Known Bugs Inserted in Assignment 2:
+		 1. Omitted a necessary step(s) to “discardCard” when the estate card was found.  
+            This will cause the player’s hand to incorrectly retain an estate during gameplay.
+
+         2.  Decremented the supplyCount of estates after executing the gainCard() function 
+             (duplicative reduction of supplyCount).  May cause the game to end too soon by over 
+             removing estate cards when referenced in the Baron cards.
+*/
+
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
-
-// 1.	Omitted a necessary step(s) to “discardCard” when the estate card was found.  
-// This will cause the player’s hand to incorrectly retain an estate during gameplay.
-
-
-// 2.	Decremented the supplyCount of estates after executing the gainCard() function 
-// (duplicative reduction of supplyCount).  May cause the game to end too soon by over 
-// removing estate cards when referenced in the Baron cards.
 
 
 // helper function signatures
@@ -22,8 +31,9 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	// needs - baron, minion, ambassador, tribute, mine.  replaced adventurer, embargo
-	int randomSeed = 1;
+	int i, j;
+	int randomSeed = 1234;
+	int handPos = 0, choice1 =
 	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
