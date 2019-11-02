@@ -31,9 +31,9 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	int i, j;
+	//int i, j;
 	int randomSeed = 1234;
-	int handPos = 0, choice1 =
+	//int handPos = 0, choice1 = 0, int choice2 = 0;
 	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
