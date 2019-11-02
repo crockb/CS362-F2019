@@ -46,7 +46,6 @@ int testPlayBaron()
 	int randomSeed = 1234;
 	int player1 = 0;
 	//int handPos = 0, choice1 = 0, int choice2 = 0;
-	int throwAwayCard = 0;
 	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
@@ -60,7 +59,6 @@ int testPlayBaron()
     printf("TEST 1: choice1 discard estate - player1 has an estate.\n");
 
     // provide player1 with a baron card
-    throwAwayCard = state.hand[player1][0];
     state.hand[player1][0] = baron;
     state.supplyCount[baron]--;
 
