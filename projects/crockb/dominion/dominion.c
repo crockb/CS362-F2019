@@ -860,7 +860,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     case baron:
 
         // assignment 2 - replaced with function
-        return playBaron(choice1, state, handPos);
+        return playBaron(choice1, choice2, state, handPos);
 
 
     case great_hall:
@@ -1139,7 +1139,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
 
 
 /* assignment #2 - a function to play the baron card in the game */
-int playBaron(int choice1, struct gameState *state, int handPos)
+int playBaron(int choice1, int choice2, struct gameState *state, int handPos)
 {
 
     int currentPlayer = whoseTurn(state);
