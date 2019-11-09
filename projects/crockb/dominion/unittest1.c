@@ -110,6 +110,9 @@ int testPlayBaron()
   	updateCoins(player1, &state, bonus);
   	memcpy(&preState, &state, sizeof(struct gameState));
 
+  	// print cards before playing card
+  	printPlayersCards(player1, &state);
+
   	// run the refactored function playBaron() function
   	playCard(0, 1, 0, 0, &state);
 
