@@ -100,7 +100,7 @@ int testPlayBaron()
     state.supplyCount[baron]--;
 
     // check for estate card in hand
-    printf("position of estate card: %d\n", hasGameCard(estate,&state,1));
+    printf("position of estate card: %d\n", hasGameCard(estate,state,1));
 
   	// print player's cards
     printPlayersCards(0, &state);
@@ -166,7 +166,6 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 {
 	int i;
 	int player = state->whoseTurn;
-	int returnValue = -2;
 
 	// hand pile
 	if (pileToCheck == 1) {
@@ -174,12 +173,12 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 		for (i = 0; i < state->handCount[player]; i++) {
 			if (state->hand[player][i] == card) {
 				// card found
-				returnValue = i;
+				return i;
 			}
 		}
 
     	// card not found
-    	returnValue = -1;
+    	return -1;
 	}
 
 	// discard pile
@@ -187,11 +186,11 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 		for (i = 0; i < state->discardCount[player]; i++) {
 		if (state->discard[player][i] == card) {
 			// card found
-			returnValue = i;
+			return i;
 		}
 
 		// card not found
-    	returnValue = -1;
+    	return -1;
 		}
 	}
 
@@ -201,24 +200,20 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 		for (i = 0; i < state->deckCount[player]; i++) {
 		if (state->deck[player][i] == card) {
 			// card found
-			returnValue = i;
+			return i;
 		}
 
 		// card not found
-    	returnValue = -1;
+    	return -1;
 		}
 	}
 
 	// no pile match - error
 	else
 	{
-
 	  printf("critical error: hasGameCard no match.\n");
-	  returnValue = -2;
-
+	  return -2
 	}
-
-	return returnValue;
 }
 
 
