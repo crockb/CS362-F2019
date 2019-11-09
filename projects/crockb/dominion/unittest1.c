@@ -128,7 +128,6 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 
 	// discard pile
 	else if (pileToCheck == 2) {
-		printf("Match found in pile #2\n");
 		for (i = 0; i < state->discardCount[player]; i++) {
 		if (state->discard[player][i] == card) {
 			// card found
@@ -257,7 +256,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
 // helper functions for unittest1
 //int hasGameCard(int card, struct gameState *state, int pileToCheck)
 
-     result = assert(hasGameCard(baron, preState, 2) >=0, hasGameCard(baron, state, 2) >=0);
+     result = assert(hasGameCard(baron, state, 2) >=0, 0 >= 0);
     if (result == 0)
     	printf("precondition #7 fail: baron in discard pile: FALSE, expected: TRUE\n");
     else
