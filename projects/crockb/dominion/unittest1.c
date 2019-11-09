@@ -100,7 +100,7 @@ int testPlayBaron()
     state.supplyCount[baron]--;
 
     // check for estate card in hand
-    printf("position of estate card: %d\n", hasGameCard(estate,state,1));
+    printf("position of estate card: %d\n", hasGameCard(estate,&state,1));
 
   	// print player's cards
     printPlayersCards(0, &state);
@@ -212,7 +212,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	else
 	{
 	  printf("critical error: hasGameCard no match.\n");
-	  return -2
+	  return -2;
 	}
 }
 
