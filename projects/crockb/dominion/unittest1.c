@@ -327,7 +327,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
 
 void printTestCondition2Results(struct gameState *state, struct gameState *preState)
 {
-	int player1 = 0;
+	//int player1 = 0;
 	int result = 0;
 
 	// +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, 
