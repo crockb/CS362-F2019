@@ -43,7 +43,7 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	int player1, bonus, result = 0;
+	int player1 = 0, bonus = 0, result = 0;
 	int randomSeed = 1234;
 	struct gameState state, preState;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
