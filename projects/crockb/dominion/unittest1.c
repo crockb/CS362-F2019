@@ -71,7 +71,7 @@ int testPlayBaron()
   	// check the results
 
     // player has one less estate in hand
-    result = assert(countCardTypeInHand(estate, &preState)-1 == countCardTypeInHand(estate, &state))
+    result = assert(countCardTypeInHand(estate, &preState)-1, countCardTypeInHand(estate, &state));
     if (result == 0)
     	printf("precondition #1 fail: # estates in hand: %d, expected: %d", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
     else
