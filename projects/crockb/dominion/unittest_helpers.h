@@ -21,4 +21,6 @@ void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
 
+// touch
+
 #endif
