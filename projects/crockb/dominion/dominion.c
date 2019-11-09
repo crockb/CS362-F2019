@@ -263,6 +263,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     }
 
     //reduce number of actions
+    printf("Did this code execute?\n");
     state->numActions--;
 
     //update coins (Treasure cards may be added with card draws)
@@ -1194,7 +1195,6 @@ int playBaron(int choice1, int choice2, struct gameState *state, int handPos)
 
 
 /* assignment #2 - a function to play the minion card */
-
 int playMinion(int choice1, int choice2, struct gameState *state, int handPos)
 {
 
