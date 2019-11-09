@@ -134,18 +134,18 @@ int hasGameCardInDeck(int card, struct gameState *state)
 // provide an estate card
 int provideEstateCardFromDeck(int player, struct gameState *state)
 {
-    if (hasGameCardInHand(estate, &state) < 0) {
+    if (hasGameCardInHand(estate, state) < 0) {
     	int tempCard;
     	int estatePos;
     	// provide an estate card from the deck
-    	if (hasGameCardInDeck(estate, &state) < 0) {
+    	if (hasGameCardInDeck(estate, state) < 0) {
     		printf("error: no estate card in deck\n");
     		return -1;
     	}
     	else
     	{
     		estatePos = hasGameCardInDeck(estate, &state);
-    		state->hand[player][1] = tempCard;
+    		tempCard = state->hand[player][1];
     		state->hand[player][1] = state->deck[player][estatePos];
     		state->deck[player][estatePos] = tempCard;
     	}
