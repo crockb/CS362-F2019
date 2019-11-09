@@ -254,7 +254,7 @@ int removeEstateCardFromHand(int player, struct gameState *state)
     	state->hand[player][estateHandPos] = copper;
     	state->deck[player][copperDeckPos] = estate;
     }
-    printf("swapCard = %d\n", swapCard);
+
     return 0;
 }
 
