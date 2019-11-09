@@ -31,6 +31,7 @@ Test #4:  Gain an Estate (No Estates Available):  +1 hand[estate], -1 hand[baron
 
 
 // helper function signatures
+int assert(int expected, int actual);
 int hasGameCardInHand(int card, struct gameState *state);
 int hasGameCardInDeck(int card, struct gameState *state);
 int countCardTypeInHand(int card, struct gameState *state);
