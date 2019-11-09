@@ -140,6 +140,7 @@ int countCardTypeInHand(int card, struct gameState *state)
 	int count = 0;
 	int player = state->whoseTurn;
 	for (i = 0; i < state->handCount[player]; i++) {
+		if (state->hand[player][i] == card)
 			count++;
 	}
 	return count;
