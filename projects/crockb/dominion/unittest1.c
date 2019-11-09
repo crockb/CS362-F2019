@@ -245,16 +245,14 @@ int provideEstateCardFromDeck(int player, struct gameState *state)
 // remove estate cards from the players hand (if they have any)
 int removeEstateCardFromHand(int player, struct gameState *state)
 {
-	int swapCard;
     int estateHandPos, copperDeckPos;
     
     while (hasGameCard(estate, state, 1) >= 0) {
     	// swap estate card with nearest copper in deck
     	copperDeckPos = hasGameCard(copper, state, 3);
     	estateHandPos = hasGameCard(estate, state, 1);
-    	swapCard = state->hand[player][estateHandPos];
-    	state->hand[player][estateHandPos] = state->deck[player][copperDeckPos];
-    	state->deck[player][copperDeckPos] = swapCard;
+    	state->hand[player][estateHandPos] = copper;
+    	state->deck[player][copperDeckPos] = estate;
     }
     printf("swapCard = %d\n", swapCard);
     return 0;
