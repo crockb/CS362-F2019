@@ -62,6 +62,8 @@ int testPlayBaron()
                sea_hag, tribute, smithy
             };
 
+/*
+
     // -------  condition #1 - choice1 (player1 has an estate) ------
     printf("unittest1, condition#1: player1 chooses to discard an estate - player1 has an estate.\n");
 
@@ -84,11 +86,18 @@ int testPlayBaron()
   	// check the results
   	printTestCondition1Results(&state, &preState);
 
+*/
   	// -------  condition #2 - choice1 (player1 has an estate) ------
+
+
     printf("unittest1, condition#2: player1 chooses to discard an estate - player1 does not have an estate.\n");
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a baron card
+    state.hand[player1][0] = baron;
+    state.supplyCount[baron]--;
 
     // confirm player has an estate card in hand
   	provideEstateCardFromDeck(player1, &state);
