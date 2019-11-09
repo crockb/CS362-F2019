@@ -31,6 +31,8 @@
 #include "rngs.h"
 
 
+
+
 // call unittest1
 int main()
 {
@@ -142,7 +144,6 @@ int testPlayBaron()
   	printUnitTest1Condition2to4Results(&state, &preState);
 
     printf("\n----- UNIT TEST #1 - COMPLETED -----\n");
-
 
 	return 0;
 }

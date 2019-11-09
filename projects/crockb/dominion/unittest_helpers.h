@@ -2,6 +2,8 @@
 #define _UNITTEST_HELPERS_H
 
 #include "dominion.h"
+#include "dominion_helpers.h"
+#include "rngs.h"
 
 // helper functions
 int testPlayBaron();
