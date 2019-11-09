@@ -258,14 +258,16 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     else
        printf("precondition #7 pass: baron in discard pile: TRUE, expected: TRUE\n");    
 
-    // precondition #8 - player has 9 total cards (afer removing 1 estate)
-    result = assert(state->handCount[player1] + state->deckCount[player1] + state->discardCount[player1] + state->playedCardCount[player1], 9);
+    // precondition #8 - player has 1 less estate
+    result = assert(countCardTypeInHand(estate, preState)-1, countCardTypeInHand(estate, state));
     if (result == 0)
-    	printf("precondition #8 fail: player has 9 cards (after removing 1 estate): %d, expected: 9\n", state->handCount[player1] + state->deckCount[player1] + state->discardCount[player1] + state->playedCardCount[player1]);
+    	printf("precondition #8 fail: player has 1 less estate: %d, expected: %d\n", countCardTypeInHand(estate, state), countCardTypeInHand(estate, preState)-1);
     else
-       printf("precondition #8 pass: player has 9 cards (after removing 1 estate): %d, expected: 9\n", state->handCount[player1] + state->deckCount[player1] + state->discardCount[player1] + state->playedCardCount[player1]);
+        printf("precondition #8 pass: player has 1 less estate: %d, expected: %d\n", countCardTypeInHand(estate, state), countCardTypeInHand(estate, preState)-1);
 
     // precondition #9 - supplyCount for estate unchanged
+
+
 
     // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 
     //                   0 actions, +1 discard[baron], 9 total cards, supplyCount estate unchanged
