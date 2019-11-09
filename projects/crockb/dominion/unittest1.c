@@ -157,6 +157,9 @@ int testPlayBaron()
   	// check the results
   	printTestCondition2to4Results(&state, &preState);
 
+    printf("\n----- UNIT TEST #1 - COMPLETED -----\n");
+
+
 /*
     // print player's cards
     // printPlayersCards(0, &state);
