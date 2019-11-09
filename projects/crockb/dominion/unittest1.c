@@ -31,14 +31,26 @@ Test #4:  Gain an Estate (No Estates Available):  +1 hand[estate], -1 hand[baron
 
 
 // helper function signatures
+int testPlayBaron();
 int assert(int expected, int actual);
 int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
 int provideEstateCardFromDeck(int player, struct gameState *state);
+int removeEstateCardFromHand(int player, struct gameState *state);
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
 void printPlayersCards(int player, struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
 
+
+// call unittest1
+int main()
+{
+    testPlayBaron();
+    return 0;
+}
+
+
+// function to execute the set of conditions for unittest#1
 int testPlayBaron()
 {
 
@@ -50,10 +62,11 @@ int testPlayBaron()
                sea_hag, tribute, smithy
             };
 
-    initializeGame(2, k, randomSeed, &state);
+    // -------  condition #1 - choice1 (player1 has an estate) ------
+    printf("unittest1, condition#1: player1 chooses to discard an estate - player1 has an estate.\n");
 
-    // -------  test #1 - choice1 (player1 has an estate) ------
-    printf("TEST 1: choice1 to discard estate - player1 has an estate.\n");
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
 
     // provide player1 with a baron card
     state.hand[player1][0] = baron;
@@ -71,7 +84,16 @@ int testPlayBaron()
   	// check the results
   	printTestCondition1Results(&state, &preState);
 
+  	// -------  condition #2 - choice1 (player1 has an estate) ------
+    printf("unittest1, condition#2: player1 chooses to discard an estate - player1 does not have an estate.\n");
 
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // confirm the player does not have an estate card
+
+
+/*
     // print player's cards
     printPlayersCards(0, &state);
 
@@ -79,21 +101,13 @@ int testPlayBaron()
     printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
     printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
     printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
-
-    // print the gamestate
-    //printAllGameStateVariables(&state);
+*/
 
 	return 0;
 }
 
 
 
-// call unittest1
-int main()
-{
-    testPlayBaron();
-    return 0;
-}
 
 
 int assert(int expected, int actual)
@@ -203,6 +217,26 @@ int provideEstateCardFromDeck(int player, struct gameState *state)
     return 0;
 }
 
+// remove estate cards from the players hand (if they have any)
+int removeEstateCardFromHand(int player, struct gameState *state)
+{
+	int swapCard;
+    int estateHandPos, coppeDeckrPos;
+    
+    while (hasGameCard(estate, state, 1) >= 0) {
+    	// swap estate card with nearest copper in deck
+    	copperDeckPos = hasGameCard(copper, state, 3);
+    	estateHandPos = hasGameCard(estate, state, 1);
+    	tempCard = state->hand[player][estateHandPos];
+    	state->hand[player][estatePos] = state->deck[player][copperPos];
+    	state->deck[player][copperPos] = tempCard;
+    }
+
+    return 0;
+}
+
+
+
 
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
@@ -271,13 +305,6 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     	printf("precondition #9 fail: estate supply count enchanged: %d, expected: %d\n", preState->supplyCount[estate], state->supplyCount[estate]);
     else
         printf("precondition #9 pass: estate supply count enchanged: %d, expected: %d\n", preState->supplyCount[estate], state->supplyCount[estate]);
-
-
-
-
-    // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 
-    //                   0 actions, +1 discard[baron], 9 total cards, supplyCount estate unchanged
-
 
 }
 
