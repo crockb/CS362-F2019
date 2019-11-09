@@ -126,7 +126,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	}
 
 	// discard pile
-	if (pileToCheck == 2) {
+	elseif (pileToCheck == 2) {
 		printf("Match found in pile #2\n");
 		for (i = 0; i < state->discardCount[player]; i++) {
 		if (state->discard[player][i] == card) {
@@ -140,7 +140,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	}
 
 	// deck pile
-	if (pileToCheck == 3) {
+	elseif (pileToCheck == 3) {
 
 		for (i = 0; i < state->deckCount[player]; i++) {
 		if (state->deck[player][i] == card) {
@@ -154,8 +154,14 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	}
 
 	// no pile match - error
-	printf("critical error: hasGameCard no match.\n");
-	return -2;
+	else
+	{
+
+	  printf("critical error: hasGameCard no match.\n");
+	  return -2;
+
+	}
+
 
 }
 
