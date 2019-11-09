@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include "dominion.h"
+#include "dominion_helpers.h"
+#include "rngs.h"
 #include "unittest_helpers.h"
-
-
-
-
 
 int assert(int expected, int actual)
 {
