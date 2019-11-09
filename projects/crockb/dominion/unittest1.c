@@ -110,6 +110,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 {
 	int i;
 	int player = state->whoseTurn;
+	int returnValue = -2;
 
 	// hand pile
 	if (pileToCheck == 1) {
@@ -117,12 +118,12 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 		for (i = 0; i < state->handCount[player]; i++) {
 			if (state->hand[player][i] == card) {
 				// card found
-				return i;
+				returnValue = i;
 			}
 		}
 
     	// card not found
-    	return -1;
+    	returnValue = -1;
 	}
 
 	// discard pile
@@ -131,11 +132,11 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 		for (i = 0; i < state->discardCount[player]; i++) {
 		if (state->discard[player][i] == card) {
 			// card found
-			return i;
+			returnValue = i;
 		}
 
 		// card not found
-    	return -1;
+    	returnValue = -1;
 		}
 	}
 
@@ -145,11 +146,11 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 		for (i = 0; i < state->deckCount[player]; i++) {
 		if (state->deck[player][i] == card) {
 			// card found
-			return i;
+			returnValue = i;
 		}
 
 		// card not found
-    	return -1;
+    	returnValue = -1;
 		}
 	}
 
@@ -158,11 +159,11 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	{
 
 	  printf("critical error: hasGameCard no match.\n");
-	  return -2;
+	  returnValue = -2;
 
 	}
 
-
+	return returnValue;
 }
 
 
