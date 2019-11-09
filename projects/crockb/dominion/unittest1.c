@@ -99,19 +99,6 @@ int testPlayBaron()
     state.hand[player1][0] = baron;
     state.supplyCount[baron]--;
 
-    // check for estate card in hand
-    printf("position of estate card: %d\n", hasGameCard(estate,&state,1));
-
-  	// print player's cards
-    printPlayersCards(0, &state);
-
-    // print number of each card type:
-    printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
-    printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
-    printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
-
-/*
-
     // confirm player has an estate card in hand
   	provideEstateCardFromDeck(player1, &state);
 
@@ -134,7 +121,6 @@ int testPlayBaron()
     printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
     printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
 
-*/
 /*
     // print player's cards
     printPlayersCards(0, &state);
