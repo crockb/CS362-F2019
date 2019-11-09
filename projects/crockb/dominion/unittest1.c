@@ -38,7 +38,7 @@ int countCardTypeInHand(int card, struct gameState *state);
 int provideEstateCardFromDeck(int player, struct gameState *state);
 int removeEstateCardFromHand(int player, struct gameState *state);
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
-void printTestCondition2Results(struct gameState *state, struct gameState *preState)
+void printTestCondition2Results(struct gameState *state, struct gameState *preState);
 void printPlayersCards(int player, struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
 
