@@ -39,6 +39,7 @@ int testPlayBaron()
 
 	// initialize variables
 	//int i, j;
+	int player1 = 0;
 	int randomSeed = 1234;
 	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -58,7 +59,7 @@ int testPlayBaron()
 
     // print the gamestate
     //printAllGameStateVariables(&state);
-    
+
     if (hasGameCardInHand(baron, &state) == 1) {
     	printf("Baron Card Found\n");
     }
@@ -90,7 +91,7 @@ int hasGameCardInHand(int card, struct gameState *state)
 	int player = state->whoseTurn;
 
 	for (i = 0; i < state->handCount[player]; i++) {
-		if state->hand[player][i] == card {
+		if (state->hand[player][i] == card) {
 			// card found
 			return 1
 		}
