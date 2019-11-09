@@ -64,10 +64,9 @@ int testPlayBaron()
                sea_hag, tribute, smithy
             };
 
-/*
 
     // -------  condition #1 - choice1 (player1 has an estate) ------
-    printf("unittest1, condition#1: player1 chooses to discard an estate - player1 has an estate.\n");
+    printf("----- UNIT TEST #1 - condition#1: player1 chooses to discard an estate - player1 has an estate.\n");
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
@@ -88,10 +87,8 @@ int testPlayBaron()
   	// check the results
   	printTestCondition1Results(&state, &preState);
 
-*/
-
   	// -------  condition #2 - choice1 (player1 has an estate) ------
-    printf("unittest1, condition#2: player1 chooses to discard an estate - player1 does not have an estate.\n");
+    printf("----- UNIT TEST #1 - condition#2: player1 chooses to discard an estate - player1 does not have an estate.\n");
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
@@ -112,10 +109,11 @@ int testPlayBaron()
 
   	playCard(0, 1, 0, 0, &state);
 
-
    	// check the results
   	printTestCondition2Results(&state, &preState);
 
+
+/*
     // print player's cards
     // printPlayersCards(0, &state);
 
@@ -131,10 +129,10 @@ int testPlayBaron()
     printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
     printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
 
+*/
+
 	return 0;
 }
-
-
 
 
 
