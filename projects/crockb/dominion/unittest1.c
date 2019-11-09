@@ -131,9 +131,6 @@ int testPlayBaron()
     printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
     printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
 
-  	printAllSupplyCounts(&state);
-
-
 	return 0;
 }
 
@@ -326,9 +323,9 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     // precondition #9 - supplyCount for estate unchanged
     result = assert(preState->supplyCount[estate], state->supplyCount[estate]);
     if (result == 0)
-    	printf("precondition #9 fail: estate supply count unchanged: %d, expected: %d\n", preState->supplyCount[estate], state->supplyCount[estate]);
+    	printf("precondition #9 fail: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
     else
-        printf("precondition #9 pass: estate supply count unchanged: %d, expected: %d\n", preState->supplyCount[estate], state->supplyCount[estate]);
+        printf("precondition #9 pass: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
 
 }
 
@@ -389,9 +386,9 @@ void printTestCondition2Results(struct gameState *state, struct gameState *preSt
     // precondition #8 - supplyCount for estate -1
     result = assert(preState->supplyCount[estate], state->supplyCount[estate]);
     if (result == 0)
-    	printf("precondition #8 fail: estate supply count reduced by 1: %d, expected: %d\n", preState->supplyCount[estate]-1, state->supplyCount[estate]);
+    	printf("precondition #8 fail: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
     else
-        printf("precondition #8 pass: estate supply count reduced by 1: %d, expected: %d\n", preState->supplyCount[estate]-1, state->supplyCount[estate]);
+        printf("precondition #8 pass: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
 }
 
 
