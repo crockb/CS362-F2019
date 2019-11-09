@@ -126,7 +126,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	}
 
 	// discard pile
-	elseif (pileToCheck == 2) {
+	else if (pileToCheck == 2) {
 		printf("Match found in pile #2\n");
 		for (i = 0; i < state->discardCount[player]; i++) {
 		if (state->discard[player][i] == card) {
@@ -140,7 +140,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	}
 
 	// deck pile
-	elseif (pileToCheck == 3) {
+	else if (pileToCheck == 3) {
 
 		for (i = 0; i < state->deckCount[player]; i++) {
 		if (state->deck[player][i] == card) {
