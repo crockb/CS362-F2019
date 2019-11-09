@@ -42,8 +42,7 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	int player1 = 0;
-	int bonus = 0;
+	int player1, bonus, result = 0;
 	int randomSeed = 1234;
 	struct gameState state, preState;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -62,7 +61,7 @@ int testPlayBaron()
     // confirm player has an estate card in hand
   	provideEstateCardFromDeck(player1, &state);
 
-  	// copy the initial pre conditions
+  	// copy the initial pre-conditions
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
@@ -70,8 +69,23 @@ int testPlayBaron()
   	
   	// check the results
 
+    // player has one less estate in hand
+    result = assert(countCardTypeInHand(estate, &preState)-1 == countCardTypeInHand(estate, &state))
+    if (result == 0)
+    	printf("precondition #1 fail: # estates in hand: %d, expected: %d", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
+    else
+       printf("precondition #1 pass: # estates in hand: %d, expected: %d", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
+
+    // player has one less baron in hand
+    // player has 3 cards in hand (less 1 estate, less 1 baron)
+    // player has +4 coins
+    // player has +1 buys
+    // player 0 actions
+    // player has 1 discarded baron
+    // player has 9 total cards
+
     // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 
-    //                   0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
+    //                   0 actions, +1 discard[baron], 9 total cards
     
     /* set expected preconditions
   	int numEstatesInHand = countCardTypeInHand(estate, &state)--;   // -1 estate card in hand
@@ -102,6 +116,14 @@ int main()
     return 0;
 }
 
+
+int assert(int expected, int actual)
+{
+	if (expected == actual)
+		return 1;
+	else
+		return 0;
+}
 
 
 // helper functions for unittest1
