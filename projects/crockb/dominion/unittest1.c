@@ -93,7 +93,7 @@ int hasGameCardInHand(int card, struct gameState *state)
 	for (i = 0; i < state->handCount[player]; i++) {
 		if (state->hand[player][i] == card) {
 			// card found
-			return 1
+			return 1;
 		}
 	}
 
