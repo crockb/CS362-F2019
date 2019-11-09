@@ -57,7 +57,7 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	int player1 = 0; //bonus = 0;
+	int player1 = 0;
 	int randomSeed = 1234;
 	struct gameState state, preState;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -82,7 +82,7 @@ int testPlayBaron()
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
-    cardEffect(baron, 1, 0, 0, &state, 0, &bonus);
+    playCard(0, 1, 0, 0, &state);
   	
   	// check the results
   	printTestCondition1Results(&state, &preState);
