@@ -6,7 +6,7 @@ rngs.o: rngs.h rngs.c
 dominion.o: dominion.h dominion.c rngs.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
-unittest_helpers.o: unittest_helpers.h dominion.o rngs.o 
+unittest_helpers.o: unittest_helpers.h unittest_helpers.c dominion.o rngs.o 
 	gcc -c unittest_helpers.c -g  $(CFLAGS)
 
 playdom: dominion.o playdom.c
