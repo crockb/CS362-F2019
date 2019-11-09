@@ -127,7 +127,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 
 	// discard pile
 	if (pileToCheck == 2) {
-
+		printf("Match found in pile #2\n");
 		for (i = 0; i < state->discardCount[player]; i++) {
 		if (state->discard[player][i] == card) {
 			// card found
