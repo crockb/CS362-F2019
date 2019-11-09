@@ -66,7 +66,7 @@ int testPlayBaron()
 
 
     // -------  condition #1 - choice1 (player1 has an estate) ------
-    printf("----- UNIT TEST #1 - condition#1: player1 chooses to discard an estate - player1 has an estate.\n");
+    printf("----- UNIT TEST #1 - CONDITION #1: player1 chooses to discard an estate - player1 has an estate.\n");
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
@@ -88,7 +88,7 @@ int testPlayBaron()
   	printTestCondition1Results(&state, &preState);
 
   	// -------  condition #2 - choice1 (player1 has an estate) ------
-    printf("----- UNIT TEST #1 - condition#2: player1 chooses to discard an estate - player1 does not have an estate.\n");
+    printf("----- UNIT TEST #1 - CONDITION #2: player1 chooses to discard an estate - player1 does not have an estate.\n");
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
@@ -104,8 +104,6 @@ int testPlayBaron()
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
-    //cardEffect(baron, 1, 0, 0, &state, 0, &bonus);
-  	printAllSupplyCounts(&state);
 
   	playCard(0, 1, 0, 0, &state);
 
