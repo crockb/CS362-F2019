@@ -6,16 +6,11 @@
 		 2. Choice 1:  Discard an Estate for +4 coins.  If no Estate, receive an Estate
 		 3. Choice 2:  Receive an Estate
 
-   Expected End States:
-   		 1. Choice 1 (Has Estate):  -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy,
-   		                            0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
+Test #1:  Remove Estate (Has Estate):   -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
+Test #2:  Remove Estate (No Estate):   +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], 11 total cards, -1 supply[estate], 0 whoseTurn, 0 phase
+Test #3:  Gain an Estate (Estates Available):  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], 11 total cards, -1 supply[estate], 0 whoseTurn, 0 phase
+Test #4:  Gain an Estate (No Estates Available):  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], 11 total cards, -1 supply[estate], 0 whoseTurn, 0 phase
 
-   		 2. Choice 1 (No Estate):   +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy,
-   		 							0 actions, +1 discard[baron], 11 total cards, -1 supply[estate], 
-   		 							0 whoseTurn, 0 phase
-		 
-		 3. Choice 2:  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, 
-		               +1 discard[baron], 11 total cards, -1 supply[estate], 0 whoseTurn, 0 phase 
 
    Known Bugs Inserted in Assignment 2:
 		 1. Omitted a necessary step(s) to “discardCard” when the estate card was found.  
@@ -35,7 +30,8 @@
 
 
 // helper function signatures
-void printGameStateVariables(struct gameState *state);
+void printAllGameStateVariables(struct gameState *state);
+int hasGameCardInHand(int card, struct gameState *state);
 
 
 int testPlayBaron()
@@ -44,8 +40,6 @@ int testPlayBaron()
 	// initialize variables
 	//int i, j;
 	int randomSeed = 1234;
-	int player1 = 0;
-	//int handPos = 0, choice1 = 0, int choice2 = 0;
 	struct gameState state;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
@@ -53,18 +47,27 @@ int testPlayBaron()
 
     initializeGame(2, k, randomSeed, &state);
 
-    printGameStateVariables(&state);
+    //printAllGameStateVariables(&state);
 
     // -------  test #1 - choice1 (player1 has an estate) ------
-    printf("TEST 1: choice1 discard estate - player1 has an estate.\n");
+    printf("TEST 1: choice1 to discard estate - player1 has an estate.\n");
 
     // provide player1 with a baron card
     state.hand[player1][0] = baron;
     state.supplyCount[baron]--;
 
     // print the gamestate
-    printGameStateVariables(&state);
+    //printAllGameStateVariables(&state);
+    
+    if (hasGameCardInHand(baron, &state) == 1) {
+    	printf("Baron Card Found\n");
+    }
+    else {
+    	printf("Baron Card Not Found\n");
+    }
 
+    // set the preconditions
+//-1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
 
 	return 0;
 }
@@ -78,9 +81,27 @@ int main()
 }
 
 
+
 // helper functions for unittest1
 
-void printGameStateVariables(struct gameState *state)
+int hasGameCardInHand(int card, struct gameState *state)
+{
+	int i;
+	int player = state->whoseTurn;
+
+	for (i = 0; i < state->handCount[player]; i++) {
+		if state->hand[player][i] == card {
+			// card found
+			return 1
+		}
+	}
+
+    // card not found
+    return 0;
+}
+
+
+void printAllGameStateVariables(struct gameState *state)
 {
 
 	int i;
@@ -128,7 +149,7 @@ void printGameStateVariables(struct gameState *state)
 	for (i = 0; i < state->deckCount[0]; i++)
 		printf("  Card #%d: %d\n", i+1, state->discard[0][i]);
 
-	printf("Player 2's deck:\n");
+	printf("Player 2's discards:\n");
 	for (i = 0; i < state->deckCount[1]; i++)
 		printf("  Card #%d: %d\n", i+1, state->discard[1][i]);
 
