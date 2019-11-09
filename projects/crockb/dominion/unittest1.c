@@ -144,6 +144,5 @@ int testPlayBaron()
     printf("\n----- UNIT TEST #1 - COMPLETED -----\n");
 
 
-
 	return 0;
 }
