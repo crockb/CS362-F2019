@@ -70,23 +70,30 @@ int testPlayBaron()
   	
   	// check the results
 
-    // player has one less estate in hand
+    // precondition #1 - player has one less estate in hand
     result = assert(countCardTypeInHand(estate, &preState)-1, countCardTypeInHand(estate, &state));
     if (result == 0)
-    	printf("precondition #1 fail: # estates in hand: %d, expected: %d", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
+    	printf("precondition #1 fail: # estates in hand: %d, expected: %d\n", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
     else
-       printf("precondition #1 pass: # estates in hand: %d, expected: %d", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
+       printf("precondition #1 pass: # estates in hand: %d, expected: %d\n", countCardTypeInHand(estate, &state), countCardTypeInHand(estate, &preState)-1);
 
-    // player has one less baron in hand
-    // player has 3 cards in hand (less 1 estate, less 1 baron)
-    // player has +4 coins
-    // player has +1 buys
-    // player 0 actions
-    // player has 1 discarded baron
-    // player has 9 total cards
+    // precondition #2 - player has one less baron in hand
+   	result = assert(countCardTypeInHand(baron, &preState)-1, countCardTypeInHand(baron, &state));
+    if (result == 0)
+    	printf("precondition #2 fail: # barons in hand: %d, expected: %d\n", countCardTypeInHand(baron, &state), countCardTypeInHand(baron, &preState)-1);
+    else
+       printf("precondition #2 pass: # barons in hand: %d, expected: %d\n", countCardTypeInHand(baron, &state), countCardTypeInHand(baron, &preState)-1);
+
+    // precondition #3 - player has 3 cards in hand (less 1 estate, less 1 baron)
+    // precondition #4 - player has +4 coins
+    // precondition #5 - player has +1 buys
+    // precondition #6 - player 0 actions
+    // precondition #7 - player has 1 discarded baron
+    // precondition #8 - player has 9 total cards
+    // precondition #9 - supplyCount for estate unchanged
 
     // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 
-    //                   0 actions, +1 discard[baron], 9 total cards
+    //                   0 actions, +1 discard[baron], 9 total cards, supplyCount estate unchanged
     
     /* set expected preconditions
   	int numEstatesInHand = countCardTypeInHand(estate, &state)--;   // -1 estate card in hand
