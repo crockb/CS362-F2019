@@ -84,6 +84,7 @@ int testPlayBaron()
   	provideEstateCardFromDeck(player1, &state);
 
   	// copy the initial pre-conditions
+  	updateCoins(player1, &state, bonus);
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
@@ -109,9 +110,6 @@ int testPlayBaron()
   	// copy the initial pre-conditions
   	updateCoins(player1, &state, bonus);
   	memcpy(&preState, &state, sizeof(struct gameState));
-
-  	// print cards before playing card
-  	printPlayersCards(player1, &state);
 
   	// run the refactored function playBaron() function
   	playCard(0, 1, 0, 0, &state);
