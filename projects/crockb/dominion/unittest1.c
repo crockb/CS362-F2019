@@ -252,19 +252,18 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
        printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);   	
 
     // precondition #7 - player has 1 discarded baron
-
-// helper functions for unittest1
-//int hasGameCard(int card, struct gameState *state, int pileToCheck)
-
      result = assert(hasGameCard(baron, state, 2) >=0, 0 >= 0);
     if (result == 0)
     	printf("precondition #7 fail: baron in discard pile: FALSE, expected: TRUE\n");
     else
        printf("precondition #7 pass: baron in discard pile: TRUE, expected: TRUE\n");    
 
-    // precondition #8 - player has 9 total cards
-
-
+    // precondition #8 - player has 9 total cards (afer removing 1 estate)
+    result = assert(handCount[player1] + deckCount[player1] + discardCount[player1] + playedCardCount[player1], 9);
+    if (result == 0)
+    	printf("precondition #8 fail: player has 9 cards (after removing 1 estate): %d, expected: 9\n", handCount[player1] + deckCount[player1] + discardCount[player1] + playedCardCount[player1]);
+    else
+       printf("precondition #8 pass: player has 9 cards (after removing 1 estate): %d, expected: 9\n", handCount[player1] + deckCount[player1] + discardCount[player1] + playedCardCount[player1]);
 
     // precondition #9 - supplyCount for estate unchanged
 
