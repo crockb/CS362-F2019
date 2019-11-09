@@ -6,6 +6,7 @@
 #include "rngs.h"
 
 // helper functions
+int testPlayBaron();
 int assert(int expected, int actual);
 int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
