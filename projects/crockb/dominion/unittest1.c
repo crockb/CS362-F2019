@@ -44,6 +44,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
 void printTestCondition2Results(struct gameState *state, struct gameState *preState);
 void printTestCondition3Results(struct gameState *state, struct gameState *preState);
 void printTestCondition4Results(struct gameState *state, struct gameState *preState);
+void printTestCondition2to4Results(struct gameState *state, struct gameState *preState);
 void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
@@ -92,7 +93,6 @@ int testPlayBaron()
   	
   	// check the results
   	printTestCondition1Results(&state, &preState);
-  	printPlayersCards(player1, &state);
 
   	// -------  condition #2 - choice1 (player1 has an estate) ------
     printf("\n----- UNIT TEST #1 - CONDITION #2: player1 chooses to discard an estate - player1 does not have an estate.\n");
@@ -115,8 +115,7 @@ int testPlayBaron()
   	playCard(0, 1, 0, 0, &state);
 
    	// check the results
-  	printTestCondition2Results(&state, &preState);
-  	printPlayersCards(player1, &state);
+  	printTestCondition2to4Results(&state, &preState);
 
   	// -------  condition #3 - choice2 (estates available in the game) ------
     printf("\n----- UNIT TEST #1 - CONDITION #3: player1 chooses not to discard an estate - estates available in the game\n");
@@ -136,8 +135,7 @@ int testPlayBaron()
   	playCard(0, 0, 1, 0, &state);
 
    	// check the results
-  	printTestCondition3Results(&state, &preState);
-  	printPlayersCards(player1, &state);
+  	printTestCondition2to4Results(&state, &preState);
 
   	// -------  condition #4 - choice2 (1 estate left in the game) ------
     printf("\n----- UNIT TEST #1 - CONDITION #4: player1 chooses not to discard an estate - 1 estate available in the game\n");
@@ -160,9 +158,7 @@ int testPlayBaron()
   	playCard(0, 0, 1, 0, &state);
 
   	// check the results
-  	printTestCondition4Results(&state, &preState);
-  	printPlayersCards(player1, &state);
-
+  	printTestCondition2to4Results(&state, &preState);
 
 /*
     // print player's cards
@@ -372,7 +368,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
 
 }
 
-void printTestCondition2Results(struct gameState *state, struct gameState *preState)
+void printTestCondition2to4Results(struct gameState *state, struct gameState *preState)
 {
 	int player1 = 0;
 	int result = 0;
