@@ -263,7 +263,6 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     }
 
     //reduce number of actions
-    printf("Did this code execute?\n");
     state->numActions--;
 
     //update coins (Treasure cards may be added with card draws)
