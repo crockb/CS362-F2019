@@ -136,6 +136,7 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 
 		// card not found
     	return -1;
+		}
 	}
 
 	// deck pile
@@ -149,10 +150,13 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 
 		// card not found
     	return -1;
+		}
 	}
 
-	printf("critical error: hasGameCard no match.\n")
-	return -1;
+	// no pile match - error
+	printf("critical error: hasGameCard no match.\n");
+	return -2;
+
 }
 
 
