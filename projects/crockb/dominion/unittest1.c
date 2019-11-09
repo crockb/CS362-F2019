@@ -22,6 +22,7 @@ Test #4:  Gain an Estate (No Estates Available):  +1 hand[estate], -1 hand[baron
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <math.h>
 #include <stdlib.h>
 #include "dominion.h"
@@ -65,7 +66,7 @@ int testPlayBaron()
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
-    cardEffect(baron, 1, 0, 0, &state, 0, bonus);
+    cardEffect(baron, 1, 0, 0, &state, 0, &bonus);
   	
   	// check the results
 
