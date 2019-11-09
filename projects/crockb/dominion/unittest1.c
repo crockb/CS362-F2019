@@ -30,9 +30,11 @@ Test #4:  Gain an Estate (No Estates Available):  +1 hand[estate], -1 hand[baron
 
 
 // helper function signatures
-void printAllGameStateVariables(struct gameState *state);
 int hasGameCardInHand(int card, struct gameState *state);
-
+int hasGameCardInDeck(int card, struct gameState *state);
+int provideEstateCardFromDeck(int player, struct gameState *state);
+void printPlayersCards(int player, struct gameState *state);
+void printAllGameStateVariables(struct gameState *state);
 
 int testPlayBaron()
 {
@@ -53,19 +55,30 @@ int testPlayBaron()
     // -------  test #1 - choice1 (player1 has an estate) ------
     printf("TEST 1: choice1 to discard estate - player1 has an estate.\n");
 
+    // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
+
     // provide player1 with a baron card
     state.hand[player1][0] = baron;
     state.supplyCount[baron]--;
 
+    // print player's cards
+    printPlayersCards(0, &state);
+
+    // confirm player has an estate card in hand
+
+
     // print the gamestate
     //printAllGameStateVariables(&state);
 
-    if (hasGameCardInHand(baron, &state) == 1) {
+/*
+    if (hasGameCardInHand(baron, &state) >= 0) {
     	printf("Baron Card Found\n");
     }
     else {
     	printf("Baron Card Not Found\n");
     }
+
+*/
 
     // set the preconditions
 //-1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
@@ -93,12 +106,73 @@ int hasGameCardInHand(int card, struct gameState *state)
 	for (i = 0; i < state->handCount[player]; i++) {
 		if (state->hand[player][i] == card) {
 			// card found
-			return 1;
+			return i;
 		}
 	}
 
     // card not found
+    return -1;
+}
+
+int hasGameCardInDeck(int card, struct gameState *state)
+{
+	int i;
+	int player = state->whoseTurn;
+
+	for (i = 0; i < state->deckCount[player]; i++) {
+		if (state->deck[player][i] == card) {
+			// card found
+			return i;
+		}
+	}
+
+    // card not found
+    return -1;
+}
+
+
+// provide an estate card
+int provideEstateCardFromDeck(int player, struct gameState *state)
+{
+    if (hasCardInHand(estate, &state) < 0) {
+    	int tempCard;
+    	int estatePos;
+    	// provide an estate card from the deck
+    	if (hasCardInDeck(estate, &state) < 0) {
+    		printf("error: no estate card in deck\n");
+    		return -1;
+    	}
+    	else
+    	{
+    		estatePos = hasCardInDeck(estate, &state);
+    		state.hand[player][1] = tempCard;
+    		state.hand[player][1] = state.deck[player][estatePos];
+    		state.deck[player][estatePos] = tempCard;
+    	}
+    }
+
     return 0;
+}
+
+
+void printPlayersCards(int player, struct gameState *state)
+{
+    int i;
+
+    // print the hand
+	printf("Player's hand:\n");
+	for (i = 0; i < state->handCount[player]; i++)
+		printf("  Card #%d: %d\n", i+1, state->hand[player][i]);
+
+	// print the discard
+	printf("Player's discard pile:\n");
+	for (i = 0; i < state->discardCount[player]; i++)
+		printf("  Card #%d: %d\n", i+1, state->discard[player][i]);
+
+	// print the deck
+	printf("Player's deck:\n");
+	for (i = 0; i < state->deckCount[player]; i++)
+		printf("  Card #%d: %d\n", i+1, state->deck[player][i]);
 }
 
 
@@ -147,11 +221,11 @@ void printAllGameStateVariables(struct gameState *state)
 		printf("  Card #%d: %d\n", i+1, state->deck[1][i]);
 
 	printf("Player 1's discards:\n");
-	for (i = 0; i < state->deckCount[0]; i++)
+	for (i = 0; i < state->discardCount[0]; i++)
 		printf("  Card #%d: %d\n", i+1, state->discard[0][i]);
 
 	printf("Player 2's discards:\n");
-	for (i = 0; i < state->deckCount[1]; i++)
+	for (i = 0; i < state->discardCount[1]; i++)
 		printf("  Card #%d: %d\n", i+1, state->discard[1][i]);
 
 }
