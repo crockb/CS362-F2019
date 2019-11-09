@@ -29,6 +29,7 @@
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
+#include "unittest_helpers.h"
 
 
 

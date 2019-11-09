@@ -1,9 +1,6 @@
 #ifndef _UNITTEST_HELPERS_H
 #define _UNITTEST_HELPERS_H
 
-#include "dominion.h"
-#include "dominion_helpers.h"
-#include "rngs.h"
 
 // helper functions
 int assert(int expected, int actual);
