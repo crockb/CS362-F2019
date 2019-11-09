@@ -127,7 +127,7 @@ int testPlayBaron()
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
-  	playCard(0, 1, 0, 0, &state);
+  	playCard(0, 0, 1, 0, &state);
 
    	// check the results
   	printTestCondition3Results(&state, &preState);
