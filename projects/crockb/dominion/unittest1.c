@@ -214,6 +214,8 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck)
 	  printf("critical error: hasGameCard no match.\n");
 	  return -2;
 	}
+
+	return -2;
 }
 
 
