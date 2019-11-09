@@ -266,11 +266,11 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
         printf("precondition #8 pass: player has 1 less estate: %d, expected: %d\n", countCardTypeInHand(estate, state), countCardTypeInHand(estate, preState)-1);
 
     // precondition #9 - supplyCount for estate unchanged
-    result = assert(preState->supplyCount(estate), state->supplyCount(estate));
+    result = assert(preState->supplyCount[estate], state->supplyCount[estate]);
     if (result == 0)
-    	printf("precondition #9 fail: estate supply count enchanged: %d, expected: %d\n", preState->supplyCount(estate), state->supplyCount(estate));
+    	printf("precondition #9 fail: estate supply count enchanged: %d, expected: %d\n", preState->supplyCount[estate], state->supplyCount[estate]);
     else
-        printf("precondition #9 pass: estate supply count enchanged: %d, expected: %d\n", preState->supplyCount(estate), state->supplyCount(estate));
+        printf("precondition #9 pass: estate supply count enchanged: %d, expected: %d\n", preState->supplyCount[estate], state->supplyCount[estate]);
 
 
 
