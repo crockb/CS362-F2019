@@ -62,7 +62,7 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	int player1 = 0;
+	int player1 = 0, bonus = 0;
 	int randomSeed = 1234;
 	struct gameState state, preState;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -107,6 +107,7 @@ int testPlayBaron()
     removeEstateCardFromHand(player1, &state);
 
   	// copy the initial pre-conditions
+  	updateCoins(player1, &state, bonus);
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
@@ -127,6 +128,7 @@ int testPlayBaron()
     state.supplyCount[baron]--;
 
   	// copy the initial pre-conditions
+  	updateCoins(player1, &state, bonus);
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
@@ -150,6 +152,7 @@ int testPlayBaron()
     state.supplyCount[estate] = 1;
 
     // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
   	memcpy(&preState, &state, sizeof(struct gameState));
 
   	// run the refactored function playBaron() function
@@ -159,7 +162,7 @@ int testPlayBaron()
   	printTestCondition4Results(&state, &preState);
   	printPlayersCards(player1, &state);
 
-  	
+
 /*
     // print player's cards
     // printPlayersCards(0, &state);
