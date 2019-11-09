@@ -32,6 +32,7 @@ Test #4:  Gain an Estate (No Estates Available):  +1 hand[estate], -1 hand[baron
 // helper function signatures
 int hasGameCardInHand(int card, struct gameState *state);
 int hasGameCardInDeck(int card, struct gameState *state);
+int countCardTypeInHand(int card, struct gameState *state);
 int provideEstateCardFromDeck(int player, struct gameState *state);
 void printPlayersCards(int player, struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
@@ -50,12 +51,8 @@ int testPlayBaron()
 
     initializeGame(2, k, randomSeed, &state);
 
-    //printAllGameStateVariables(&state);
-
     // -------  test #1 - choice1 (player1 has an estate) ------
     printf("TEST 1: choice1 to discard estate - player1 has an estate.\n");
-
-    // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
 
     // provide player1 with a baron card
     state.hand[player1][0] = baron;
@@ -64,8 +61,16 @@ int testPlayBaron()
     // confirm player has an estate card in hand
   	provideEstateCardFromDeck(player1, &state);
 
+    // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
+    // set preconditions
+
     // print player's cards
     printPlayersCards(0, &state);
+
+    // print number of each card type:
+    printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
+    printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
+    printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
 
     // print the gamestate
     //printAllGameStateVariables(&state);
@@ -127,6 +132,17 @@ int hasGameCardInDeck(int card, struct gameState *state)
 
     // card not found
     return -1;
+}
+
+int countCardTypeInHand(int card, struct gameState *state)
+{
+	int i;
+	int count = 0;
+	int player = state->whoseTurn;
+	for (i = 0; i < state->handCount[player]; i++) {
+			count++;
+	}
+	return count;
 }
 
 
