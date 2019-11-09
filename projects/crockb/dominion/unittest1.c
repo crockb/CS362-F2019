@@ -61,11 +61,11 @@ int testPlayBaron()
     state.hand[player1][0] = baron;
     state.supplyCount[baron]--;
 
+    // confirm player has an estate card in hand
+  	provideEstateCardFromDeck(player1, &state);
+
     // print player's cards
     printPlayersCards(0, &state);
-
-    // confirm player has an estate card in hand
-
 
     // print the gamestate
     //printAllGameStateVariables(&state);
@@ -97,7 +97,6 @@ int main()
 
 
 // helper functions for unittest1
-
 int hasGameCardInHand(int card, struct gameState *state)
 {
 	int i;
@@ -131,7 +130,7 @@ int hasGameCardInDeck(int card, struct gameState *state)
 }
 
 
-// provide an estate card
+// provide an estate card (if the player doesn't already have one in their hand)
 int provideEstateCardFromDeck(int player, struct gameState *state)
 {
     if (hasGameCardInHand(estate, state) < 0) {
