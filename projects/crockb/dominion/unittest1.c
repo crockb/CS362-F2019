@@ -246,7 +246,11 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
        printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);   	
 
     // precondition #7 - player has 1 discarded baron
-     result = assert(preState->numActions-1, state->numActions);
+
+// helper functions for unittest1
+//int hasGameCard(int card, struct gameState *state, int pileToCheck)
+
+     result = assert(hasGameCard(baron, preState, 2) >=0, hasGameCard(baron, state, 2) >=0);
     if (result == 0)
     	printf("precondition #7 fail: baron in discard pile: FALSE, expected: TRUE\n");
     else
