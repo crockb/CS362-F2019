@@ -41,10 +41,10 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	//int i, j;
 	int player1 = 0;
+	int bonus = 0;
 	int randomSeed = 1234;
-	struct gameState state;
+	struct gameState state, preState;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
@@ -61,8 +61,22 @@ int testPlayBaron()
     // confirm player has an estate card in hand
   	provideEstateCardFromDeck(player1, &state);
 
-    // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
-    // set preconditions
+  	// copy the initial pre conditions
+  	memcpy(&preState, &state, sizeof(struct gameState));
+
+  	// run the refactored function playBaron() function
+    cardEffect(baron, 1, 0, 0, &state, 0, bonus);
+  	
+  	// check the results
+
+    // expected results: -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 
+    //                   0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
+    
+    /* set expected preconditions
+  	int numEstatesInHand = countCardTypeInHand(estate, &state)--;   // -1 estate card in hand
+  	int numBaronsInHand = 0;										// 0 barons in hand
+  	int handCount = 3;												// 
+	*/
 
     // print player's cards
     printPlayersCards(0, &state);
@@ -75,21 +89,9 @@ int testPlayBaron()
     // print the gamestate
     //printAllGameStateVariables(&state);
 
-/*
-    if (hasGameCardInHand(baron, &state) >= 0) {
-    	printf("Baron Card Found\n");
-    }
-    else {
-    	printf("Baron Card Not Found\n");
-    }
-
-*/
-
-    // set the preconditions
-//-1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], 9 total cards, 0 whosTurn, 0 phase
-
 	return 0;
 }
+
 
 
 // call unittest1
@@ -145,6 +147,7 @@ int countCardTypeInHand(int card, struct gameState *state)
 	}
 	return count;
 }
+
 
 
 // provide an estate card (if the player doesn't already have one in their hand)
@@ -341,4 +344,9 @@ int playBaron(int choice1, int choice2, struct gameState *state, int handPos)
 
         return 0;
 }
+
+
+int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
+
+
 */
