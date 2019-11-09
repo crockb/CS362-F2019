@@ -90,8 +90,27 @@ int testPlayBaron()
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
 
-    // confirm the player does not have an estate card
+    // confirm player has an estate card in hand
+  	provideEstateCardFromDeck(player1, &state);
 
+  	// print player's cards
+    printPlayersCards(0, &state);
+
+    // print number of each card type:
+    printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
+    printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
+    printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
+
+  	// confirm the player does not have an estate card
+    removeEstateCardFromHand(player1, &state);
+
+  	// print player's cards
+    printPlayersCards(0, &state);
+
+    // print number of each card type:
+    printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
+    printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
+    printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
 
 /*
     // print player's cards
