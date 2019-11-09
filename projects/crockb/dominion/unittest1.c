@@ -227,9 +227,9 @@ int removeEstateCardFromHand(int player, struct gameState *state)
     	// swap estate card with nearest copper in deck
     	copperDeckPos = hasGameCard(copper, state, 3);
     	estateHandPos = hasGameCard(estate, state, 1);
-    	tempCard = state->hand[player][estateHandPos];
-    	state->hand[player][estatePos] = state->deck[player][copperDeckPos];
-    	state->deck[player][copperDeckPos] = tempCard;
+    	swapCard = state->hand[player][estateHandPos];
+    	state->hand[player][estateHandPos] = state->deck[player][copperDeckPos];
+    	state->deck[player][copperDeckPos] = swapCard;
     }
 
     return 0;
