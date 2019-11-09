@@ -29,8 +29,8 @@ player: player.c interface.o
 
 all: playdom player 
 
-unittest1: dominion.o unittest_helpers.o unittest1.c
-	gcc -o unittest1 unittest1.c -g dominion.o rngs.o unittest_helpers.o $(CFLAGS)
+unittest1: dominion.o unittest1.c
+	gcc -o unittest1 unittest1.c -g dominion.o rngs.o $(CFLAGS)
 
 unittest2: dominion.o unittest1.c
 	gcc -o unittest2 unittest2.c -g dominion.o rngs.o $(CFLAGS)
