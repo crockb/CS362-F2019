@@ -44,7 +44,7 @@ int testPlayBaron()
 {
 
 	// initialize variables
-	int player1 = 0, bonus = 0, result = 0;
+	int player1 = 0, bonus = 0;
 	int randomSeed = 1234;
 	struct gameState state, preState;
 	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -180,6 +180,7 @@ int provideEstateCardFromDeck(int player, struct gameState *state)
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
 	int player1 = 0;
+	int result = 0;
 
     // precondition #1 - player has one less estate in hand
     result = assert(countCardTypeInHand(estate, preState)-1, countCardTypeInHand(estate, state));
