@@ -144,7 +144,7 @@ int provideEstateCardFromDeck(int player, struct gameState *state)
     	}
     	else
     	{
-    		estatePos = hasGameCardInDeck(estate, &state);
+    		estatePos = hasGameCardInDeck(estate, state);
     		tempCard = state->hand[player][1];
     		state->hand[player][1] = state->deck[player][estatePos];
     		state->deck[player][estatePos] = tempCard;
