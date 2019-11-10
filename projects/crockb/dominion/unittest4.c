@@ -83,7 +83,7 @@ int main()
 int testPlayTribute()
 {
   	// initialize variables
-  	int player1 = 0, result = -1, bonus = 0; //copperPos = -1, returnValue; // player2 = 0, player3 = 0;
+  	int player1 = 0, result = -1, bonus = 0, returnValue; // player2 = 0, player3 = 0;
   	int randomSeed = 7890;
   	struct gameState state, preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -110,7 +110,7 @@ int testPlayTribute()
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
 
-    // play the ambassador card
+    // play the tribute card
     playCard(0, 0, 0, 0, &state);
 
     // expected results: +2 actions (-1 of current turn)
@@ -119,8 +119,6 @@ int testPlayTribute()
     	printf("condition 1.0 - FAIL: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+1);
     else
     	printf("condition 1.0 - PASS: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+1);
-
-*/
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
@@ -136,7 +134,7 @@ int testPlayTribute()
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
 
-    // play the ambassador card
+    // play the tribute card
     playCard(0, 0, 0, 0, &state);
 
     // expected results: +2 coins (treasure card)
@@ -149,16 +147,35 @@ int testPlayTribute()
     else
     	printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
 
-    printPlayersCards(0, &preState);
-    printPlayersCards(0, &state);
+*/
 
+	// initialize the game
+    initializeGame(2, k, randomSeed, &state);
 
-
-
-/*
+    // provide player1 with a tribute card
+    state.hand[player1][0] = tribute;
+    state.supplyCount[tribute]--;
 
 	// condition 3.0 - 1 or less cards in discard/deck - no cards (failure)
     setCondition3(&state);
+
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // play the tribute card
+    returnValue = playCard(0, 0, 0, 0, &state);
+
+    // expected results: (failure)
+    result = assert(-1, returnValue);
+    if (result == 0)
+    	printf("condition 2.0 - FAIL: (fail flag not returned): actual %d, expected: %d\n", returnValue, -1);
+    else
+    	printf("condition 2.0 - PASS: (fail flag returned): actual %d, expected: %d\n", returnValue, -1);
+
+/*
+
+
 
 	// condition 4.1.1 - 2 or more cards in discard/deck - no deck cards (shuffle) - duplicates - 2 coppers
 	setCondition4(&state, copper, copper);      
@@ -258,7 +275,7 @@ int playTribute(struct gameState *state, int handPos)
             else {
                 //No Card to Reveal
                 if (DEBUG) {
-                    printf("No cards to reveal\n");
+                    // printf("No cards to reveal\n");
                 }
             }
         }
