@@ -126,6 +126,7 @@ int assert(int expected, int actual)
 
 void setCondition1(struct gameState *state)
 {
+	int player1 = 0;
 
     // provide player1 with a mine card
     state->hand[player1][0] = mine;
@@ -143,6 +144,7 @@ void setCondition1(struct gameState *state)
 */
 void setCondition2(struct gameState *state)
 {
+	int player1 = 0;
 
     // provide player1 with a mine card
     state->hand[player1][0] = mine;
@@ -159,6 +161,7 @@ void setCondition2(struct gameState *state)
 */
 void setCondition3(struct gameState *state)
 {
+	int player1 = 0;
 
     // provide player1 with a mine card
     state->hand[player1][0] = mine;
@@ -174,13 +177,13 @@ void setCondition3(struct gameState *state)
 */
 void setCondition4(struct gameState *state)
 {
+	int player1 = 0;
 
     // provide player1 with a mine card
     state->hand[player1][0] = mine;
     state->supplyCount[mine]--;
     state->hand[player1][1] = copper;   // valid card to trash
 }
-
 
 
 void printPlayersCards(int player, struct gameState *state)
