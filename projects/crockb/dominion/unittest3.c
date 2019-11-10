@@ -334,7 +334,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
  	// int countCardTypeInDiscard(int card, int player, struct gameState *state)
 
     // precondition #2 - +1 copper each other player (in discard pile)
-    result = assert(countCardTypeInDiscard(copper, player2, preState)+1 == countCardTypeInDiscard(copper, player2, state), countCardTypeInDiscard(copper, player3, preState)+1 == countCardTypeInDiscard(copper, player3, state));
+    result = assert(countCardTypeInDiscard(1, countCardTypeInDiscard(copper, player2, preState)+1 == countCardTypeInDiscard(copper, player2, state) && countCardTypeInDiscard(copper, player3, preState)+1 == countCardTypeInDiscard(copper, player3, state));
     if (result == 0)
 		printf("precondition #2 fail: +1 copper each other player (in discard pile): p2 actual %d p2 expected: %d, p3 actual %d p3 expected: %d\n", countCardTypeInDiscard(copper, player2, state), countCardTypeInDiscard(copper, player2, preState)+1, countCardTypeInDiscard(copper, player3, state), countCardTypeInDiscard(copper, player3, preState)+1);
     else
