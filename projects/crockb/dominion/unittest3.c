@@ -89,6 +89,8 @@ int testPlayAmbassador()
     
     // check the results
     printTestCondition1Results(&state, &preState);
+	printPlayersCards(1, &state);
+
 
     // -------  condition #2 - attempt to discard 3 copies (fail) ------
     printf("\n----- UNIT TEST #3 - CONDITION #2: attempt to discard 3 copies (fail)\n");
