@@ -7,30 +7,17 @@
 		 		- Action: +2 actions
 		 		- Treasure Card: +2 coins
 		 		- Victory Card: +2 cards
-	Branches:
-					   LEFT PLAYER HAS
-						 only have 1 or less cards in their discard/deck
-							if (state->deckCount[nextPlayer] > 0)
-							else if (state->discardCount[nextPlayer] > 0)
-							else (no cards to reveal)
-						 have more than 1 card in discard/deck
-						 	if nothing in deck (move from discard, reshuffle deck)
-							else pull from the deck
-						 check for duplicates
-						 has action
-						 has treasure (may need to slip in a great_hall)
-						 has victory
 
-		CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
-					 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (treasure)
-					 3: Left player has 1 or less cards in discard/deck - no cards (failure)
-					 4: Left player has 2 or more cards in discard/deck - no deck cards (shuffle)
-					 	4.1:   has duplicates at the backend
-					   		4.1.1: 2 coppers
-					   		4.1.2: 2 estates
-					   		4.1.3: 2 mines
-					   	4.2:   has a copper, has an estate
-					   	4.3:   has a copper, has a great_hall 
+	CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
+				 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (treasure)
+				 3: Left player has 1 or less cards in discard/deck - no cards (failure)
+				 4: Left player has 2 or more cards in discard/deck - no deck cards (shuffle)
+				   4.1:   has duplicates at the backend
+				     4.1.1: 2 coppers
+				     4.1.2: 2 estates
+				     4.1.3: 2 mines
+				   4.2:   has a copper, has an estate
+				   4.3:   has a mine, has a great_hall 
 					   
    	Known Bugs Inserted in Assignment 2:
 		1. 	Within the duplicate tribute card check, removed the statement that set 
@@ -264,7 +251,7 @@ int testPlayTribute()
     else
     	printf("condition 4.1.3 - PASS: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
 
-*/
+
 
 	// ----- CONDITION 4.2.0 ---------
 
@@ -289,10 +276,6 @@ int testPlayTribute()
     updateCoins(player1, &preState, 2);
     updateCoins(player1, &state, state.coins);
 
-/*
-    printf("Player 2 Cards:");
-    printPlayersCards(1,&state);
-*/
 
     // check +2 coins
     result = assert(preState.coins, state.coins);
@@ -308,15 +291,46 @@ int testPlayTribute()
     else
     	printf("condition 4.2.0 - PASS: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
 
-/*
+*/
+	// ----- CONDITION 4.2.0 ---------
 
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
 
-
-
-
+    // provide player1 with a tribute card
+    state.hand[player1][0] = tribute;
+    state.supplyCount[tribute]--;
 
 	// condition 4.3.0 -  or more cards in discard/deck - no deck cards (shuffle) - 1 copper, 1 great_hall
-    setCondition4(&state, copper, great_hall);      // condition 4.1.1  	     
+    setCondition4(&state, mine, great_hall);
+
+     // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // play the tribute card
+    playCard(0, 0, 0, 0, &state);
+
+    // expected results: +4 actions (-1 for card played, +4 cards (-1 for card played)
+
+   	// check +4 cards (-1 for card played)
+    result = assert(preState.handCount[player1]+1, state.handCount[player1]);
+    if (result == 0)
+    	printf("condition 4.3.0 - FAIL: +4 cards (-1 of current turn): actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+3);
+    else
+    	printf("condition 4.3.0 - PASS: +4 cards (-1 of current turn): actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+3);
+
+    // check +4 actions (-1 of current turn)
+    result = assert(preState.numActions+3, state.numActions);
+    if (result == 0)
+    	printf("condition 4.3.0 - FAIL: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
+    else
+    	printf("condition 4.3.0 - PASS: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
+
+
+/*
+
+ 	     
 
 */
 	return 0;
