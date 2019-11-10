@@ -39,5 +39,8 @@ unittest3: dominion.o unittest3.c
 unittest4: dominion.o unittest4.c
 	gcc -o unittest4 unittest4.c -g dominion.o rngs.o $(CFLAGS)
 
+unittest5: dominion.o unittest5.c
+	gcc -o unittest5 unittest5.c -g dominion.o rngs.o $(CFLAGS)
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe

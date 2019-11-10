@@ -70,7 +70,7 @@ int testPlayTribute()
     //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
     // -------  condition #4 - 1 or less cards in discard/deck - deckCount > 0 ------
-    printf("----- UNIT TEST #4 ----- 7 conditions tested ------ \n");
+    printf("----- UNIT TEST #4 ----- 8 conditions tested ------ \n");
 
 
 	// ----- CONDITION 1.0 ---------
