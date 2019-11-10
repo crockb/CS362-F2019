@@ -78,7 +78,7 @@ int testPlayMinion()
     printTestCondition1Results(&state, &preState);
 
     // -------  condition #2 - choice 2 discard hand (players 2 & 3 have 5 cards) ------
-    printf("----- UNIT TEST #2 - CONDITION #2: all players discard and draw 4\n");
+    printf("\n----- UNIT TEST #2 - CONDITION #2: all players discard and draw 4\n");
 
     // initialize the game
     initializeGame(3, k, randomSeed, &state);
@@ -98,7 +98,7 @@ int testPlayMinion()
     printTestCondition2Results(&state, &preState);
 
     // -------  condition #3 - choice 2 discard hand (p1 & p2 have 5 cards, p3 does not) ------
-    printf("----- UNIT TEST #2 - CONDITION #3: p1 & p2 discard and draw 4, p3 too few cards\n");
+    printf("\n----- UNIT TEST #2 - CONDITION #3: p1 & p2 discard and draw 4, p3 too few cards\n");
 
     // initialize the game
     initializeGame(3, k, randomSeed, &state);
