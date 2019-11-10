@@ -289,6 +289,9 @@ int testPlayTribute()
     updateCoins(player1, &preState, 2);
     updateCoins(player1, &state, state.coins);
 
+    printf("Player 2 Cards:");
+    printPlayersCards(1,&state);
+
     // check +2 coins
     result = assert(preState.coins, state.coins);
     if (result == 0)
