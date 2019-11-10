@@ -47,7 +47,7 @@
 
 
 // helper function signatures
-int testPlayTribute();
+int testPlayMine();
 int assert(int expected, int actual);
 void printPlayersCards(int player, struct gameState *state);
 
@@ -67,16 +67,38 @@ int main()
 }
 
 
-int testPlayTribute()
+int testPlayMine()
 {
 
-	printf("Hello friend.\n");
+  	// initialize variables
+  	int player1 = 0, result = -1, bonus = 0, returnValue; // player2 = 0, player3 = 0;
+  	int randomSeed = 7890;
+  	struct gameState state, preState;
+  	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
+               great_hall, tribute, smithy
+            };
+
+    //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+
+    // -------  beginning of unit test conditions ------
+    printf("----- UNIT TEST #5 ----- 4 conditions tested ------ \n");
+
+    // test the preconditions
+    setCondition1(&state);
+	printPlayersCards(0, &state);
+
+	setCondition2(&state);
+	printPlayersCards(0, &state);    
+
+    setCondition3(&state);
+	printPlayersCards(0, &state);    
+
+    setCondition4(&state);
+	printPlayersCards(0, &state);    
 
 
 	return 0;
 }
-
-
 
 
 int assert(int expected, int actual)
@@ -87,41 +109,91 @@ int assert(int expected, int actual)
     return 0;
 }
 
-// CONDITION:  #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
-void setCondition1(struct gameState *state, int card)
+/*
+	CONDITIONS
+
+ 		 3: Valid Trash Card, Purchase Card (Should Be Too) Expensive
+ 		 	values: choice[1] = copper ($0), choice2 = gold ($6)
+ 		    expected outcome(s):  return -1
+
+ 		 4: Valid Trash Card, Purchase Card Is In Range
+ 		    values: choice[1] = copper ($0), choice2 = silver ($3)
+ 		    expected outcome(s):  gain silver in hand, trash copper from hand
+*/
+
+/*
+	CONDITION #1
+ 		 1: Invalid Trash Card (choice 1)
+ 		 	values:  choice1[1] = estate ($2), choice2 = silver ($3)
+ 		 	expected outcome(s):  return -1
+*/
+
+void setCondition1(struct gameState *state)
 {
-	int player2 = 1;
-	state->deckCount[player2] = 1;
-	state->discardCount[player2] = 0;
-	state->deck[player2][0] = card;
+
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a mine card
+    state.hand[player1][0] = mine;
+    state.supplyCount[mine]--;
+    state.hand[player1][1] = estate;   // invalid card to trash
+
 }
 
-// CONDITION: #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
-void setCondition2(struct gameState *state, int card)
+
+/*
+	CONDITION #2
+ 		 2: Invalid Purchase Card (choice 2) is out of bounds
+ 		 	values: choice[1] = copper ($0), choice2 = 100
+ 		 	expected outcome(s):  return -1
+*/
+void setCondition2(struct gameState *state)
 {
-	int player2 = 1;
-	state->deckCount[player2] = 0;
-	state->discardCount[player2] = 1;
-	state->discard[player2][0] = card;
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a mine card
+    state.hand[player1][0] = mine;
+    state.supplyCount[mine]--;
+    state.hand[player1][1] = copper;   // valid choice
 }
 
-// CONDITION: #3 - Left player has 1 or less cards in discard/deck - no cards
+
+/*
+	CONDITION #3
+ 		 3: Valid Trash Card, Purchase Card (Should Be Too) Expensive
+ 		 	values: choice[1] = copper ($0), choice2 = gold ($6)
+ 		    expected outcome(s):  return -1
+*/
 void setCondition3(struct gameState *state)
 {
-	int player2 = 1;
-	state->deckCount[player2] = 0;
-	state->discardCount[player2] = 0;
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a mine card
+    state.hand[player1][0] = mine;
+    state.supplyCount[mine]--;
+    state.hand[player1][1] = copper;   // valid card to trash
 }
 
-// CONDITION: #4 - Left player has 2 or more cards in discard/deck - no deck cards
+/*
+	CONDITION #4
+ 		 4: Valid Trash Card, Purchase Card Is In Range
+ 		    values: choice[1] = copper ($0), choice2 = silver ($3)
+ 		    expected outcome(s):  gain silver in hand, trash copper from hand
+*/
 void setCondition4(struct gameState *state, int card1, int card2)
 {
-	int player2 = 1;
-	state->deckCount[player2] = 0;
-	state->discardCount[player2] = 2;
-	state->discard[player2][0] = card1;
-	state->discard[player2][1] = card2;
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a mine card
+    state.hand[player1][0] = mine;
+    state.supplyCount[mine]--;
+    state.hand[player1][1] = copper;   // valid card to trash
 }
+
 
 
 void printPlayersCards(int player, struct gameState *state)
