@@ -141,7 +141,7 @@ int testPlayTribute()
 
     // expected results: +2 coins (treasure card)
     //updateCoins(state->whoseTurn, state, coin_bonus);
-    printf("state.coins = %d\n");
+    printf("state.coins = %d\n", state.coins);
     result = assert(updateCoins(player1, &preState, 2), updateCoins(player1, &state, state.coins));
     if (result == 0)
     	printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", updateCoins(player1, &state, state.coins), updateCoins(player1, &preState, 2));
