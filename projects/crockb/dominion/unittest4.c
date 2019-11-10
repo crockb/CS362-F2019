@@ -98,9 +98,9 @@ int testPlayTribute()
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
 
-    // provide player1 with a ambassador card
-    state.hand[player1][0] = ambassador;
-    state.supplyCount[ambassador]--;
+    // provide player1 with a tribute card
+    state.hand[player1][0] = tribute;
+    state.supplyCount[tribute]--;
 
     // condition 1.0 - 1 or less cards in discard/deck - deckCount > 0 (mine)
     setCondition1(&state, mine);
