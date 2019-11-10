@@ -197,7 +197,7 @@ int testPlayTribute()
     memcpy(&preState, &state, sizeof(struct gameState));
 
     // play the tribute card
-    returnValue = playCard(0, 0, 0, 0, &state);
+    playCard(0, 0, 0, 0, &state);
 
     // expected results: +2 coins (treasure card) - no double counting
     updateCoins(player1, &preState, 2);
