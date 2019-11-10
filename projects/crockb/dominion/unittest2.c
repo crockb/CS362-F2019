@@ -58,6 +58,7 @@ int testPlayMinion()
                sea_hag, tribute, smithy
             };
 
+/*
     // -------  condition #1 - choice1 (player1 chooses to add 2 coins) ------
     printf("----- UNIT TEST #2 - CONDITION #1: player1 chooses to add 2 coins\n");
 
@@ -98,6 +99,7 @@ int testPlayMinion()
     // check the results
     printTestCondition2Results(&state, &preState);
 
+*/
     // -------  condition #3 - choice 2 discard hand (p1 & p2 have 5 cards, p3 does not) ------
     printf("----- UNIT TEST #2 - CONDITION #3: p1 & p2 discard and draw 4, p3 too few cards\n");
 
