@@ -268,7 +268,7 @@ int removeEstateCardFromHand(int player, struct gameState *state)
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
 
-	int player1 = 0;
+	//int player1 = 0;
 	int result = 0;
 
 	//CONDITION #1:  Reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)
