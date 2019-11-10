@@ -83,6 +83,7 @@ int testPlayMine()
     // -------  beginning of unit test conditions ------
     printf("----- UNIT TEST #5 ----- 4 conditions tested ------ \n");
 
+/*
     // ----- CONDITION 1 - Invalid Trash Card (choice 1) ---------
 
     // initialize the game
@@ -103,10 +104,34 @@ int testPlayMine()
     // expected outcome(s):  return -1
     result = assert(-1, returnValue);
     if (result == 0)
-    	printf("condition 1 - FAIL: Invalid Trash Card (Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 1 - FAIL: Invalid Trash Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("condition 1 - PASS: Invalid Trash Card (Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 1 - PASS: Invalid Trash Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
 
+*/
+    // ----- CONDITION 2 - Invalid Purchase Card (choice 2) is out of bounds ----
+
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // condition 1 -  Invalid Purchase Card (choice 2) is out of bounds ----    
+    setCondition2(&state);
+
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+
+    // values: choice[1] = copper ($0), choice2 = 100
+    returnValue = playCard(0, state.hand[player1][1], 100, 0, &state); 
+
+    // expected outcome(s):  return -1
+    result = assert(-1, returnValue);
+    if (result == 0)
+    	printf("condition 2 - FAIL: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+    else
+    	printf("condition 1 - PASS: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
 
 /*
 	// initialize the game
