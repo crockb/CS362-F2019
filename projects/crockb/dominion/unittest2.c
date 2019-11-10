@@ -98,22 +98,6 @@ int testPlayMinion()
     // check the results
     printTestCondition2Results(&state, &preState);
 
-    // print player's cards
-    printf("player 1 (pre-state)\n");
-    printPlayersCards(0, &preState);
-    printf("player 1 (post-state)\n");
-    printPlayersCards(0, &state);
-
-    printf("player 2 (pre-state)\n");
-    printPlayersCards(1, &preState);
-    printf("player 2 (post-state)\n");
-    printPlayersCards(1, &state);
-
-    printf("player 3 (pre-state)\n");
-    printPlayersCards(2, &preState);
-    printf("player 3 (post-state)\n");
-    printPlayersCards(2, &state);
-
     // -------  condition #3 - choice 2 discard hand (p1 & p2 have 5 cards, p3 does not) ------
     printf("----- UNIT TEST #2 - CONDITION #3: p1 & p2 discard and draw 4, p3 too few cards\n");
 
@@ -137,21 +121,6 @@ int testPlayMinion()
     // check the results
     printTestCondition3Results(&state, &preState);
 
-    // print player's cards
-    printf("player 1 (pre-state)\n");
-    printPlayersCards(0, &preState);
-    printf("player 1 (post-state)\n");
-    printPlayersCards(0, &state);
-
-    printf("player 2 (pre-state)\n");
-    printPlayersCards(1, &preState);
-    printf("player 2 (post-state)\n");
-    printPlayersCards(1, &state);
-
-    printf("player 3 (pre-state)\n");
-    printPlayersCards(2, &preState);
-    printf("player 3 (post-state)\n");
-    printPlayersCards(2, &state);
 
 /*
     // print player's cards
@@ -387,27 +356,30 @@ void printTestCondition3Results(struct gameState *state, struct gameState *preSt
       printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
 
 
-
-    // precondition #2 - each player has 4 discards
-    result = assert(1, (state->discardCount[player1] == 4 && state->discardCount[player2] == 4 && state->discardCount[player3] == 4));
+    // precondition #2 - p1 & p2 should have 4 discards, p3 should have 0
+    result = assert(1, (state->discardCount[player1] == 4 && state->discardCount[player2] == 4 && state->discardCount[player3] == 0));
     if (result == 0)
-      printf("precondition #2 fail: all players should have 4 discards: p1: %d, p2: %d, p3: %d\n", state->discardCount[player1], state->discardCount[player2], state->discardCount[player3]);
+      printf("precondition #2 fail: p1 & p2 should have 4 discards, p3 should have 0: p1: %d, p2: %d, p3: %d\n", state->discardCount[player1], state->discardCount[player2], state->discardCount[player3]);
     else
-      printf("precondition #2 pass: all players should have 4 discards: p1: %d, p2: %d, p3: %d\n", state->discardCount[player1], state->discardCount[player2], state->discardCount[player3]);
+      printf("precondition #2 pass: p1 & p2 should have 4 discards, p3 should have 0: p1: %d, p2: %d, p3: %d\n", state->discardCount[player1], state->discardCount[player2], state->discardCount[player3]);
 
-  	// precondition #3 - each player has 4 less cards in their deck
-    result = assert(1, (state->deckCount[player1] == preState->deckCount[player1]-4 && state->deckCount[player2] == preState->deckCount[player2]-4 && state->deckCount[player3] == preState->deckCount[player3]-4));    
+
+
+  	// precondition #3 - p1 & p2 should have 4 less deck cards, p3 should have the same
+    result = assert(1, (state->deckCount[player1] == preState->deckCount[player1]-4 && state->deckCount[player2] == preState->deckCount[player2]-4 && state->deckCount[player3] == preState->deckCount[player3]));    
     if (result == 0)
-    	printf("precondition #3 fail: all players should have 4 less cards in their deck piles: p1: actual %d expected %d, p2: actual %d expected %d, p3: actual %d expected %d\n", state->deckCount[player1], preState->deckCount[player1]-4, state->deckCount[player2], preState->deckCount[player2]-4, state->deckCount[player3], preState->deckCount[player3]-4);
+    	printf("precondition #3 fail: p1 & p2 should have 4 less deck cards, p3 should have the same: p1: actual %d expected %d, p2: actual %d expected %d, p3: actual %d expected %d\n", state->deckCount[player1], preState->deckCount[player1]-4, state->deckCount[player2], preState->deckCount[player2]-4, state->deckCount[player3], preState->deckCount[player3]);
     else
-		printf("precondition #3 pass: all players should have 4 less cards in their deck piles: p1: actual %d expected %d, p2: actual %d expected %d, p3: actual %d expected %d\n", state->deckCount[player1], preState->deckCount[player1]-4, state->deckCount[player2], preState->deckCount[player2]-4, state->deckCount[player3], preState->deckCount[player3]-4);
+    	printf("precondition #3 pass: p1 & p2 should have 4 less deck cards, p3 should have the same: p1: actual %d expected %d, p2: actual %d expected %d, p3: actual %d expected %d\n", state->deckCount[player1], preState->deckCount[player1]-4, state->deckCount[player2], preState->deckCount[player2]-4, state->deckCount[player3], preState->deckCount[player3]);
 
+/*
     // precondition #4 - each player has 4 hand cards
     result = assert(1, (state->handCount[player1] == 4 && state->handCount[player2] == 4 && state->handCount[player3] == 4));
     if (result == 0)
       printf("precondition #4 fail: all players should have 4 hand cards: p1: %d, p2: %d, p3: %d\n", state->handCount[player1], state->handCount[player2], state->handCount[player3]);
     else
       printf("precondition #4 pass: all players should have 4 hand cards: p1: %d, p2: %d, p3: %d\n", state->handCount[player1], state->handCount[player2], state->handCount[player3]);
+*/
 
 }
 
