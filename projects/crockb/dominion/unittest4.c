@@ -7,7 +7,7 @@
 		 		- Action: +2 actions
 		 		- Treasure Card: +2 coins
 		 		- Victory Card: +2 cards
-	Test Conditions Identified and Expected End States:
+	Branches:
 					   LEFT PLAYER HAS
 						 only have 1 or less cards in their discard/deck
 							if (state->deckCount[nextPlayer] > 0)
@@ -21,16 +21,16 @@
 						 has treasure (may need to slip in a great_hall)
 						 has victory
 
-		CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0
-					   Left player has 1 or less cards in discard/deck - discardCount = 1
-					   Left player has 1 or less cards in discard/deck - no cards
-					   Left player has 2 or more cards in discard/deck - no deck cards
-					   		- has duplicates at the backend
-					   		- has a copper, has an estate
-					   		- has a copper, has a great_hall
-		CONDITION #2:  
-					   
-		CONDITION #3:  
+		CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
+					 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (victory)
+					 3: Left player has 1 or less cards in discard/deck - no cards (failure)
+					 4: Left player has 2 or more cards in discard/deck - no deck cards (shuffle)
+					 	4.1:   has duplicates at the backend
+					   		4.1.1: 2 coppers
+					   		4.1.2: 2 estates
+					   		4.1.3: 2 mines
+					   	4.2:   has a copper, has an estate
+					   	4.3:   has a copper, has a great_hall 
 					   
    	Known Bugs Inserted in Assignment 2:
 		1. 	Within the duplicate tribute card check, removed the statement that set 
@@ -65,8 +65,6 @@ void setCondition2(struct gameState *state, int card);     			// #2 - Left playe
 void setCondition3(struct gameState *state);               			// #3 - Left player has 1 or less cards in discard/deck - no cards
 void setCondition4(struct gameState *state, int card1, int card2);  // #4 - Left player has 2 or more cards in discard/deck - no deck cards
 
-
-
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
 void printTestCondition2to4Results(struct gameState *state, struct gameState *preState);
@@ -85,7 +83,7 @@ int main()
 int testPlayTribute()
 {
   	// initialize variables
-  	int player1 = 0; //, bonus = 0, copperPos = -1, returnValue; // player2 = 0, player3 = 0;
+  	int player1 = 0, result = -1; //, bonus = 0, copperPos = -1, returnValue; // player2 = 0, player3 = 0;
   	int randomSeed = 7890;
   	struct gameState state; //preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -94,6 +92,9 @@ int testPlayTribute()
 
     //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
+    // -------  condition #4 - 1 or less cards in discard/deck - deckCount > 0 ------
+    printf("----- UNIT TEST #4 - CONDITION #1: 1 or less cards in discard/deck - deckCount > 0\n");
+
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
 
@@ -101,11 +102,47 @@ int testPlayTribute()
     state.hand[player1][0] = ambassador;
     state.supplyCount[ambassador]--;
 
-    // confirm setConditions
-	setCondition4(&state, great_hall, mine);
-	printf("Expect: deckCount = 0, discard = 2\n");
-	printPlayersCards(1, &state);
+    // condition 1.0 - 1 or less cards in discard/deck - deckCount > 0 (mine)
+    setCondition1(&state, mine);
 
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // play the ambassador card
+    playCard(0, 0, 0, 0, &state);
+
+    // expected results: +2 actions
+    result = assert(preState->numActions+2, state->numActions);
+    if (result == 0)
+    	printf("condition 1.0 - fail: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+2);
+    else
+    	printf("condition 1.0 - PASS: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+2);
+
+/*
+
+	// condition 2.0 - 1 or less cards in discard/deck - discardCount = 1 (estate victory)
+    setCondition2(&state, estate);         		
+
+	// condition 3.0 - 1 or less cards in discard/deck - no cards (failure)
+    setCondition3(&state);
+
+	// condition 4.1.1 - 2 or more cards in discard/deck - no deck cards (shuffle) - duplicates - 2 coppers
+	setCondition4(&state, copper, copper);      
+
+	// condition 4.1.2 - 2 or more cards in discard/deck - no deck cards (shuffle) - duplicates - 2 estates
+	setCondition4(&state, estate, estate);
+
+	// condition 4.1.3 - 2 or more cards in discard/deck - no deck cards (shuffle) - duplicates - 2 mines
+	setCondition4(&state, mine, mine);
+
+	// condition 4.2.0 -  or more cards in discard/deck - no deck cards (shuffle) - 1 copper, 1 estate
+	setCondition4(&state, copper, estate);      
+
+	// condition 4.3.0 -  or more cards in discard/deck - no deck cards (shuffle) - 1 copper, 1 great_hall
+    setCondition4(&state, copper, great_hall);      // condition 4.1.1  	     
+
+*/
 	return 0;
 }
 
@@ -127,14 +164,6 @@ void setCondition2(struct gameState *state, int card)
 	state->discardCount[player2] = 1;
 	state->discard[player2][0] = card;
 }
-
-/*		
-		
-		#4 - Left player has 2 or more cards in discard/deck - no deck cards
-			- #5 - has duplicates at the backend
-			- #6 - has a copper, has an estate
-			- #7 - has a copper, has a great_hall
-*/
 
 // CONDITION: #3 - Left player has 1 or less cards in discard/deck - no cards
 void setCondition3(struct gameState *state)
