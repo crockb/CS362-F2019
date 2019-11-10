@@ -70,9 +70,13 @@ int testPlayBaron()
 
     // run the refactored function playBaron() function
     playCard(0, 1, 0, 0, &state);
-    
+
     // check the results
     printUnitTest1Condition1Results(&state, &preState);
+
+  	
+  	// check the results
+  	printUnitTest1Condition1Results(&state, &preState);
 
     // -------  condition #2 - choice1 (player1 has an estate) ------
     printf("\n----- UNIT TEST #1 - CONDITION #2: player1 chooses to discard an estate - player1 does not have an estate.\n");
@@ -94,8 +98,12 @@ int testPlayBaron()
     // run the refactored function playBaron() function
     playCard(0, 1, 0, 0, &state);
 
+
     // check the results
     printUnitTest1Condition2to4Results(&state, &preState);
+
+   	// check the results
+  	printUnitTest1Condition2to4Results(&state, &preState);
 
     // -------  condition #3 - choice2 (estates available in the game) ------
     printf("\n----- UNIT TEST #1 - CONDITION #3: player1 chooses not to discard an estate - estates available in the game\n");
@@ -116,6 +124,10 @@ int testPlayBaron()
 
     // check the results
     printUnitTest1Condition2to4Results(&state, &preState);
+
+   	// check the results
+  	printUnitTest1Condition2to4Results(&state, &preState);
+
 
     // -------  condition #4 - choice2 (1 estate left in the game) ------
     printf("\n----- UNIT TEST #1 - CONDITION #4: player1 chooses not to discard an estate - 1 estate available in the game\n");

@@ -36,22 +36,5 @@ int main()
 int testPlayMinion()
 {
 	printf("Hello friend.\n");
-
-/*
-    // print player's cards
-    // printPlayersCards(0, &state);
-    // print number of each card type:
-    printf("preState:\n");
-    printf("Number of barons: %d\n", countCardTypeInHand(baron, &preState));
-    printf("Number of estates: %d\n", countCardTypeInHand(estate, &preState));
-    printf("Number of coppers: %d\n", countCardTypeInHand(copper, &preState));
-    // print number of each card type:
-    printf("state:\n");
-    printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
-    printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
-    printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
-*/
-
-
 	return 0;
 }
