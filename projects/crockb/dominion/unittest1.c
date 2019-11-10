@@ -457,12 +457,12 @@ void printPlayersCards(int player, struct gameState *state)
 void printAllSupplyCounts(struct gameState *state)
 {
   printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
-    printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
-    printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
-    printf("supplyCount (province): %d\n", state->supplyCount[province]);
-    printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
-    printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
-    printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
+  printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
+  printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
+  printf("supplyCount (province): %d\n", state->supplyCount[province]);
+  printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
+  printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
+  printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
   printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
   printf("supplyCount (gardens): %d\n", state->supplyCount[gardens]);
   printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
@@ -484,12 +484,12 @@ void printAllGameStateVariables(struct gameState *state)
     // print out the results of the game state
   printf("numPlayers: %d\n", state->numPlayers);
   printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
-    printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
-    printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
-    printf("supplyCount (province): %d\n", state->supplyCount[province]);
-    printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
-    printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
-    printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
+  printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
+  printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
+  printf("supplyCount (province): %d\n", state->supplyCount[province]);
+  printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
+  printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
+  printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
   printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
   printf("supplyCount (gardens): %d\n", state->supplyCount[gardens]);
   printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
@@ -529,105 +529,3 @@ void printAllGameStateVariables(struct gameState *state)
     printf("  Card #%d: %d\n", i+1, state->discard[1][i]);
 
 }
-
-/*
-
-//set number of Curse cards
-    if (numPlayers == 2)
-    {
-        state->supplyCount[curse] = 10;
-    }
-    else if (numPlayers == 3)
-    {
-        state->supplyCount[curse] = 20;
-    }
-    else
-    {
-        state->supplyCount[curse] = 30;
-    }
-
-    //set number of Victory cards
-    if (numPlayers == 2)
-    {
-        state->supplyCount[estate] = 8;
-        state->supplyCount[duchy] = 8;
-        state->supplyCount[province] = 8;
-    }
-    else
-    {
-        state->supplyCount[estate] = 12;
-        state->supplyCount[duchy] = 12;
-        state->supplyCount[province] = 12;
-    }
-
-    //set number of Treasure cards
-    state->supplyCount[copper] = 60 - (7 * numPlayers);
-    state->supplyCount[silver] = 40;
-    state->supplyCount[gold] = 30;
-
-
-*/
-
-
-
-
-
-/* assignment #2 - a function to play the baron card in the game 
-int playBaron(int choice1, int choice2, struct gameState *state, int handPos)
-{
-
-    int currentPlayer = whoseTurn(state);
-    discardCard(handPos, currentPlayer, state, 0);
-
-    state->numBuys++;//Increase buys by 1!
-
-        if (choice1 > 0) { //Boolean true or going to discard an estate
-            int p = 0;//Iterator for hand!
-            int card_not_discarded = 1;//Flag for discard set!
-            while(card_not_discarded) {
-                if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
-                    state->coins += 4;//Add 4 coins to the amount of coins
-                    card_not_discarded = 0;//Exit the loop
-                }
-                else if (p > state->handCount[currentPlayer]) {
-                    if(DEBUG) {
-                        printf("No estate cards in your hand, invalid choice\n");
-                        printf("Must gain an estate if there are any\n");
-                    }
-                    if (supplyCount(estate, state) > 0) {
-                        gainCard(estate, state, 0, currentPlayer);
-                        state->supplyCount[estate]--;
-
-                        if (supplyCount(estate, state) == 0) {
-                            isGameOver(state);
-                        }
-                    }
-                    card_not_discarded = 0;//Exit the loop
-                }
-
-                else {
-                    p++;//Next card
-                }
-            } 
-        } 
-
-        // else - player did not elect to discard an estate
-        else {
-            if (supplyCount(estate, state) > 0) {
-                gainCard(estate, state, 0, currentPlayer);//Gain an estate
-                state->supplyCount[estate]--;
-
-                if (supplyCount(estate, state) == 0) {
-                    isGameOver(state);
-                }
-            }
-        }
-
-        return 0;
-}
-
-
-int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
-
-
-*/
