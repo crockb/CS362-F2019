@@ -35,6 +35,8 @@ int testPlayAmbassador();
 int assert(int expected, int actual);
 int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
+int confirmNumCoppersInHand(player, &state);
+
 int provideEstateCardFromDeck(int player, struct gameState *state);
 int removeEstateCardFromHand(int player, struct gameState *state);
 
@@ -50,7 +52,31 @@ int main()
 {
 	testPlayAmbassador();
 
+    // -------  condition #1 - reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply) ------
+    printf("----- UNIT TEST #3 - CONDITION #1: reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)\n");
 
+    // initialize the game
+    initializeGame(3, k, randomSeed, &state);
+
+    // provide player1 with a ambassador card
+    state.hand[player1][0] = ambassador;
+    state.supplyCount[ambassador]--;
+
+    // confirm player has 2 coppers in hand
+    confirmNumCoppersInHand(player1, &state);
+    printPlayersCards(0, &state);
+
+/*
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // run the refactored function playBaron() function
+    playCard(0, 1, 0, 0, &state);
+    
+    // check the results
+    printTestCondition1Results(&state, &preState);
+*/
 
 /*
     // print player's cards
@@ -72,7 +98,7 @@ int main()
 */
 
 
-	
+
 	return 0;
 }
 
@@ -97,6 +123,39 @@ int assert(int expected, int actual)
   else
     return 0;
 }
+
+int confirmNumCoppersInHand(int player, struct gameState *state, int num) {
+ // int countCardTypeInHand(int card, struct gameState *state)
+ // int hasGameCard(int card, struct gameState *state, int pileToCheck)
+
+    int tempCard;
+    int copperPos;
+	int i = 1;
+
+    if (hasGameCard(copper, state, 1) < 2) {
+
+      	// check for error - no available coppers
+    	if (hasGameCard(copper, state, 3) < 0) {
+        	printf("error: no coppers in deck\n");
+        	return -1;
+      	}
+    
+    	while (hasGameCard(copper, state, 1) < 2)
+      	{
+        	copperPos = hasGameCard(copper, state, 3);
+        	tempCard = state->hand[player][i];
+        	state->hand[player][i] = state->deck[player][copperPos];
+        	state->deck[player][copperPos] = tempCard;
+      	}
+    }
+
+    // already has 2 coppers
+    else {
+    	return 0;
+    }
+
+}
+
 
 
 // helper functions for unittest1
