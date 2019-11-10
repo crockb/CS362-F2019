@@ -70,7 +70,7 @@ int testPlayTribute()
     //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
     // -------  condition #4 - 1 or less cards in discard/deck - deckCount > 0 ------
-    printf("----- UNIT TEST #4 ----- 8 conditions tested ------ \n");
+    printf("\n----- UNIT TEST #4 - playTribute() ------\n");
 
 
 	// ----- CONDITION 1.0 ---------
@@ -316,6 +316,9 @@ int testPlayTribute()
     	printf("condition 4.3.0 - FAIL: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
     else
     	printf("condition 4.3.0 - PASS: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
+
+    printf("\n----- UNIT TEST #4 - playTribute() - COMPLETED -----\n");
+
 
 	return 0;
 }

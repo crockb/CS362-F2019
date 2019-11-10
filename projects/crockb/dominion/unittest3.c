@@ -68,7 +68,7 @@ int testPlayAmbassador()
             };
 
     // -------  condition #1 - reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply) ------
-    printf("----- UNIT TEST #3 - CONDITION #1: reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)\n");
+    printf("\n----- UNIT TEST #3 - playAmbassador() - CONDITION #1: reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)\n");
 
     // initialize the game
     initializeGame(3, k, randomSeed, &state);
@@ -143,6 +143,8 @@ int testPlayAmbassador()
     // check the results
     printTestCondition3Results(&state, &preState, returnValue);
 
+    printf("\n----- UNIT TEST #3 - playAmbassador() - COMPLETED -----\n");
+
 	return 0;
 }
 
@@ -162,7 +164,7 @@ int confirmNumCoppersInHand(int player, struct gameState *state, int num) {
 
     int tempCard;
     int copperPos;
-	int i = 2;
+	   int i = 2;
 
     if (countCardTypeInHand(copper, state) < 2) {
 

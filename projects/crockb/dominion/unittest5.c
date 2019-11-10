@@ -80,7 +80,7 @@ int testPlayMine()
 
 
     // -------  beginning of unit test conditions ------
-    printf("----- UNIT TEST #5 ----- 4 conditions tested ------ \n");
+    printf("\n----- UNIT TEST #5 - playMine() ------\n");
 
     // ----- CONDITION 1 - Invalid Trash Card (choice 1) ---------
 
@@ -186,6 +186,8 @@ int testPlayMine()
     	printf("condition 4 (part 2) - FAIL: -1 copper in hand: actual %d, expected: %d\n", countCardTypeInHand(copper, &state), countCardTypeInHand(copper, &preState)-1);
     else
     	printf("condition 4 (part 2) - PASS: -1 copper in hand: actual %d, expected: %d\n", countCardTypeInHand(copper, &state), countCardTypeInHand(copper, &preState)-1);
+
+    printf("\n----- UNIT TEST #5 - playMine() - COMPLETED -----\n");
 
 	return 0;
 }

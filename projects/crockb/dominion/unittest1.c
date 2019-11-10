@@ -71,7 +71,7 @@ int testPlayBaron()
 
 
     // -------  condition #1 - choice1 (player1 has an estate) ------
-    printf("----- UNIT TEST #1 - CONDITION #1: player1 chooses to discard an estate - player1 has an estate.\n");
+    printf("----- UNIT TEST #1 - playBaron() - CONDITION #1: player1 chooses to discard an estate - player1 has an estate.\n");
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
@@ -159,10 +159,7 @@ int testPlayBaron()
     // check the results
     printTestCondition2to4Results(&state, &preState);
 
-    printf("\n----- UNIT TEST #1 - COMPLETED -----\n");
-
-
-
+    printf("\n----- UNIT TEST #1 - playBaron() - COMPLETED -----\n");
 
   return 0;
 }

@@ -55,7 +55,7 @@ int testPlayMinion()
 
 
     // -------  condition #1 - choice1 (player1 chooses to add 2 coins) ------
-    printf("----- UNIT TEST #2 - CONDITION #1: player1 chooses to add 2 coins\n");
+    printf("\n----- UNIT TEST #2 - playMinion - CONDITION #1: player1 chooses to add 2 coins\n");
 
     // initialize the game
     initializeGame(3, k, randomSeed, &state);
@@ -116,6 +116,8 @@ int testPlayMinion()
 
     // check the results
     printTestCondition3Results(&state, &preState);
+
+    printf("\n----- UNIT TEST #2 - playMinion() - COMPLETED -----\n");
 
 	return 0;
 }
