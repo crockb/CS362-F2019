@@ -61,7 +61,7 @@ int removeEstateCardFromHand(int player, struct gameState *state);
 
 // helper function to set conditions before playing card
 void setCondition1(struct gameState *state);     // #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
-void setCondition2(struct gameState *state)      // #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
+void setCondition2(struct gameState *state);     // #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
 
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
