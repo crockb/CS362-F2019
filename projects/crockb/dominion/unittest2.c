@@ -68,7 +68,7 @@ int testPlayMinion()
     state.hand[player1][0] = minion;
     state.supplyCount[minion]--;
 
-    printf("MINIONS IN HAND: %d\n", countCardTypeInHand(minion, preState));
+    printf("MINIONS IN HAND: %d\n", countCardTypeInHand(minion, &state));
 
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
@@ -111,7 +111,7 @@ int testPlayMinion()
     state.supplyCount[minion]--;
 
     // reduce the number of cards in p3's hand (note this is only for testing)
-    state->handCount[player3] = 3;
+    state.handCount[player3] = 3;
 
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
