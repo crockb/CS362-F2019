@@ -80,9 +80,9 @@ int testPlayAmbassador()
     // confirm an estate is located in the 2nd position
 	removeEstateCardFromHand(0, &state);
 	provideEstateCardFromDeck(0, &state);
+	printf("Look here.\n");
 	printPlayersCards(0, &state);
 
-/*
     // confirm player has 2 coppers in hand
     confirmNumCoppersInHand(player1, &state, 2);
     copperPos = hasGameCard(copper, &state, 1);
@@ -138,8 +138,6 @@ int testPlayAmbassador()
 
     // check the results
     printTestCondition3Results(&state, &preState, returnValue);
-
-*/
 
 	return 0;
 }
