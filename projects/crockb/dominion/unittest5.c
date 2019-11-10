@@ -62,7 +62,7 @@ void setCondition4(struct gameState *state);  // #4 - Left player has 2 or more 
 
 int main()
 {
-	testPlayTribute();
+	testPlayMine();
 	return 0;
 }
 
