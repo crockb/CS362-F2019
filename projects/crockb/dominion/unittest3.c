@@ -7,7 +7,7 @@
 		 2. Each player gains a copy of the chosen card from the supply (in their discard)
 	Test Conditions Identified and Expected End States:
 		CONDITION #1:  Reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)
-					   p1 2 less coppers, +1 copper each player (in discard pile), supply should be the same (after 2 adds, 2 removes)  
+					   p1 2 less coppers, +1 copper each player (in discard pile), copper supply should be the same (after 2 adds, 2 removes)  
 		CONDITION #2:  Attempt to discard 3 copies (fail)
 					   (fail flag, no gameState changes)
 		CONDITION #3:  Attempt to discard the ambassador (fail):
@@ -284,7 +284,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
 	int result = 0;
 
 	//CONDITION #1:  Reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)
-	//				 p1 2 less coppers, +1 copper each player (in discard pile), supply should be the same (after 2 adds, 2 removes)
+	//				 p1 2 less coppers, +1 copper each player (in discard pile), copper supply should be the same (after 2 adds, 2 removes)
 
 
     // precondition #1 - p1 2 less coppers
@@ -303,50 +303,14 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     else
 		printf("precondition #2 pass: +1 copper each other player (in discard pile): p2 actual %d p2 expected: %d, p3 actual %d p3 expected: %d\n", countCardTypeInDiscard(copper, player2, state), countCardTypeInDiscard(copper, player2, preState)+1, countCardTypeInDiscard(copper, player3, state), countCardTypeInDiscard(copper, player3, preState)+1);
 
-  /*
-    // precondition #3 - player has 3 cards in hand (less 1 estate, less 1 baron)
-    result = assert(preState->handCount[player1]-2, state->handCount[player1]);
+ 
+    // precondition #3 - copper supply should be the same (after 2 adds, 2 removes)
+    result = assert(preState->supplyCount[copper], state->supplyCount[copper]);
     if (result == 0)
-      printf("precondition #3 fail: # cards in hand: %d, expected: %d\n", state->handCount[player1], preState->handCount[player1]-2);
+    	printf("precondition #3 fail: copper supply should be the same (after 2 adds, 2 removes): actual %d, expected: %d\n", state->supplyCount[copper], preState->supplyCount[copper]);
     else
-       printf("precondition #3 pass: # cards in hand: %d, expected: %d\n", state->handCount[player1], preState->handCount[player1]-2);    
+    	printf("precondition #3 pass: copper supply should be the same (after 2 adds, 2 removes): actual %d, expected: %d\n", state->supplyCount[copper], preState->supplyCount[copper]);    
 
-    // precondition #4 - player has +4 coins
-    result = assert(preState->coins+4, state->coins);
-    if (result == 0)
-      printf("precondition #4 fail: # of coins: %d, expected: %d\n", state->coins, preState->coins+4);
-    else
-       printf("precondition #4 pass: # of coins: %d, expected: %d\n", state->coins, preState->coins+4);       
-
-    // precondition #5 - player has +1 buys
-    result = assert(preState->numBuys+1, state->numBuys);
-    if (result == 0)
-      printf("precondition #5 fail: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1);
-    else
-       printf("precondition #5 pass: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1); 
-
-    // precondition #6 - player 0 actions
-    result = assert(preState->numActions-1, state->numActions);
-    if (result == 0)
-      printf("precondition #6 fail: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);
-    else
-       printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);     
-
-    // precondition #7 - player has 1 discarded baron
-     result = assert(hasGameCard(baron, state, 2) >=0, 0 >= 0);
-    if (result == 0)
-      printf("precondition #7 fail: baron in discard pile: FALSE, expected: TRUE\n");
-    else
-       printf("precondition #7 pass: baron in discard pile: TRUE, expected: TRUE\n");    
-
-
-    // precondition #8 - supplyCount for estate unchanged
-    result = assert(preState->supplyCount[estate], state->supplyCount[estate]);
-    if (result == 0)
-      printf("precondition #8 fail: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
-    else
-        printf("precondition #8 pass: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
-*/
 }
 
 void printPlayersCards(int player, struct gameState *state)
