@@ -1331,6 +1331,8 @@ int playTribute(struct gameState *state, int handPos)
     // discard tribute card
     discardCard(handPos, currentPlayer, state, 0);
 
+    printf("Did this fire #1?\n");
+
     // check the availability of nextplayer cards and set them to the tribute cards
         if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
             if (state->deckCount[nextPlayer] > 0) {
@@ -1340,6 +1342,7 @@ int playTribute(struct gameState *state, int handPos)
                 state->deckCount[nextPlayer]--;
             }
             else if (state->discardCount[nextPlayer] > 0) {
+                printf("Did this fire #2?\n");
                 tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
             }
             else {
@@ -1352,6 +1355,7 @@ int playTribute(struct gameState *state, int handPos)
 
         else {
             if (state->deckCount[nextPlayer] == 0) {
+                printf("Did this fire #3?\n");
                 for (i = 0; i < state->discardCount[nextPlayer]; i++) {
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
@@ -1361,6 +1365,7 @@ int playTribute(struct gameState *state, int handPos)
 
                 shuffle(nextPlayer,state);//Shuffle the deck
             }
+            printf("Did this fire #4?\n");
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
 
@@ -1394,6 +1399,7 @@ int playTribute(struct gameState *state, int handPos)
             }
 
             else { //Action Card
+                printf("Did this fire #5?\n");
                 state->numActions = state->numActions + 2;
             }
         }
