@@ -68,13 +68,9 @@ int testPlayMinion()
     state.hand[player1][0] = minion;
     state.supplyCount[minion]--;
 
-    printPlayersCards(0, &state);
- /*
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
-
-
 
     // run the refactored function playMinion() function
     playCard(0, 1, 0, 0, &state);
@@ -112,7 +108,7 @@ int testPlayMinion()
     state.hand[player1][0] = minion;
     state.supplyCount[minion]--;
 
-    // reduce the number of cards in p3's hand (note this is only for testing)
+    // reduce the number of cards in p3's hand (note this method is only for testing purposes)
     state.handCount[player3] = 3;
 
     // copy the initial pre-conditions
@@ -124,8 +120,6 @@ int testPlayMinion()
 
     // check the results
     printTestCondition3Results(&state, &preState);
-
-*/
 
 /*
     // print player's cards
