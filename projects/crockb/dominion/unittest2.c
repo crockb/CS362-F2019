@@ -242,7 +242,7 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
 
   // CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], 4 handCount, +2 coins, 1 action
 
-  int player1 = 0;
+  //int player1 = 0;
   int result = 0;
 
 
