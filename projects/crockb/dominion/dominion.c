@@ -1331,7 +1331,6 @@ int playTribute(struct gameState *state, int handPos)
     // discard tribute card
     discardCard(handPos, currentPlayer, state, 0);
 
-    printf("Did this fire #1?\n");
 
     // check the availability of nextplayer cards and set them to the tribute cards
         if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
@@ -1339,10 +1338,9 @@ int playTribute(struct gameState *state, int handPos)
                 tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
                 discardCard(state->deckCount[nextPlayer]-1, nextPlayer, state, 0);
                 state->deckCount[nextPlayer]--;
-                printf("Did this fire #2?\n");
             }
             else if (state->discardCount[nextPlayer] > 0) {
-                printf("Did this fire #3?\n");
+
                 tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
             }
             else {
@@ -1358,7 +1356,7 @@ int playTribute(struct gameState *state, int handPos)
 
         else {
             if (state->deckCount[nextPlayer] == 0) {
-                printf("Did this fire #4?\n");
+
                 for (i = 0; i < state->discardCount[nextPlayer]; i++) {
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
@@ -1367,52 +1365,52 @@ int playTribute(struct gameState *state, int handPos)
                     state->discard[nextPlayer][i] = -1;
                     state->discardCount[nextPlayer]--;
                     */
-                    
+
                 }
 
                 //shuffle(nextPlayer,state);//Shuffle the deck  -- commented out due to unit test 4.2.2
             }
-            printf("Did this fire #5?\n");
+
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             // discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0); - bug (commented out for unittest 4.2.2 in order to achieve coverage)
-            printf("Tribute Revealed [0] = %d\n", tributeRevealedCards[0]);
+
 
             tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];  // modified to -2 instead of -1 for 4.2.2 coverage
-            //discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
-            printf("Tribute Revealed [2] = %d\n", tributeRevealedCards[1]);
+            //discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0); - bug (commented out for unittest 4.2.2 in order to achieve coverage)
+
         }
 
         if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
             state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
             state->playedCardCount++;
-            printf("Did this fire #6?\n");
+
         }
 
         for (i = 0; i < 2; i ++) {
             if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
                 state->coins += 2;
-                printf("Did this fire #7?\n");
+
             }
 
             else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
                 drawCard(currentPlayer, state);
                 drawCard(currentPlayer, state);
-                printf("Did this fire #8?\n");
+
                 // great hall receives bonus from Action as well
                 if (tributeRevealedCards[i] == great_hall) {
                     state->numActions = state->numActions + 2;
-                    printf("Did this fire #9?\n");
+
                 }
             }
 
             else if (tributeRevealedCards[i] == -1)
             {
                 // do nothing - invalid card
-                printf("Did this fire #10?\n");
+
             }
 
             else { //Action Card
-                printf("Did this fire #11?\n");
+
                 state->numActions = state->numActions + 2;
             }
         }
