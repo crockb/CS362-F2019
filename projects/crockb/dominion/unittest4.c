@@ -39,7 +39,7 @@
 
         2.  In the discardCard() statements for the nextPlayer removed the -1 for the deckCount 
         	index.  The value for the tribute cards will always be set outside the bounds of 
-        	the nextPlayer’s hand
+        	the nextPlayer’s hand // NOTE:  had to remove for unit testing coverage
 */
 
 #include <stdio.h>
@@ -289,8 +289,10 @@ int testPlayTribute()
     updateCoins(player1, &preState, 2);
     updateCoins(player1, &state, state.coins);
 
+/*
     printf("Player 2 Cards:");
     printPlayersCards(1,&state);
+*/
 
     // check +2 coins
     result = assert(preState.coins, state.coins);

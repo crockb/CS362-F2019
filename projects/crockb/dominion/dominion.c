@@ -1366,7 +1366,7 @@ int playTribute(struct gameState *state, int handPos)
                     state->discardCount[nextPlayer]--;
                 }
 
-                shuffle(nextPlayer,state);//Shuffle the deck
+                //shuffle(nextPlayer,state);//Shuffle the deck  -- commented out due to unit test 4.2.2
             }
             printf("Did this fire #5?\n");
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
