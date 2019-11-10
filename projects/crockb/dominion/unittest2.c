@@ -28,8 +28,6 @@ int testPlayMinion();
 int assert(int expected, int actual);
 int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
-int provideEstateCardFromDeck(int player, struct gameState *state);
-int removeEstateCardFromHand(int player, struct gameState *state);
 
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
@@ -58,7 +56,7 @@ int testPlayMinion()
                sea_hag, tribute, smithy
             };
 
-/*
+
     // -------  condition #1 - choice1 (player1 chooses to add 2 coins) ------
     printf("----- UNIT TEST #2 - CONDITION #1: player1 chooses to add 2 coins\n");
 
@@ -99,7 +97,6 @@ int testPlayMinion()
     // check the results
     printTestCondition2Results(&state, &preState);
 
-*/
     // -------  condition #3 - choice 2 discard hand (p1 & p2 have 5 cards, p3 does not) ------
     printf("----- UNIT TEST #2 - CONDITION #3: p1 & p2 discard and draw 4, p3 too few cards\n");
 
@@ -123,29 +120,8 @@ int testPlayMinion()
     // check the results
     printTestCondition3Results(&state, &preState);
 
-
-/*
-    // print player's cards
-    printf("player 1 (pre-state)\n");
-    printPlayersCards(0, &preState);
-    printf("player 1 (post-state)\n");
-    printPlayersCards(0, &state);
-
-    printf("player 2 (pre-state)\n");
-    printPlayersCards(1, &preState);
-    printf("player 2 (post-state)\n");
-    printPlayersCards(1, &state);
-
-    printf("player 3 (pre-state)\n");
-    printPlayersCards(2, &preState);
-    printf("player 3 (post-state)\n");
-    printPlayersCards(2, &state);
-
-*/
-
 	return 0;
 }
-
 
 
 int assert(int expected, int actual)
@@ -227,46 +203,6 @@ int countCardTypeInHand(int card, struct gameState *state)
   return count;
 }
 
-
-
-// provide an estate card (if the player doesn't already have one in their hand)
-int provideEstateCardFromDeck(int player, struct gameState *state)
-{
-    if (hasGameCard(estate, state, 1) < 0) {
-      int tempCard;
-      int estatePos;
-      // provide an estate card from the deck
-      if (hasGameCard(estate, state, 3) < 0) {
-        printf("error: no estate card in deck\n");
-        return -1;
-      }
-      else
-      {
-        estatePos = hasGameCard(estate, state, 3);
-        tempCard = state->hand[player][1];
-        state->hand[player][1] = state->deck[player][estatePos];
-        state->deck[player][estatePos] = tempCard;
-      }
-    }
-
-    return 0;
-}
-
-// remove estate cards from the players hand (if they have any)
-int removeEstateCardFromHand(int player, struct gameState *state)
-{
-    int estateHandPos, copperDeckPos;
-    
-    while (hasGameCard(estate, state, 1) >= 0) {
-      // swap estate card with nearest copper in deck
-      copperDeckPos = hasGameCard(copper, state, 3);
-      estateHandPos = hasGameCard(estate, state, 1);
-      state->hand[player][estateHandPos] = copper;
-      state->deck[player][copperDeckPos] = estate;
-    }
-
-    return 0;
-}
 
 
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
