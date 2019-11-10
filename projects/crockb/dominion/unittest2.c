@@ -240,7 +240,7 @@ int removeEstateCardFromHand(int player, struct gameState *state)
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
 
-  // CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], 4 handCount, +2 coins, 1 action
+  // CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
 
   //int player1 = 0;
   int result = 0;
@@ -251,23 +251,16 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
    if (result == 0)
       printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
    else
-      printf("precondition #2 pass: # barons in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
+      printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
+
+    // precondition #2 - player has +2 coins
+    result = assert(preState->coins+2, state->coins);
+    if (result == 0)
+      printf("precondition #2 fail: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);
+    else
+       printf("precondition #2 pass: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);       
 
 /*
-    // precondition #3 - player has 3 cards in hand (less 1 estate, less 1 baron)
-    result = assert(preState->handCount[player1]-2, state->handCount[player1]);
-    if (result == 0)
-      printf("precondition #3 fail: # cards in hand: %d, expected: %d\n", state->handCount[player1], preState->handCount[player1]-2);
-    else
-       printf("precondition #3 pass: # cards in hand: %d, expected: %d\n", state->handCount[player1], preState->handCount[player1]-2);    
-
-    // precondition #4 - player has +4 coins
-    result = assert(preState->coins+4, state->coins);
-    if (result == 0)
-      printf("precondition #4 fail: # of coins: %d, expected: %d\n", state->coins, preState->coins+4);
-    else
-       printf("precondition #4 pass: # of coins: %d, expected: %d\n", state->coins, preState->coins+4);       
-
     // precondition #5 - player has +1 buys
     result = assert(preState->numBuys+1, state->numBuys);
     if (result == 0)
