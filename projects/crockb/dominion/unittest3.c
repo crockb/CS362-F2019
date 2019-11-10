@@ -88,7 +88,10 @@ int testPlayAmbassador()
     
     // check the results
     printTestCondition1Results(&state, &preState);
+    printPlayersCards(0, &state);
+    
 
+/*
     // print player's cards
     printf("player 1 (pre-state)\n");
     printPlayersCards(0, &preState);
@@ -104,7 +107,7 @@ int testPlayAmbassador()
     printPlayersCards(2, &preState);
     printf("player 3 (post-state)\n");
     printPlayersCards(2, &state);
-
+*/
 	return 0;
 }
 
