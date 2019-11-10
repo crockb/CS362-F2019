@@ -89,19 +89,6 @@ int testPlayAmbassador()
     // check the results
     printTestCondition1Results(&state, &preState);
 
-/*
-    // copy the initial pre-conditions
-    updateCoins(player1, &state, bonus);
-    memcpy(&preState, &state, sizeof(struct gameState));
-
-    // run the refactored function playBaron() function
-    playCard(0, 1, 0, 0, &state);
-    
-    // check the results
-    printTestCondition1Results(&state, &preState);
-*/
-
-/*
     // print player's cards
     printf("player 1 (pre-state)\n");
     printPlayersCards(0, &preState);
@@ -117,8 +104,6 @@ int testPlayAmbassador()
     printPlayersCards(2, &preState);
     printf("player 3 (post-state)\n");
     printPlayersCards(2, &state);
-
-*/
 
 	return 0;
 }
@@ -283,17 +268,21 @@ int removeEstateCardFromHand(int player, struct gameState *state)
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
 
-	printf("Entered the printTestConditionResults\n");
-/*
-  int player1 = 0;
-  int result = 0;
+	int player1 = 0;
+	int result = 0;
 
-    // precondition #1 - player has one less estate in hand
-    result = assert(countCardTypeInHand(estate, preState)-1, countCardTypeInHand(estate, state));
+	//CONDITION #1:  Reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)
+	//				 p1 2 less coppers, +2 coppers supply, +1 copper each player (in discard pile)
+
+
+    // precondition #1 - p1 2 less coppers
+    result = assert(countCardTypeInHand(copper, preState)-2, countCardTypeInHand(copper, state));
     if (result == 0)
-      printf("precondition #1 fail: # estates in hand: %d, expected: %d\n", countCardTypeInHand(estate, state), countCardTypeInHand(estate, preState)-1);
+      printf("precondition #1 fail: p1 2 less coppers: actual %d, expected: %d\n", countCardTypeInHand(copper, state), countCardTypeInHand(copper, preState)-2);
     else
-       printf("precondition #1 pass: # estates in hand: %d, expected: %d\n", countCardTypeInHand(estate, state), countCardTypeInHand(estate, preState)-1);
+       printf("precondition #1 pass: p1 2 less coppers: actual %d, expected: %d\n", countCardTypeInHand(copper, state), countCardTypeInHand(copper, preState)-2);
+  
+  /*
 
     // precondition #2 - player has one less baron in hand
     result = assert(countCardTypeInHand(baron, preState)-1, countCardTypeInHand(baron, state));
