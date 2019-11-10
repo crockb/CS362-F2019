@@ -83,7 +83,7 @@ int testPlayTribute()
   	// initialize variables
   	int player1 = 0; //, bonus = 0, copperPos = -1, returnValue; // player2 = 0, player3 = 0;
   	int randomSeed = 7890;
-  	struct gameState state, preState;
+  	struct gameState state; //preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                great_hall, tribute, smithy
             };
@@ -99,7 +99,7 @@ int testPlayTribute()
 
     // confirm an estate is located in the 2nd position
 	setCondition1(&state);
-	printf("Expect: deckCount = 1, discard = 0")
+	printf("Expect: deckCount = 1, discard = 0");
 	printPlayersCards(1, &state);
 
 	return 0;
