@@ -68,9 +68,8 @@ int testPlayMinion()
     state.hand[player1][0] = minion;
     state.supplyCount[minion]--;
 
-    printf("MINIONS IN HAND: %d\n", countCardTypeInHand(minion, &state));
     printPlayersCards(0, &state);
-    
+
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));

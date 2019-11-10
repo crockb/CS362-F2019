@@ -171,6 +171,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
         for (j = 0; j < 5; j++)
         {
             drawCard(i, state);
+            printf("Anybody getting cards?\n");
         }
     }
 
