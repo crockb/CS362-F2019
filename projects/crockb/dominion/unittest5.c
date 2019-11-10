@@ -70,7 +70,6 @@ int main()
 
 int testPlayMine()
 {
-
   	// initialize variables
   	int player1 = 0, result = -1, bonus = 0, returnValue = -10;
   	int randomSeed = 7890;

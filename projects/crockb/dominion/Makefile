@@ -42,5 +42,15 @@ unittest4: dominion.o unittest4.c
 unittest5: dominion.o unittest5.c
 	gcc -o unittest5 unittest5.c -g dominion.o rngs.o $(CFLAGS)
 
+unittestresults: unittest1 unittest2 unittest3 unittest4 unittest5
+	./unittest1 >> unittestresults.out
+	./unittest2 >> unittestresults.out
+	./unittest3 >> unittestresults.out
+	./unittest4 >> unittestresults.out
+	./unittest5 >> unittestresults.out
+	gcov -b -f dominion.c >> unittestresults.out
+	cat dominion.c.gcov >> unittestresults.out
+
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
