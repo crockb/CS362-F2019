@@ -378,9 +378,9 @@ void printTestCondition3Results(struct gameState *state, struct gameState *preSt
     // precondition #4 - p3 should have 3 cards (unchanged)
     result = assert(preState->handCount[player3], state->handCount[player3]);
     if (result == 0)
-      printf("precondition #4 fail: p3 should have 3 cards (unchanged): actual %d, expected%d\n", state->handCount[player3], preState->handCount[player3]);
+      printf("precondition #4 fail: p3 should have 3 cards (unchanged): actual %d, expected %d\n", state->handCount[player3], preState->handCount[player3]);
     else
-      printf("precondition #4 pass: p3 should have 3 cards (unchanged): actual %d, expected%d\n", state->handCount[player3], preState->handCount[player3]);
+      printf("precondition #4 pass: p3 should have 3 cards (unchanged): actual %d, expected %d\n", state->handCount[player3], preState->handCount[player3]);
 
 }
 
