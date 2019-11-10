@@ -43,6 +43,7 @@ int removeEstateCardFromHand(int player, struct gameState *state);
 
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
+void printTestCondition2Results(struct gameState *state, struct gameState *preState, int returnValue);
 void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
@@ -58,7 +59,7 @@ int main()
 int testPlayAmbassador()
 {
   	// initialize variables
-  	int player1 = 0, bonus = 0, copperPos = -1; // player2 = 0, player3 = 0;
+  	int player1 = 0, bonus = 0, copperPos = -1, returnValue; // player2 = 0, player3 = 0;
   	int randomSeed = 7890;
   	struct gameState state, preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -85,11 +86,32 @@ int testPlayAmbassador()
 
     //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
     // run the refactored function playAmbassador() function
-    playCard(0, copperPos, 2, 0, &state);
+    returnValue = playCard(0, copperPos, 2, 0, &state);
     
     // check the results
     printTestCondition1Results(&state, &preState);
 
+    // -------  condition #2 - attempt to discard 3 copies (fail) ------
+    printf("----- UNIT TEST #3 - CONDITION #2: attempt to discard 3 copies (fail)\n");
+
+    // initialize the game
+    initializeGame(3, k, randomSeed, &state);
+
+    // provide player1 with a ambassador card
+    state.hand[player1][0] = ambassador;
+    state.supplyCount[ambassador]--;
+
+    // confirm player has 2 coppers in hand
+    confirmNumCoppersInHand(player1, &state, 2);
+    copperPos = hasGameCard(copper, &state, 1);
+
+    // run the refactored function playAmbassador() function
+    returnValue = playCard(0, copperPos, 3, 0, &state);
+
+    // check the results
+    printTestCondition2Results(&state, &preState, returnValue);
+
+/*
     // print player's cards
     printf("player 1 (pre-state)\n");
     printPlayersCards(0, &preState);
@@ -106,6 +128,7 @@ int testPlayAmbassador()
     printf("player 3 (post-state)\n");
     printPlayersCards(2, &state);
 
+*/
 	return 0;
 }
 
@@ -303,7 +326,6 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     else
 		printf("precondition #2 pass: +1 copper each other player (in discard pile): p2 actual %d p2 expected: %d, p3 actual %d p3 expected: %d\n", countCardTypeInDiscard(copper, player2, state), countCardTypeInDiscard(copper, player2, preState)+1, countCardTypeInDiscard(copper, player3, state), countCardTypeInDiscard(copper, player3, preState)+1);
 
- 
     // precondition #3 - copper supply should be the same (after 2 adds, 2 removes)
     result = assert(preState->supplyCount[copper], state->supplyCount[copper]);
     if (result == 0)
@@ -312,6 +334,24 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     	printf("precondition #3 pass: copper supply should be the same (after 2 adds, 2 removes): actual %d, expected: %d\n", state->supplyCount[copper], preState->supplyCount[copper]);    
 
 }
+
+
+void printTestCondition2Results(struct gameState *state, struct gameState *preState, int returnValue) {
+
+	int result = 0;
+
+	//	CONDITION #2:  Attempt to discard 3 copies (fail)
+	//				   (fail flag, no gameState changes)
+
+    // precondition #1 - attempt to discard 3 copies (fail flag)
+    result = assert(-1, returnValue);
+    if (result == 0)
+    	printf("precondition #1 fail: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, 1);
+    else
+    	printf("precondition #1 pass: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, 1);
+
+}
+
 
 void printPlayersCards(int player, struct gameState *state)
 {
