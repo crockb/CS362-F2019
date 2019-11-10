@@ -178,7 +178,7 @@ int testPlayTribute()
     	printf("condition 3.0 - FAIL: (fail flag not returned): actual %d, expected: %d\n", returnValue, -1);
     else
     	printf("condition 3.0 - PASS: (fail flag returned): actual %d, expected: %d\n", returnValue, -1);
-*/
+
 
 	// ----- CONDITION 4.1.1 ---------
 
@@ -208,12 +208,37 @@ int testPlayTribute()
     	printf("condition 4.1.1 - FAIL: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
     else
     	printf("condition 4.1.1 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+*/
 
+	// ----- CONDITION 4.1.2 ---------
 
-/*
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a tribute card
+    state.hand[player1][0] = tribute;
+    state.supplyCount[tribute]--;
 
 	// condition 4.1.2 - 2 or more cards in discard/deck - no deck cards (shuffle) - duplicates - 2 estates
 	setCondition4(&state, estate, estate);
+
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // play the tribute card
+    playCard(0, 0, 0, 0, &state);
+
+    // expected results: +2 cards (-1 for the tribute)  (no double counting)
+    result = assert(preState.handCount[player1]+1, state.handCount[player1]);
+    if (result == 0)
+    	printf("condition 4.1.2 - FAIL: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
+    else
+    	printf("condition 4.1.2 - PASS: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
+
+/*
+
+
 
 	// condition 4.1.3 - 2 or more cards in discard/deck - no deck cards (shuffle) - duplicates - 2 mines
 	setCondition4(&state, mine, mine);
