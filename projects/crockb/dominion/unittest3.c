@@ -80,6 +80,8 @@ int testPlayAmbassador()
     // confirm an estate is located in the 2nd position
 	removeEstateCardFromHand(0, &state);
 	provideEstateCardFromDeck(0, &state);
+
+	// move positions of the estate to expose bug #2, inadvertently chooses estate vs. copper
 	int swap;
 	swap = state.hand[0][1];
 	state.hand[0][1] = state.hand[0][2];
@@ -96,14 +98,6 @@ int testPlayAmbassador()
     //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
     // run the refactored function playAmbassador() function
     returnValue = playCard(0, copperPos, 2, 0, &state);
-
-    printf("Look here.\n");
-	printf("Player 1 (state)\n");
-	printPlayersCards(0, &state);
-	printf("Player 2 (state)\n");
-	printPlayersCards(1, &state);
-	printf("Player 3 (state)\n");
-	printPlayersCards(2, &state);
     
     // check the results
     printTestCondition1Results(&state, &preState);
