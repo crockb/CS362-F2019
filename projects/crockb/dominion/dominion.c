@@ -1435,20 +1435,21 @@ int playMine(int choice1, int choice2, struct gameState *state, int handPos)
 
         if (j < copper || j > gold)
         {
-            return -1;
             printf("Did this fire 2?\n");
+            return -1;
+
         }
 
         if (choice2 > treasure_map || choice2 < curse)
         {
-            return -1;
             printf("Did this fire 3?\n");
+            return -1;
         }
 
         if ( (getCost(j + 3)) < getCost(choice2) )
         {
-            return -1;
             printf("Did this fire 4?\n");
+            return -1;
         }
 
         gainCard(choice1, state, 2, currentPlayer);
