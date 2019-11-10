@@ -86,7 +86,12 @@ int testPlayAmbassador()
 	state.hand[0][1] = state.hand[0][2];
 	state.hand[0][2] = swap;
 
+	printf("Player 1 (state)\n");
 	printPlayersCards(0, &state);
+	printf("Player 2 (state)\n");
+	printPlayersCards(1, &state);
+	printf("Player 3 (state)\n");
+	printPlayersCards(2, &state);
 
     // confirm player has 2 coppers in hand
     confirmNumCoppersInHand(player1, &state, 2);
