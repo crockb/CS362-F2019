@@ -290,16 +290,11 @@ void printTestCondition2Results(struct gameState *state, struct gameState *preSt
       printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
 
     // precondition #2 - each player has 4 discards
-
-
-    result = assert(1, (discardCount[player1] == 4 && discardCount[player2] == 4 && discardCount[player3] == 4));
+    result = assert(1, (state->discardCount[player1] == 4 && state->discardCount[player2] == 4 && state->discardCount[player3] == 4));
     if (result == 0)
-      printf("precondition #1 fail: all players should have 4 discards: p1: %d, p2: %d, p3: %d\n", discardCount[player1], discardCount[player2], discardCount[player3]);
+      printf("precondition #1 fail: all players should have 4 discards: p1: %d, p2: %d, p3: %d\n", state->discardCount[player1], state->discardCount[player2], state->discardCount[player3]);
     else
-      printf("precondition #1 pass: all players should have 4 discards: p1: %d, p2: %d, p3: %d\n", discardCount[player1], discardCount[player2], discardCount[player3]);
-
-
-
+      printf("precondition #1 pass: all players should have 4 discards: p1: %d, p2: %d, p3: %d\n", state->discardCount[player1], state->discardCount[player2], state->discardCount[player3]);
 
 
 }
