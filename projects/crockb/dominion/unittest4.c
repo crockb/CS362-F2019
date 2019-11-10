@@ -149,6 +149,11 @@ int testPlayTribute()
     else
     	printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
 
+    printPlayersCards(0, &preState);
+    printPlayersCards(0, &state);
+
+
+
 
 /*
 
