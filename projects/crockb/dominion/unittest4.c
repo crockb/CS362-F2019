@@ -52,7 +52,7 @@
 
 
 // helper function signatures
-int testTribute();
+int testplayTribute();
 int assert(int expected, int actual);
 int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
