@@ -346,9 +346,16 @@ void printTestCondition2Results(struct gameState *state, struct gameState *preSt
     // precondition #1 - attempt to discard 3 copies (fail flag)
     result = assert(-1, returnValue);
     if (result == 0)
-    	printf("precondition #1 fail: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, 1);
+    	printf("precondition #1 fail: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("precondition #1 pass: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, 1);
+    	printf("precondition #1 pass: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, -1);
+
+    // precondition #2 - no gameState changes
+    result = assert(preState, state);
+    if (result == 0)
+    	printf("precondition #2 fail: attempt to discard 3 copies (no game state changes): actual %d, expected: %d\n", result, 1);
+    else
+    	printf("precondition #2 pass: attempt to discard 3 copies (no game state changes): actual %d, expected: %d\n", result, 1);
 
 }
 
