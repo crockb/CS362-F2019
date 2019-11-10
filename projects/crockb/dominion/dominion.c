@@ -1431,35 +1431,29 @@ int playMine(int choice1, int choice2, struct gameState *state, int handPos)
         // discard the played card
         discardCard(handPos, currentPlayer, state, 0);
 
-        printf("Did this fire 1?\n");
 
         if (j < copper || j > gold)
         {
-            printf("Did this fire 2?\n");
             return -1;
 
         }
 
         if (choice2 > treasure_map || choice2 < curse)
         {
-            printf("Did this fire 3?\n");
             return -1;
         }
 
         if ( (getCost(j + 3)) < getCost(choice2) )
         {
-            printf("Did this fire 4?\n");
             return -1;
         }
 
         gainCard(choice1, state, 2, currentPlayer);
-        printf("Did this fire 5?\n");
         //discard trashed card
         for (i = 0; i < state->handCount[currentPlayer]; i++)
         {
             if (state->hand[currentPlayer][i] == j)
             {
-                printf("Did this fire 6?\n");
                 discardCard(j, currentPlayer, state, 0);
                 break;
             }

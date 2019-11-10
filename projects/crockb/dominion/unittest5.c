@@ -79,12 +79,10 @@ int testPlayMine()
                great_hall, tribute, smithy
             };
 
-    //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
     // -------  beginning of unit test conditions ------
     printf("----- UNIT TEST #5 ----- 4 conditions tested ------ \n");
 
-/*
     // ----- CONDITION 1 - Invalid Trash Card (choice 1) ---------
 
     // initialize the game
@@ -155,7 +153,7 @@ int testPlayMine()
     	printf("condition 3 - FAIL: Purchase Card Too Expensive (-1 Error): actual %d, expected: %d\n", returnValue, -1);
     else
     	printf("condition 3 - PASS: Purchase Card Too Expensive (-1 Error): actual %d, expected: %d\n", returnValue, -1);
-*/
+
 
     // ----- CONDITION 4 - Valid Trash Card, Purchase Card Is In Range ----
     
@@ -192,6 +190,7 @@ int testPlayMine()
 
 	return 0;
 }
+
 
 
 int assert(int expected, int actual)
