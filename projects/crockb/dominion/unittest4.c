@@ -146,6 +146,13 @@ int testPlayTribute()
 	return 0;
 }
 
+int assert(int expected, int actual)
+{
+  if (expected == actual)
+    return 1;
+  else
+    return 0;
+}
 
 // CONDITION:  #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
 void setCondition1(struct gameState *state, int card)
