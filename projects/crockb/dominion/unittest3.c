@@ -13,8 +13,8 @@
 		CONDITION #3:  Attempt to discard the ambassador (fail):
 					   (fail flag)
    	Known Bugs Inserted in Assignment 2:
-		1. Replaced i < stateHandCount with i <=, could cause an out of bounds
-        2. Replaced choice1 with choice2 in the statement "each player receives a copy"
+		1. Replaced i < stateHandCount with i <=, could cause an out of bounds // NOTE commented out for unit testing
+    2. Replaced choice1 with choice2 in the statement "each player receives a copy"
 
     Other Notes:
     	choice1 reflects the cardPos the user reveals
