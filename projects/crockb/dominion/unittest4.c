@@ -314,7 +314,7 @@ int testPlayTribute()
     // expected results: +4 actions (-1 for card played, +4 cards (-1 for card played)
 
    	// check +4 cards (-1 for card played)
-    result = assert(preState.handCount[player1]+1, state.handCount[player1]);
+    result = assert(preState.handCount[player1]+3, state.handCount[player1]);
     if (result == 0)
     	printf("condition 4.3.0 - FAIL: +4 cards (-1 of current turn): actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+3);
     else
@@ -326,7 +326,6 @@ int testPlayTribute()
     	printf("condition 4.3.0 - FAIL: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
     else
     	printf("condition 4.3.0 - PASS: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
-
 
 /*
 
