@@ -62,6 +62,8 @@ int removeEstateCardFromHand(int player, struct gameState *state);
 // helper function to set conditions before playing card
 void setCondition1(struct gameState *state, int card);     // #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
 void setCondition2(struct gameState *state, int card);     // #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
+void setCondition3(struct gameState *state);               // #3 - Left player has 1 or less cards in discard/deck - no cards
+
 
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
@@ -98,13 +100,8 @@ int testPlayTribute()
     state.supplyCount[ambassador]--;
 
     // confirm setConditions
-	setCondition1(&state, estate);
-	printf("Expect: deckCount = 0, discard = 1\n");
-	printPlayersCards(1, &state);
-
-    // confirm setConditions
-	setCondition2(&state, copper);
-	printf("Expect: deckCount = 0, discard = 1\n");
+	setCondition3(&state);
+	printf("Expect: deckCount = 0, discard = 0\n");
 	printPlayersCards(1, &state);
 
 	return 0;
@@ -130,13 +127,20 @@ void setCondition2(struct gameState *state, int card)
 }
 
 /*		
-		#3 - Left player has 1 or less cards in discard/deck - no cards
+		
 		#4 - Left player has 2 or more cards in discard/deck - no deck cards
 			- has duplicates at the backend
 			- has a copper, has an estate
 			- has a copper, has a great_hall
 */
 
+// CONDITION: #3 - Left player has 1 or less cards in discard/deck - no cards
+void setCondition3(struct gameState *state)
+{
+	int player2 = 1;
+	state->deckCount[player2] = 0;
+	state->discardCount[player2] = 0;
+}
 
 
 
