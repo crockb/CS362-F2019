@@ -20,7 +20,7 @@
 
  		 4: Valid Trash Card, Purchase Card Is In Range
  		    values: choice[1] = copper ($0), choice2 = silver ($3)
- 		    expected outcome(s):  gain silver in hand, trash copper from hand
+ 		    expected outcome(s):  +1 silver in hand, -1 copper from hand
 					   
    	Known Bugs Inserted in Assignment 2:
 		1.	In the discardCard statement at the bottom of the function replaced i with j.  
@@ -49,6 +49,7 @@
 // helper function signatures
 int testPlayMine();
 int assert(int expected, int actual);
+int countCardTypeInHand(int card, struct gameState *state);
 void printPlayersCards(int player, struct gameState *state);
 
 
@@ -102,9 +103,9 @@ int testPlayMine()
     // expected outcome(s):  return -1
     result = assert(-1, returnValue);
     if (result == 0)
-    	printf("condition 1 - FAIL: Invalid Trash Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 1 - FAIL: Invalid Trash Card (-1 Error): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("condition 1 - PASS: Invalid Trash Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 1 - PASS: Invalid Trash Card (-1 Error): actual %d, expected: %d\n", returnValue, -1);
 
 
     // ----- CONDITION 2 - Invalid Purchase Card (choice 2) is out of bounds ----
@@ -125,18 +126,18 @@ int testPlayMine()
     // expected outcome(s):  return -1
     result = assert(-1, returnValue);
     if (result == 0)
-    	printf("condition 2 - FAIL: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 2 - FAIL: Invalid Purchase Card (-1 Error): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("condition 2 - PASS: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 2 - PASS: Invalid Purchase Card (-1 Error): actual %d, expected: %d\n", returnValue, -1);
 
-*/
+
 
     // ----- CONDITION 3 - Valid Trash Card, Purchase Card (Should Be Too) Expensive ----
     
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
 
-    // condition 2 -  Valid Trash Card, Purchase Card (Should Be Too) Expensive ----    
+    // condition 3 -  Valid Trash Card, Purchase Card (Should Be Too) Expensive ----    
     setCondition3(&state);
 
     // copy the initial pre-conditions
@@ -151,24 +152,43 @@ int testPlayMine()
     // expected outcome(s):  return -1 (too expensive)
     result = assert(-1, returnValue);
     if (result == 0)
-    	printf("condition 3 - FAIL: Purchase Card (Should Be Too) Expensive: actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 3 - FAIL: Purchase Card Too Expensive (-1 Error): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("condition 3 - PASS: Purchase Card (Should Be Too) Expensive: actual %d, expected: %d\n", returnValue, -1);
-
-
-/*
-
-    // initialize the game
-    initializeGame(2, k, randomSeed, &state);
-    setCondition3(&state);
-	printPlayersCards(0, &state);    
-
-    // initialize the game
-    initializeGame(2, k, randomSeed, &state);
-    setCondition4(&state);
-	printPlayersCards(0, &state);    
-
+    	printf("condition 3 - PASS: Purchase Card Too Expensive (-1 Error): actual %d, expected: %d\n", returnValue, -1);
 */
+
+    // ----- CONDITION 4 - Valid Trash Card, Purchase Card Is In Range ----
+    
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // condition 4 -  Valid Trash Card, Purchase Card Is In Range ----    
+    setCondition4(&state);
+
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+
+    // values: choice[1] = copper ($0), choice2 = silver ($3)
+    returnValue = playCard(0, state.hand[player1][1], silver, 0, &state); 
+
+    // int countCardTypeInHand(int card, struct gameState *state);
+
+    // expected outcome(s):  +1 silver in hand
+    result = assert(countCardTypeInHand(silver, &preState)+1, countCardTypeInHand(silver, &state));
+    if (result == 0)
+    	printf("condition 4 (part 1) - FAIL: +1 silver in hand: actual %d, expected: %d\n", countCardTypeInHand(silver, &state), countCardTypeInHand(silver, &preState)+1);
+    else
+    	printf("condition 4 (part 1) - PASS: +1 silver in hand: actual %d, expected: %d\n", countCardTypeInHand(silver, &state), countCardTypeInHand(silver, &preState)+1);
+
+    // expected outcome(s): -1 copper from hand
+    result = assert(countCardTypeInHand(copper, &preState)-1, countCardTypeInHand(copper, &state));
+    if (result == 0)
+    	printf("condition 4 (part 2) - FAIL: -1 copper in hand: actual %d, expected: %d\n", countCardTypeInHand(copper, &state), countCardTypeInHand(copper, &preState)-1);
+    else
+    	printf("condition 4 (part 2) - PASS: -1 copper in hand: actual %d, expected: %d\n", countCardTypeInHand(copper, &state), countCardTypeInHand(copper, &preState)-1);
 
 	return 0;
 }
@@ -248,6 +268,19 @@ void setCondition4(struct gameState *state)
     state->hand[player1][0] = mine;
     state->supplyCount[mine]--;
     state->hand[player1][1] = copper;   // valid card to trash
+}
+
+
+int countCardTypeInHand(int card, struct gameState *state)
+{
+  int i;
+  int count = 0;
+  int player = state->whoseTurn;
+  for (i = 0; i < state->handCount[player]; i++) {
+    if (state->hand[player][i] == card)
+      count++;
+  }
+  return count;
 }
 
 
