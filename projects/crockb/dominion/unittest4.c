@@ -83,9 +83,9 @@ int main()
 int testPlayTribute()
 {
   	// initialize variables
-  	int player1 = 0, result = -1; //, bonus = 0, copperPos = -1, returnValue; // player2 = 0, player3 = 0;
+  	int player1 = 0, result = -1, bonus = 0; //copperPos = -1, returnValue; // player2 = 0, player3 = 0;
   	int randomSeed = 7890;
-  	struct gameState state; //preState;
+  	struct gameState state, preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                great_hall, tribute, smithy
             };
@@ -113,11 +113,11 @@ int testPlayTribute()
     playCard(0, 0, 0, 0, &state);
 
     // expected results: +2 actions
-    result = assert(preState->numActions+2, state->numActions);
+    result = assert(preState.numActions+2, state.numActions);
     if (result == 0)
-    	printf("condition 1.0 - fail: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+2);
+    	printf("condition 1.0 - FAIL: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+2);
     else
-    	printf("condition 1.0 - PASS: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+2);
+    	printf("condition 1.0 - PASS: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+2);
 
 /*
 
