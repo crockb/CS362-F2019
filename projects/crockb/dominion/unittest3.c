@@ -35,7 +35,7 @@ int testPlayAmbassador();
 int assert(int expected, int actual);
 int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
-int confirmNumCoppersInHand(player, &state);
+int confirmNumCoppersInHand(int player, struct gameState *state, int num);
 
 int provideEstateCardFromDeck(int player, struct gameState *state);
 int removeEstateCardFromHand(int player, struct gameState *state);
@@ -59,9 +59,9 @@ int main()
 int testPlayAmbassador()
 {
   	// initialize variables
-  	int player1 = 0, bonus = 0;
+  	int player1 = 0; // bonus = 0;
   	int randomSeed = 1234;
-  	struct gameState state, preState;
+  	struct gameState state; // preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
@@ -77,7 +77,7 @@ int testPlayAmbassador()
     state.supplyCount[ambassador]--;
 
     // confirm player has 2 coppers in hand
-    confirmNumCoppersInHand(player1, &state);
+    confirmNumCoppersInHand(player1, &state, 2);
     printPlayersCards(0, &state);
 
 /*
@@ -150,6 +150,7 @@ int confirmNumCoppersInHand(int player, struct gameState *state, int num) {
         	state->hand[player][i] = state->deck[player][copperPos];
         	state->deck[player][copperPos] = tempCard;
       	}
+      	   return 0;
     }
 
     // already has 2 coppers
