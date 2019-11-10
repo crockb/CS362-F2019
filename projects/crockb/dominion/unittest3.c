@@ -91,7 +91,7 @@ int testPlayAmbassador()
     printTestCondition1Results(&state, &preState);
 
     // -------  condition #2 - attempt to discard 3 copies (fail) ------
-    printf("----- UNIT TEST #3 - CONDITION #2: attempt to discard 3 copies (fail)\n");
+    printf("\n----- UNIT TEST #3 - CONDITION #2: attempt to discard 3 copies (fail)\n");
 
     // initialize the game
     initializeGame(3, k, randomSeed, &state);
@@ -110,8 +110,8 @@ int testPlayAmbassador()
     // check the results
     printTestCondition2Results(&state, &preState, returnValue);
 
-    // -------  condition #2 - attempt to discard the ambassador (fail) ------
-    printf("----- UNIT TEST #3 - CONDITION #3: attempt to discard the ambassador (fail)\n");
+    // -------  condition #3 - attempt to discard the ambassador (fail) ------
+    printf("\n----- UNIT TEST #3 - CONDITION #3: attempt to discard the ambassador (fail)\n");
 
     // initialize the game
     initializeGame(3, k, randomSeed, &state);
