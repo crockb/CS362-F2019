@@ -51,7 +51,7 @@ int testPlayMinion()
 {
 
   // initialize variables
-  int player1 = 0, player3 = 2, bonus = 0;
+  int player1 = 0; //player3 = 2, bonus = 0;
   int randomSeed = 5678;
   struct gameState state, preState;
   int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -69,10 +69,12 @@ int testPlayMinion()
     state.supplyCount[minion]--;
 
     printPlayersCards(0, &state);
-
+ /*
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
+
+
 
     // run the refactored function playMinion() function
     playCard(0, 1, 0, 0, &state);
@@ -123,6 +125,7 @@ int testPlayMinion()
     // check the results
     printTestCondition3Results(&state, &preState);
 
+*/
 
 /*
     // print player's cards
