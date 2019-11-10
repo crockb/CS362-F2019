@@ -116,9 +116,6 @@ int testPlayAmbassador()
 
 
 
-
-
-
 int assert(int expected, int actual)
 {
   if (expected == actual)
@@ -135,7 +132,7 @@ int confirmNumCoppersInHand(int player, struct gameState *state, int num) {
     int copperPos;
 	int i = 1;
 
-    if (hasGameCard(copper, state, 1) < 2) {
+    if (countCardTypeInHand(copper, state) < 2) {
 
       	// check for error - no available coppers
     	if (hasGameCard(copper, state, 3) < 0) {
@@ -143,7 +140,7 @@ int confirmNumCoppersInHand(int player, struct gameState *state, int num) {
         	return -1;
       	}
     
-    	while (hasGameCard(copper, state, 1) < 2)
+    	while (countCardTypeInHand(copper, state) < 2)
       	{
         	copperPos = hasGameCard(copper, state, 3);
         	tempCard = state->hand[player][i];
