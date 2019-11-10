@@ -60,8 +60,8 @@ int provideEstateCardFromDeck(int player, struct gameState *state);
 int removeEstateCardFromHand(int player, struct gameState *state);
 
 // helper function to set conditions before playing card
-void setCondition1(struct gameState *state);     // #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
-void setCondition2(struct gameState *state);     // #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
+void setCondition1(struct gameState *state, int card);     // #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
+void setCondition2(struct gameState *state, int card);     // #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
 
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
@@ -98,7 +98,12 @@ int testPlayTribute()
     state.supplyCount[ambassador]--;
 
     // confirm setConditions
-	setCondition2(&state);
+	setCondition1(&state, estate);
+	printf("Expect: deckCount = 0, discard = 1\n");
+	printPlayersCards(1, &state);
+
+    // confirm setConditions
+	setCondition2(&state, capper);
 	printf("Expect: deckCount = 0, discard = 1\n");
 	printPlayersCards(1, &state);
 
@@ -107,15 +112,24 @@ int testPlayTribute()
 
 
 // CONDITION:  #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
-void setCondition1(struct gameState *state)
+void setCondition1(struct gameState *state, int card)
 {
 	int player2 = 1;
 	state->deckCount[player2] = 1;
 	state->discardCount[player2] = 0;
+	state->deck[player2][0] = card;
 }
 
-/*
-		
+// CONDITION: #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
+void setCondition2(struct gameState *state, int card)
+{
+	int player2 = 1;
+	state->deckCount[player2] = 0;
+	state->discardCount[player2] = 1;
+	state->discard[player2][0] = card;
+}
+
+/*		
 		#3 - Left player has 1 or less cards in discard/deck - no cards
 		#4 - Left player has 2 or more cards in discard/deck - no deck cards
 			- has duplicates at the backend
@@ -123,14 +137,8 @@ void setCondition1(struct gameState *state)
 			- has a copper, has a great_hall
 */
 
-// CONDITION: #2 - Left player has 1 or less cards in discard/deck - discardCount = 1
 
-void setCondition2(struct gameState *state)
-{
-	int player2 = 1;
-	state->deckCount[player2] = 0;
-	state->discardCount[player2] = 1;
-}
+
 
 /*
 
