@@ -9,9 +9,9 @@
 		CONDITION #1:  Reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)
 					   p1 2 less coppers, +1 copper each player (in discard pile), copper supply should be the same (after 2 adds, 2 removes)  
 		CONDITION #2:  Attempt to discard 3 copies (fail)
-					   (fail flag, no gameState changes)
+					   (fail flag)
 		CONDITION #3:  Attempt to discard the ambassador (fail):
-					   (fail flag, no gameState changes)
+					   (fail flag)
    	Known Bugs Inserted in Assignment 2:
 		1. Replaced i < stateHandCount with i <=, could cause an out of bounds
         2. Replaced choice1 with choice2 in the statement "each player receives a copy"
@@ -38,12 +38,11 @@ int countCardTypeInHand(int card, struct gameState *state);
 int countCardTypeInDiscard(int card, int player, struct gameState *state);
 int confirmNumCoppersInHand(int player, struct gameState *state, int num);
 
-int provideEstateCardFromDeck(int player, struct gameState *state);
-int removeEstateCardFromHand(int player, struct gameState *state);
 
 // helper print functions
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
 void printTestCondition2Results(struct gameState *state, struct gameState *preState, int returnValue);
+void printTestCondition3Results(struct gameState *state, struct gameState *preState, int returnValue);
 void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
@@ -111,24 +110,26 @@ int testPlayAmbassador()
     // check the results
     printTestCondition2Results(&state, &preState, returnValue);
 
-/*
-    // print player's cards
-    printf("player 1 (pre-state)\n");
-    printPlayersCards(0, &preState);
-    printf("player 1 (post-state)\n");
-    printPlayersCards(0, &state);
+    // -------  condition #2 - attempt to discard the ambassador (fail) ------
+    printf("----- UNIT TEST #3 - CONDITION #3: attempt to discard the ambassador (fail)\n");
 
-    printf("player 2 (pre-state)\n");
-    printPlayersCards(1, &preState);
-    printf("player 2 (post-state)\n");
-    printPlayersCards(1, &state);
+    // initialize the game
+    initializeGame(3, k, randomSeed, &state);
 
-    printf("player 3 (pre-state)\n");
-    printPlayersCards(2, &preState);
-    printf("player 3 (post-state)\n");
-    printPlayersCards(2, &state);
+    // provide player1 with a ambassador card
+    state.hand[player1][0] = ambassador;
+    state.supplyCount[ambassador]--;
 
-*/
+    // confirm player has 2 coppers in hand
+    confirmNumCoppersInHand(player1, &state, 2);
+    copperPos = hasGameCard(copper, &state, 1);
+
+    // run the refactored function playAmbassador() function
+    returnValue = playCard(0, 0, 1, 0, &state);
+
+    // check the results
+    printTestCondition3Results(&state, &preState, returnValue);
+
 	return 0;
 }
 
@@ -260,46 +261,6 @@ int countCardTypeInDiscard(int card, int player, struct gameState *state)
 
 
 
-// provide an estate card (if the player doesn't already have one in their hand)
-int provideEstateCardFromDeck(int player, struct gameState *state)
-{
-    if (hasGameCard(estate, state, 1) < 0) {
-      int tempCard;
-      int estatePos;
-      // provide an estate card from the deck
-      if (hasGameCard(estate, state, 3) < 0) {
-        printf("error: no estate card in deck\n");
-        return -1;
-      }
-      else
-      {
-        estatePos = hasGameCard(estate, state, 3);
-        tempCard = state->hand[player][1];
-        state->hand[player][1] = state->deck[player][estatePos];
-        state->deck[player][estatePos] = tempCard;
-      }
-    }
-
-    return 0;
-}
-
-// remove estate cards from the players hand (if they have any)
-int removeEstateCardFromHand(int player, struct gameState *state)
-{
-    int estateHandPos, copperDeckPos;
-    
-    while (hasGameCard(estate, state, 1) >= 0) {
-      // swap estate card with nearest copper in deck
-      copperDeckPos = hasGameCard(copper, state, 3);
-      estateHandPos = hasGameCard(estate, state, 1);
-      state->hand[player][estateHandPos] = copper;
-      state->deck[player][copperDeckPos] = estate;
-    }
-
-    return 0;
-}
-
-
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
 
@@ -341,7 +302,7 @@ void printTestCondition2Results(struct gameState *state, struct gameState *preSt
 	int result = 0;
 
 	//	CONDITION #2:  Attempt to discard 3 copies (fail)
-	//				   (fail flag, no gameState changes)
+	//				   (fail flag)
 
     // precondition #1 - attempt to discard 3 copies (fail flag)
     result = assert(-1, returnValue);
@@ -350,12 +311,22 @@ void printTestCondition2Results(struct gameState *state, struct gameState *preSt
     else
     	printf("precondition #1 pass: attempt to discard 3 copies (fail flag): actual %d, expected: %d\n", returnValue, -1);
 
-    // precondition #2 - no gameState changes
-    result = assert(preState, state);
+}
+
+
+void printTestCondition3Results(struct gameState *state, struct gameState *preState, int returnValue) {
+
+	int result = 0;
+
+	//	CONDITION #3:  Attempt to discard the ambassador (fail):
+	//				   (fail flag)
+
+    // precondition #1 - attempt to discard the ambassador (fail)
+    result = assert(-1, returnValue);
     if (result == 0)
-    	printf("precondition #2 fail: attempt to discard 3 copies (no game state changes): actual %d, expected: %d\n", result, 1);
+    	printf("precondition #1 fail: attempt to discard the ambassador (fail): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("precondition #2 pass: attempt to discard 3 copies (no game state changes): actual %d, expected: %d\n", result, 1);
+    	printf("precondition #1 pass: attempt to discard the ambassador (fail): actual %d, expected: %d\n", returnValue, -1);
 
 }
 
