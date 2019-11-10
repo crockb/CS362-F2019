@@ -81,6 +81,11 @@ int testPlayAmbassador()
 	removeEstateCardFromHand(0, &state);
 	provideEstateCardFromDeck(0, &state);
 	printf("Look here.\n");
+	int swap;
+	swap = state.hand[0][1];
+	state.hand[0][1] = state.hand[0][2];
+	state.hand[0][2] = swap;
+
 	printPlayersCards(0, &state);
 
     // confirm player has 2 coppers in hand
