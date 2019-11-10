@@ -8,7 +8,8 @@
 	Test Conditions Identified and Expected End States:
 		CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
 		CONDITION #2:  Choice 2 - Discard Hand (players 2 & 3 have 5 cards):   -1 hand[minion], +4 discard[] each player, -4 deck[] each player, 4 cards in hand[] each player
-		CONDITION #3:  Choice 2 - Discard Hand (player 3 does not have 5 cards):   -1 hand[minion], +4 discard[] player 1&2, -4 deck[] player 1&2, no change to player3 deck
+		CONDITION #3:  Choice 2 - Discard Hand (player 3 does not have 5 cards):   	-1 hand[minion], +4 discard[] p1 &p2 and 0 discard p3, -4 deck[] pl & p2, no change to p3, p3 should have 3 cards
+	
    	Known Bugs Inserted in Assignment 2:
 		1. Removed the +1 Action of the card at the beginning.
         2. In the draw4 cards set of statements i has been replaced with j'
@@ -32,7 +33,6 @@ int countCardTypeInHand(int card, struct gameState *state);
 void printTestCondition1Results(struct gameState *state, struct gameState *preState);
 void printTestCondition2Results(struct gameState *state, struct gameState *preState);
 void printTestCondition3Results(struct gameState *state, struct gameState *preState);
-
 void printPlayersCards(int player, struct gameState *state);
 
 // call unittest2
