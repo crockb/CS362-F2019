@@ -109,6 +109,9 @@ int testPlayTribute()
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
 
+    // print the player's deck
+    printPlayersCards(0, &state);
+
     // play the ambassador card
     playCard(0, 0, 0, 0, &state);
 
