@@ -72,7 +72,7 @@ int testPlayMine()
 {
 
   	// initialize variables
-  	int player1 = 0, result = -1, bonus = 0; //returnValue = -10;
+  	int player1 = 0, result = -1, bonus = 0, returnValue = -10;
   	int randomSeed = 7890;
   	struct gameState state, preState;
   	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
