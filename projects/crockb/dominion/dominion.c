@@ -1347,10 +1347,8 @@ int playTribute(struct gameState *state, int handPos)
             }
             else {
                 //No Card to Reveal
-               // if (DEBUG) {       // commented out for assignment #3
-               //     printf("No cards to reveal\n");
-                 return -1;
-
+                if (DEBUG) {
+                    // printf("No cards to reveal\n");
                 }
             }
         }
