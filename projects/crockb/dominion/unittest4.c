@@ -140,7 +140,7 @@ int testPlayTribute()
     playCard(0, 0, 0, 0, &state);
 
     // expected results: +2 coins
-    result = assert(preState.coins+2, state.state);
+    result = assert(preState.coins+2, state.coins);
     if (result == 0)
     	printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins+2);
     else
