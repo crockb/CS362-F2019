@@ -37,6 +37,8 @@ int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
 int countCardTypeInDiscard(int card, int player, struct gameState *state);
 int confirmNumCoppersInHand(int player, struct gameState *state, int num);
+int provideEstateCardFromDeck(int player, struct gameState *state);
+int removeEstateCardFromHand(int player, struct gameState *state);
 
 
 // helper print functions
@@ -75,6 +77,12 @@ int testPlayAmbassador()
     state.hand[player1][0] = ambassador;
     state.supplyCount[ambassador]--;
 
+    // confirm an estate is located in the 2nd position
+	removeEstateCardFromHand(0, &state);
+	provideEstateCardFromDeck(0, &state);
+	printPlayersCards(0, &state);
+
+/*
     // confirm player has 2 coppers in hand
     confirmNumCoppersInHand(player1, &state, 2);
     copperPos = hasGameCard(copper, &state, 1);
@@ -89,7 +97,6 @@ int testPlayAmbassador()
     
     // check the results
     printTestCondition1Results(&state, &preState);
-	printPlayersCards(1, &state);
 
 
     // -------  condition #2 - attempt to discard 3 copies (fail) ------
@@ -132,6 +139,8 @@ int testPlayAmbassador()
     // check the results
     printTestCondition3Results(&state, &preState, returnValue);
 
+*/
+
 	return 0;
 }
 
@@ -151,7 +160,7 @@ int confirmNumCoppersInHand(int player, struct gameState *state, int num) {
 
     int tempCard;
     int copperPos;
-	int i = 1;
+	int i = 2;
 
     if (countCardTypeInHand(copper, state) < 2) {
 
@@ -261,6 +270,45 @@ int countCardTypeInDiscard(int card, int player, struct gameState *state)
   return count;
 }
 
+
+// provide an estate card (if the player doesn't already have one in their hand)
+int provideEstateCardFromDeck(int player, struct gameState *state)
+{
+    if (hasGameCard(estate, state, 1) < 0) {
+      int tempCard;
+      int estatePos;
+      // provide an estate card from the deck
+      if (hasGameCard(estate, state, 3) < 0) {
+        printf("error: no estate card in deck\n");
+        return -1;
+      }
+      else
+      {
+        estatePos = hasGameCard(estate, state, 3);
+        tempCard = state->hand[player][1];
+        state->hand[player][1] = state->deck[player][estatePos];
+        state->deck[player][estatePos] = tempCard;
+      }
+    }
+
+    return 0;
+}
+
+// remove estate cards from the players hand (if they have any)
+int removeEstateCardFromHand(int player, struct gameState *state)
+{
+    int estateHandPos, copperDeckPos;
+    
+    while (hasGameCard(estate, state, 1) >= 0) {
+      // swap estate card with nearest copper in deck
+      copperDeckPos = hasGameCard(copper, state, 3);
+      estateHandPos = hasGameCard(estate, state, 1);
+      state->hand[player][estateHandPos] = copper;
+      state->deck[player][copperDeckPos] = estate;
+    }
+
+    return 0;
+}
 
 
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
