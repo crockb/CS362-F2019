@@ -96,8 +96,6 @@ int testPlayMine()
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
 
-    // playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-
     // values:  choice1[1] = estate ($2), choice2 = silver ($3) 
     returnValue = playCard(0, state.hand[player1][1], silver, 0, &state); 
 
@@ -108,20 +106,18 @@ int testPlayMine()
     else
     	printf("condition 1 - PASS: Invalid Trash Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
 
-*/
+
     // ----- CONDITION 2 - Invalid Purchase Card (choice 2) is out of bounds ----
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
 
-    // condition 1 -  Invalid Purchase Card (choice 2) is out of bounds ----    
+    // condition 2 -  Invalid Purchase Card (choice 2) is out of bounds ----    
     setCondition2(&state);
 
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
-
-    // playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
     // values: choice[1] = copper ($0), choice2 = 100
     returnValue = playCard(0, state.hand[player1][1], 100, 0, &state); 
@@ -131,13 +127,36 @@ int testPlayMine()
     if (result == 0)
     	printf("condition 2 - FAIL: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
     else
-    	printf("condition 1 - PASS: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+    	printf("condition 2 - PASS: Invalid Purchase Card (Send Flag): actual %d, expected: %d\n", returnValue, -1);
+
+*/
+
+    // ----- CONDITION 3 - Valid Trash Card, Purchase Card (Should Be Too) Expensive ----
+    
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // condition 2 -  Valid Trash Card, Purchase Card (Should Be Too) Expensive ----    
+    setCondition3(&state);
+
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+
+    // values: choice[1] = copper ($0), choice2 = gold ($6)
+    returnValue = playCard(0, state.hand[player1][1], gold, 0, &state); 
+
+    // expected outcome(s):  return -1 (too expensive)
+    result = assert(-1, returnValue);
+    if (result == 0)
+    	printf("condition 3 - FAIL: Purchase Card (Should Be Too) Expensive: actual %d, expected: %d\n", returnValue, -1);
+    else
+    	printf("condition 3 - PASS: Purchase Card (Should Be Too) Expensive: actual %d, expected: %d\n", returnValue, -1);
+
 
 /*
-	// initialize the game
-    initializeGame(2, k, randomSeed, &state);
-	setCondition2(&state);
-	printPlayersCards(0, &state);    
 
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
