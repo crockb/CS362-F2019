@@ -51,6 +51,20 @@ void printAllGameStateVariables(struct gameState *state);
 int main()
 {
 	testPlayAmbassador();
+	return 0;
+}
+
+
+
+int testPlayAmbassador()
+{
+  	// initialize variables
+  	int player1 = 0, bonus = 0;
+  	int randomSeed = 1234;
+  	struct gameState state, preState;
+  	int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
+               sea_hag, tribute, smithy
+            };
 
     // -------  condition #1 - reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply) ------
     printf("----- UNIT TEST #3 - CONDITION #1: reveal a copper, return 2 copies to supply, each player receives 1 (in discard from supply)\n");
@@ -96,17 +110,6 @@ int main()
     printPlayersCards(2, &state);
 
 */
-
-
-
-	return 0;
-}
-
-
-
-int testPlayAmbassador()
-{
-	printf("Hello friend.\n");
 
 	return 0;
 }
