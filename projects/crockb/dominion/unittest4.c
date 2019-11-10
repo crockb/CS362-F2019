@@ -103,7 +103,7 @@ int testPlayTribute()
 	printPlayersCards(1, &state);
 
     // confirm setConditions
-	setCondition2(&state, capper);
+	setCondition2(&state, copper);
 	printf("Expect: deckCount = 0, discard = 1\n");
 	printPlayersCards(1, &state);
 
