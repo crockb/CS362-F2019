@@ -81,13 +81,13 @@ int testPlayMinion()
 
     // print number of each card type:
     printf("preState:\n");
-    printf("Number of barons: %d\n", countCardTypeInHand(baron, &preState));
+    printf("Number of minions: %d\n", countCardTypeInHand(baron, &preState));
     printf("Number of estates: %d\n", countCardTypeInHand(estate, &preState));
     printf("Number of coppers: %d\n", countCardTypeInHand(copper, &preState));
 
     // print number of each card type:
     printf("state:\n");
-    printf("Number of barons: %d\n", countCardTypeInHand(baron, &state));
+    printf("Number of minions: %d\n", countCardTypeInHand(baron, &state));
     printf("Number of estates: %d\n", countCardTypeInHand(estate, &state));
     printf("Number of coppers: %d\n", countCardTypeInHand(copper, &state));
 
@@ -240,17 +240,17 @@ int removeEstateCardFromHand(int player, struct gameState *state)
 void printTestCondition1Results(struct gameState *state, struct gameState *preState)
 {
 
-  // CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
+    // CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
 
-  //int player1 = 0;
-  int result = 0;
+    //int player1 = 0;
+    int result = 0;
 
 
-   // precondition #1 - player has one less minion in hand
-   result = assert(countCardTypeInHand(minion, preState)-1, countCardTypeInHand(minion, state));
-   if (result == 0)
+    // precondition #1 - player has one less minion in hand
+    result = assert(countCardTypeInHand(minion, preState)-1, countCardTypeInHand(minion, state));
+    if (result == 0)
       printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
-   else
+    else
       printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardTypeInHand(minion, state), countCardTypeInHand(minion, preState)-1);
 
     // precondition #2 - player has +2 coins
@@ -260,38 +260,16 @@ void printTestCondition1Results(struct gameState *state, struct gameState *preSt
     else
        printf("precondition #2 pass: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);       
 
-/*
-    // precondition #5 - player has +1 buys
-    result = assert(preState->numBuys+1, state->numBuys);
-    if (result == 0)
-      printf("precondition #5 fail: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1);
-    else
-       printf("precondition #5 pass: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1); 
 
-    // precondition #6 - player 0 actions
-    result = assert(preState->numActions-1, state->numActions);
+    // precondition #3 - player has 1 action
+    result = assert(1, state->numActions);
     if (result == 0)
-      printf("precondition #6 fail: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);
+      printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
     else
-       printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);     
-
-    // precondition #7 - player has 1 discarded baron
-     result = assert(hasGameCard(baron, state, 2) >=0, 0 >= 0);
-    if (result == 0)
-      printf("precondition #7 fail: baron in discard pile: FALSE, expected: TRUE\n");
-    else
-       printf("precondition #7 pass: baron in discard pile: TRUE, expected: TRUE\n");    
-
-
-    // precondition #8 - supplyCount for estate unchanged
-    result = assert(preState->supplyCount[estate], state->supplyCount[estate]);
-    if (result == 0)
-      printf("precondition #8 fail: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
-    else
-        printf("precondition #8 pass: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
-*/
+       printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
 
 }
+
 
 void printTestCondition2to4Results(struct gameState *state, struct gameState *preState)
 {
