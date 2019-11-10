@@ -1238,7 +1238,7 @@ int playMinion(int choice1, int choice2, struct gameState *state, int handPos)
                     //draw 4
                     for (j = 0; j < 4; j++)
                     {
-                        drawCard(i, state);
+                        drawCard(i, state); // bug inserted in assignment #2, should be i
                     }
                 }
             }
