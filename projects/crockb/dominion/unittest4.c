@@ -22,7 +22,7 @@
 						 has victory
 
 		CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
-					 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (victory)
+					 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (treasure)
 					 3: Left player has 1 or less cards in discard/deck - no cards (failure)
 					 4: Left player has 2 or more cards in discard/deck - no deck cards (shuffle)
 					 	4.1:   has duplicates at the backend
@@ -129,8 +129,8 @@ int testPlayTribute()
     state.hand[player1][0] = tribute;
     state.supplyCount[tribute]--;
 
-	// condition 2.0 - 1 or less cards in discard/deck - discardCount = 1 (estate victory)
-    setCondition2(&state, estate);
+	// condition 2.0 - 1 or less cards in discard/deck - discardCount = 1 (treasure)
+    setCondition2(&state, copper);
 
     // copy the initial pre-conditions
     updateCoins(player1, &state, bonus);
@@ -139,7 +139,7 @@ int testPlayTribute()
     // play the ambassador card
     playCard(0, 0, 0, 0, &state);
 
-    // expected results: +2 coins
+    // expected results: +2 coins (treasure card)
     //updateCoins(state->whoseTurn, state, coin_bonus);
     result = assert(updateCoins(player1, &preState, 2), updateCoins(player1, &state, state.coins));
     if (result == 0)
