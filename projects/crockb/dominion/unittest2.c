@@ -26,7 +26,6 @@
 // helper function signatures
 int testPlayMinion();
 int assert(int expected, int actual);
-int hasGameCard(int card, struct gameState *state, int pileToCheck);
 int countCardTypeInHand(int card, struct gameState *state);
 
 // helper print functions
@@ -130,64 +129,6 @@ int assert(int expected, int actual)
     return 1;
   else
     return 0;
-}
-
-
-// helper functions for unittest1
-int hasGameCard(int card, struct gameState *state, int pileToCheck)
-{
-  int i;
-  int player = state->whoseTurn;
-
-  // hand pile
-  if (pileToCheck == 1) {
-
-    for (i = 0; i < state->handCount[player]; i++) {
-      if (state->hand[player][i] == card) {
-        // card found
-        return i;
-      }
-    }
-
-      // card not found
-      return -1;
-  }
-
-  // discard pile
-  else if (pileToCheck == 2) {
-    for (i = 0; i < state->discardCount[player]; i++) {
-    if (state->discard[player][i] == card) {
-      // card found
-      return i;
-    }
-
-    // card not found
-      return -1;
-    }
-  }
-
-  // deck pile
-  else if (pileToCheck == 3) {
-
-    for (i = 0; i < state->deckCount[player]; i++) {
-    if (state->deck[player][i] == card) {
-      // card found
-      return i;
-    }
-
-    // card not found
-      return -1;
-    }
-  }
-
-  // no pile match - error
-  else
-  {
-    printf("critical error: hasGameCard no match.\n");
-    return -2;
-  }
-
-  return -2;
 }
 
 
