@@ -1337,7 +1337,6 @@ int playTribute(struct gameState *state, int handPos)
         if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
             if (state->deckCount[nextPlayer] > 0) {
                 tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-                printf("Tribute revealed card[0] = %d\n", tributeRevealedCards[0]);
                 discardCard(state->deckCount[nextPlayer]-1, nextPlayer, state, 0);
                 state->deckCount[nextPlayer]--;
             }

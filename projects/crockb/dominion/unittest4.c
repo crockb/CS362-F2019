@@ -95,6 +95,7 @@ int testPlayTribute()
     // -------  condition #4 - 1 or less cards in discard/deck - deckCount > 0 ------
     printf("----- UNIT TEST #4 - CONDITION #1: 1 or less cards in discard/deck - deckCount > 0\n");
 
+/*
     // initialize the game
     initializeGame(2, k, randomSeed, &state);
 
@@ -109,23 +110,44 @@ int testPlayTribute()
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
 
-    // print the player's deck
-    printPlayersCards(0, &state);
+    // play the ambassador card
+    playCard(0, 0, 0, 0, &state);
+
+    // expected results: +2 actions (-1 of current turn)
+    result = assert(preState.numActions+1, state.numActions);
+    if (result == 0)
+    	printf("condition 1.0 - FAIL: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+1);
+    else
+    	printf("condition 1.0 - PASS: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+1);
+
+*/
+
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
+
+    // provide player1 with a tribute card
+    state.hand[player1][0] = tribute;
+    state.supplyCount[tribute]--;
+
+	// condition 2.0 - 1 or less cards in discard/deck - discardCount = 1 (estate victory)
+    setCondition2(&state, estate);
+
+    // copy the initial pre-conditions
+    updateCoins(player1, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
 
     // play the ambassador card
     playCard(0, 0, 0, 0, &state);
 
-    // expected results: +2 actions
-    result = assert(preState.numActions+2, state.numActions);
+    // expected results: +2 coins
+    result = assert(preState.coins+2, state.state);
     if (result == 0)
-    	printf("condition 1.0 - FAIL: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+2);
+    	printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins+2);
     else
-    	printf("condition 1.0 - PASS: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+2);
+    	printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins+2);
+
 
 /*
-
-	// condition 2.0 - 1 or less cards in discard/deck - discardCount = 1 (estate victory)
-    setCondition2(&state, estate);         		
 
 	// condition 3.0 - 1 or less cards in discard/deck - no cards (failure)
     setCondition3(&state);
