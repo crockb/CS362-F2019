@@ -187,7 +187,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     state->numBuys = 1;
     state->playedCardCount = 0;
     state->whoseTurn = 0;
-    state->handCount[state->whoseTurn] = 0;
+    //state->handCount[state->whoseTurn] = 0;
     //int it; move to top
 
     // 11/9/19 COMMENTED OUT --- Moved draw cards to here, only drawing at the start of a turn
