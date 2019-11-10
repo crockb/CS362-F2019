@@ -93,7 +93,8 @@ int testPlayMinion()
     // run the refactored function playMinion() function
     playCard(0, 0, 1, 0, &state);
 
-
+    // check the results
+    printTestCondition2Results(&state, &preState);
 
 
 /*
