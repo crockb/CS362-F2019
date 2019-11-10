@@ -78,14 +78,14 @@ int testPlayAmbassador()
     state.supplyCount[ambassador]--;
 
     // confirm an estate is located in the 2nd position
-	removeEstateCardFromHand(0, &state);
-	provideEstateCardFromDeck(0, &state);
-
-	// move positions of the estate to expose bug #2, inadvertently chooses estate vs. copper
-	int swap;
-	swap = state.hand[0][1];
-	state.hand[0][1] = state.hand[0][2];
-	state.hand[0][2] = swap;
+	  removeEstateCardFromHand(0, &state);
+	  provideEstateCardFromDeck(0, &state);
+ 
+	  // move positions of the estate to expose bug #2, inadvertently chooses estate vs. copper
+	  int swap;
+	  swap = state.hand[0][1];
+	  state.hand[0][1] = state.hand[0][2];
+	  state.hand[0][2] = swap;
 
     // confirm player has 2 coppers in hand
     confirmNumCoppersInHand(player1, &state, 2);
