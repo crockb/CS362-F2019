@@ -141,6 +141,7 @@ int testPlayTribute()
 
     // expected results: +2 coins (treasure card)
     //updateCoins(state->whoseTurn, state, coin_bonus);
+    printf("state.coins = %d\n");
     result = assert(updateCoins(player1, &preState, 2), updateCoins(player1, &state, state.coins));
     if (result == 0)
     	printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", updateCoins(player1, &state, state.coins), updateCoins(player1, &preState, 2));
@@ -234,20 +235,18 @@ int playTribute(struct gameState *state, int handPos)
     // discard tribute card
     discardCard(handPos, currentPlayer, state, 0);
 
-    // check the availability of nextplayer cards and set them to the tribute cards
+    printf("Did this fire #1?\n");
 
-		// if they only have 1 or less cards in their discard/deck
+    // check the availability of nextplayer cards and set them to the tribute cards
         if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
             if (state->deckCount[nextPlayer] > 0) {
-            	// assign the last card in the deck
                 tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-
-                // put that card in the discard pile
                 discardCard(state->deckCount[nextPlayer]-1, nextPlayer, state, 0);
                 state->deckCount[nextPlayer]--;
+                printf("Did this fire #2?\n");
             }
-
             else if (state->discardCount[nextPlayer] > 0) {
+                printf("Did this fire #3?\n");
                 tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
             }
             else {
@@ -260,6 +259,7 @@ int playTribute(struct gameState *state, int handPos)
 
         else {
             if (state->deckCount[nextPlayer] == 0) {
+                printf("Did this fire #4?\n");
                 for (i = 0; i < state->discardCount[nextPlayer]; i++) {
                     state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                     state->deckCount[nextPlayer]++;
@@ -269,6 +269,7 @@ int playTribute(struct gameState *state, int handPos)
 
                 shuffle(nextPlayer,state);//Shuffle the deck
             }
+            printf("Did this fire #5?\n");
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
             discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
 
@@ -279,36 +280,40 @@ int playTribute(struct gameState *state, int handPos)
         if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
             state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
             state->playedCardCount++;
+            printf("Did this fire #6?\n");
         }
 
         for (i = 0; i < 2; i ++) {
             if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
                 state->coins += 2;
+                printf("Did this fire #7?\n");
             }
 
             else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
                 drawCard(currentPlayer, state);
                 drawCard(currentPlayer, state);
-
+                printf("Did this fire #8?\n");
                 // great hall receives bonus from Action as well
                 if (tributeRevealedCards[i] == great_hall) {
                     state->numActions = state->numActions + 2;
+                    printf("Did this fire #9?\n");
                 }
             }
 
             else if (tributeRevealedCards[i] == -1)
             {
                 // do nothing - invalid card
+                printf("Did this fire #10?\n");
             }
 
             else { //Action Card
+                printf("Did this fire #11?\n");
                 state->numActions = state->numActions + 2;
             }
         }
 
         return 0;
 }
-
 */
 
 
