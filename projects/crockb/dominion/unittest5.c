@@ -98,7 +98,7 @@ int testPlayMine()
     // playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
     // values:  choice1[1] = estate ($2), choice2 = silver ($3) 
-    returnValue = playCard(0, state.handPos[1], silver, 0, &state); 
+    returnValue = playCard(0, state.hand[player1][1], silver, 0, &state); 
 
     // expected outcome(s):  return -1
     result = assert(-1, returnValue);
@@ -125,7 +125,7 @@ int testPlayMine()
 	printPlayersCards(0, &state);    
 
 */
-    
+
 	return 0;
 }
 
