@@ -143,9 +143,9 @@ int testPlayTribute()
     //updateCoins(state->whoseTurn, state, coin_bonus);
     result = assert(updateCoins(player1, &preState, 2), updateCoins(player1, &state, state.coins));
     if (result == 0)
-    	printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", updateCoins(player1, &state, state.coins), preState.coins+2);
+    	printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", updateCoins(player1, &state, state.coins), updateCoins(player1, &preState, 2));
     else
-    	printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", updateCoins(player1, &state, state.coins), preState.coins+2);
+    	printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", updateCoins(player1, &state, state.coins), updateCoins(player1, &preState, 2));
 
 
 /*
