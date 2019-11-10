@@ -98,6 +98,22 @@ int testPlayMinion()
     // check the results
     printTestCondition2Results(&state, &preState);
 
+    // print player's cards
+    printf("player 1 (pre-state)\n");
+    printPlayersCards(0, &preState);
+    printf("player 1 (post-state)\n");
+    printPlayersCards(0, &state);
+
+    printf("player 2 (pre-state)\n");
+    printPlayersCards(1, &preState);
+    printf("player 2 (post-state)\n");
+    printPlayersCards(1, &state);
+
+    printf("player 3 (pre-state)\n");
+    printPlayersCards(2, &preState);
+    printf("player 3 (post-state)\n");
+    printPlayersCards(2, &state);
+
     // -------  condition #3 - choice 2 discard hand (p1 & p2 have 5 cards, p3 does not) ------
     printf("----- UNIT TEST #2 - CONDITION #3: p1 & p2 discard and draw 4, p3 too few cards\n");
 
@@ -120,6 +136,22 @@ int testPlayMinion()
 
     // check the results
     printTestCondition3Results(&state, &preState);
+
+    // print player's cards
+    printf("player 1 (pre-state)\n");
+    printPlayersCards(0, &preState);
+    printf("player 1 (post-state)\n");
+    printPlayersCards(0, &state);
+
+    printf("player 2 (pre-state)\n");
+    printPlayersCards(1, &preState);
+    printf("player 2 (post-state)\n");
+    printPlayersCards(1, &state);
+
+    printf("player 3 (pre-state)\n");
+    printPlayersCards(2, &preState);
+    printf("player 3 (post-state)\n");
+    printPlayersCards(2, &state);
 
 /*
     // print player's cards
