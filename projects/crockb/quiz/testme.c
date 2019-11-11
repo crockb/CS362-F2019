@@ -24,8 +24,22 @@ char inputChar()
 
 char *inputString()
 {
-    return "reset";
+    int n, i;
+    char *myString = "reset"
+
+    for (i = 0; i < 5; i++)
+    {
+        n = rand() % 5;
+
+        // shuffle the characters
+        const char* temp = myString[n];
+        myString[n] = myString[i];
+        myString[i] = temp;
+    }
+
+    return myString;
 }
+
 
 void testme()
 {
