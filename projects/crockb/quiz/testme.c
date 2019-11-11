@@ -58,7 +58,7 @@ char *inputString()
 
     */
 
-    return new string(set);
+    return new String(set);
 }
 
 
