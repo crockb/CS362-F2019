@@ -26,13 +26,14 @@ char *inputString()
 {
     int n, i;
     char *myString = "reset";
+    char temp;
 
     for (i = 0; i < 5; i++)
     {
         n = rand() % 5;
 
         // shuffle the characters
-        const char* temp = myString[n];
+        temp = myString[n];
         myString[n] = myString[i];
         myString[i] = temp;
     }
