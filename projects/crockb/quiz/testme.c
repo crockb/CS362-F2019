@@ -25,9 +25,11 @@ char inputChar()
 char *inputString()
 {
 
+
     int n, i;
-    char *myString = "reset";
+    char myString[] = "reset";
     char temp;
+    char *returnString;
 
 
     for (i = 0; i < 5; i++)
@@ -40,7 +42,11 @@ char *inputString()
         myString[i] = temp;
     }
 
-    return myString;
+    returnString = malloc(10 * sizeof(char));
+    memset(returnString, '\0', 10 * sizeof(char));
+    sprintf(returnString, myString);
+
+    return returnString;
 
 
 /*
