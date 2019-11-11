@@ -49,7 +49,6 @@ char *inputString()
 
 void testme()
 {
-
   int tcCount = 0;
   char *s;
   char c;
@@ -61,15 +60,15 @@ void testme()
     s = inputString();
     printf("Iteration %d: c = %c, s = %s, state = %d\n", tcCount, c, s, state);
 
-    if (c == '[' && state == 0) { state = 1; printf("success stage 1\n"); }
-    if (c == '(' && state == 1) { state = 2; printf("success stage 2\n"); }
-    if (c == '{' && state == 2) { state = 3; printf("success stage 3\n"); }
-    if (c == ' '&& state == 3)  { state = 4; printf("success stage 4\n"); }
-    if (c == 'a' && state == 4) { state = 5; printf("success stage 5\n"); }
-    if (c == 'x' && state == 5) { state = 6; printf("success stage 6\n"); }
-    if (c == '}' && state == 6) { state = 7; printf("success stage 7\n"); }
-    if (c == ')' && state == 7) { state = 8; printf("success stage 8\n"); }
-    if (c == ']' && state == 8) { state = 9; printf("success stage 9\n"); }
+    if (c == '[' && state == 0) state = 1;
+    if (c == '(' && state == 1) state = 2;
+    if (c == '{' && state == 2) state = 3;
+    if (c == ' '&& state == 3) state = 4;
+    if (c == 'a' && state == 4) state = 5;
+    if (c == 'x' && state == 5) state = 6;
+    if (c == '}' && state == 6) state = 7;
+    if (c == ')' && state == 7) state = 8;
+    if (c == ']' && state == 8) state = 9;
     if (s[0] == 'r' && s[1] == 'e'
        && s[2] == 's' && s[3] == 'e'
        && s[4] == 't' && s[5] == '\0'
@@ -79,8 +78,8 @@ void testme()
       exit(200);
     }
   }
-
 }
+
 
 int main(int argc, char *argv[])
 {
