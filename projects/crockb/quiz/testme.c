@@ -26,7 +26,7 @@ char *inputString()
 {
     int n, i;
     char *myString = "reset";
-    char temp;
+    char *temp;
 
     for (i = 0; i < 5; i++)
     {
