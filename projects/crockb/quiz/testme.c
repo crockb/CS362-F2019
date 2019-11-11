@@ -28,7 +28,7 @@ char inputChar()
     char set[9] = {'[', '(', '{', ' ', 'a', 'x', '}', ')', ']' };
 
     for (i = 0; i < 9; i++) {
-      printf("char[%d]: %s", i, set[i]);
+      printf("char[%d]: %c", i, set[i]);
     }
 
     printf("\n");
