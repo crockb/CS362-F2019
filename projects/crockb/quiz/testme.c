@@ -10,7 +10,6 @@
 #include<time.h>
 
 
-
 char inputChar()
 {
     int n;
@@ -25,12 +24,10 @@ char inputChar()
 char *inputString()
 {
 
-
     int n, i;
     char myString[] = "reset";
     char temp;
     char *returnString;
-
 
     for (i = 0; i < 5; i++)
     {
@@ -47,23 +44,6 @@ char *inputString()
     sprintf(returnString, myString);
 
     return returnString;
-
-
-/*
-    int n, i;
-    char set[6] = { 'r','e','s','e','t', '\0'};
-    char temp;
-
-    for (i = 0; i < 5; i++)
-    {
-        n = rand() % 5;
-
-        // shuffle the characters
-        temp = set[i];
-        set[i] = set[n];
-        set[n] = temp;
-    }
-*/
 }
 
 
