@@ -25,12 +25,12 @@
 char inputChar()
 {
     int i = 0;
-    //char set[9] = {'[', '(', '{', ' ', 'a', 'x', '}', ')', ']' };
+    char set[9] = {'[', '(', '{', ' ', 'a', 'x', '}', ')', ']' };
 
-    char set[] = "[({ ax})]}";
+  //  char set[] = "[({ ax})]}";
 
     for (i = 0; i < 9; i++) {
-      printf("char[%d]: %c", i, set[i]);
+      printf("char[%d]: %c  ", i, set[i]);
     }
 
     printf("\n");
