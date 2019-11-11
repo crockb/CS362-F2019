@@ -16,9 +16,8 @@ char inputChar()
     int i = 0, n;
     char set[9] = {'[', '(', '{', ' ', 'a', 'x', '}', ')', ']' };
 
-    n = rand() % 9;
-
     for (i = 0; i < 9; i++) {
+      n = rand() % 9;
       printf("char[%d]: %c  ", i, set[n]);
     }
 
@@ -39,7 +38,7 @@ char *inputString()
 
     // TODO: rewrite this function
     return "";
-    
+
 }
 
 void testme()
