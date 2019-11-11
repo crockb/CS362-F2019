@@ -25,12 +25,13 @@
 char inputChar()
 {
     int i = 0;
-    char set[] = {"[", "(", "{", " ", "a", "x", "}", ")", "]" };
+    char set[9] = {"[", "(", "{", " ", "a", "x", "}", ")", "]" };
 
     for (i = 0; i < 8; i++) {
       printf("char[%d]: %c", i, set[i]);
     }
 
+    printf("\n");
     // TODO: rewrite this function
     return ' ';
 }
