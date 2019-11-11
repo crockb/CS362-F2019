@@ -24,8 +24,9 @@ char inputChar()
 
 char *inputString()
 {
-    int n, i;
+
     char *myString = "reset";
+    /*
     char *temp;
 
     for (i = 0; i < 5; i++)
@@ -37,7 +38,7 @@ char *inputString()
         myString[n] = myString[i];
         myString[i] = temp;
     }
-
+    */
     return myString;
 }
 
