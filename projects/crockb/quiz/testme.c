@@ -24,9 +24,10 @@ char inputChar()
 
 char *inputString()
 {
-
+    int n, i;
     char* myString = "reset";
     char temp;
+
 
     for (i = 0; i < 5; i++)
     {
