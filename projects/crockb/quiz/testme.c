@@ -9,6 +9,7 @@
 #include<stdlib.h>
 #include<time.h>
 
+/*
     if (c == '[' && state == 0) state = 1;
     if (c == '(' && state == 1) state = 2;
     if (c == '{' && state == 2) state = 3;
@@ -19,12 +20,14 @@
     if (c == ')' && state == 7) state = 8;
     if (c == ']' && state == 8) state = 9;
 
+*/
+
 char inputChar()
 {
     int i = 0;
     char set[8] = { '[', '(', '{',' ','a', 'x', '}', ']' };
 
-    for (i = 0; i < 8, i++) {
+    for (i = 0; i < 8; i++) {
       printf("char[%d]: %c", i, set[i]);
     }
 
