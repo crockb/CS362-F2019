@@ -25,22 +25,6 @@ char inputChar()
 char *inputString()
 {
 
-
-    int n, i;
-    char set[6] = { 'r','e','s','e','t', '\0'};
-    char temp;
-
-    for (i = 0; i < 5; i++)
-    {
-        n = rand() % 5;
-
-        // shuffle the characters
-        temp = set[i];
-        set[i] = set[n];
-        set[n] = temp;
-    }
-
-  /*
     int n, i;
     char *myString = "reset";
     char temp;
@@ -56,7 +40,39 @@ char *inputString()
         myString[i] = temp;
     }
 
-    */
+    return myString;
+
+
+/*
+    int n, i;
+    char set[6] = { 'r','e','s','e','t', '\0'};
+    char temp;
+
+    for (i = 0; i < 5; i++)
+    {
+        n = rand() % 5;
+
+        // shuffle the characters
+        temp = set[i];
+        set[i] = set[n];
+        set[n] = temp;
+    }
+*/
+
+    int n, i;
+    char *myString = "reset";
+    char temp;
+
+
+    for (i = 0; i < 5; i++)
+    {
+        n = rand() % 5;
+
+        // shuffle the characters
+        temp = myString[n];
+        myString[n] = myString[i];
+        myString[i] = temp;
+    }
 
     return new String(set);
 }
