@@ -58,23 +58,6 @@ char *inputString()
         set[n] = temp;
     }
 */
-
-    int n, i;
-    char *myString = "reset";
-    char temp;
-
-
-    for (i = 0; i < 5; i++)
-    {
-        n = rand() % 5;
-
-        // shuffle the characters
-        temp = myString[n];
-        myString[n] = myString[i];
-        myString[i] = temp;
-    }
-
-    return new String(set);
 }
 
 
