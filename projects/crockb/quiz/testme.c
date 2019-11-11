@@ -37,15 +37,16 @@ char inputChar()
 char *inputString()
 {
 
-    char set[] = "reset";
-    return set;
+    // TODO: rewrite this function
+    return "";
+    
 }
 
 void testme()
 {
 
   inputChar();
-  
+
   /*
   int tcCount = 0;
   char *s;
