@@ -102,7 +102,7 @@ int testPlayBaron()
 
     // initialize the game
     initializeGame(randomizePlayerCount(), k, 1234, &state);
-    randomizeDeckCards(&state, k);
+    //randomizeDeckCards(&state, k);
     printAllGameStateVariables(&state);
 
     return 0;
