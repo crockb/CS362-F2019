@@ -191,11 +191,10 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     //int it; move to top
 
     //Moved draw cards to here, only drawing at the start of a turn
-    /* commented out for randomtesting coverage
+
     for (it = 0; it < 5; it++) {
         drawCard(state->whoseTurn, state);
     }
-    */
 
     updateCoins(state->whoseTurn, state, 0);
 
