@@ -84,7 +84,7 @@ int printCardName(int card);
 // call randomtestcard1
 int main()
 {
-    //srand(time(NULL));
+    srand(time(NULL));
     testPlayBaron();
     return 0;
 }
