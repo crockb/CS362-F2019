@@ -120,20 +120,32 @@ int randomizePlayerCount(){
 // int shuffle(int player, struct gameState *state)
 void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
 
-  int i, j, n;
+  int player, i, j, n;
 
   // randomly swap out a deck card with another from the gameset
-  for (i = 0; i < state->numPlayers; i++) {
-      shuffle(i, state);
+  for (player = 0; player < state->numPlayers; player++) {
+
+      // move all hand cards to the deck
+      for (i = 0; i < state->handCount[player]; i++) {
+          state->deck[player][state->deckCount[player]] = state->hand[player][i];
+          state->deckCount[player]++;
+      }
+      state->handCount[player] = 0;
+
+      // move all hand cards to the deck
+      for (i = 0; i < state->discardCount[player]; i++) {
+          state->deck[player][state->deckCount[player]] = state->discard[player][i];
+          state->deckCount[player]++;
+      }   
+      state->handCount[player] = 0;
+
       for (j = 0; j < 20; j++) {
-          j = rand() % 10;
+          j = rand() % state->deckCount[player];
           n = rand() % 10;
-          state->deck[i][j] = kingdomCards[n];
-          printf("Infinite loop?\n");
+          state->deck[player][j] = kingdomCards[n];
       }
   }
 }
-
 
 /*
 int playBaron(int choice1, struct gameState *state, int handPos)
