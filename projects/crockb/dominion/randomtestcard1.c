@@ -110,6 +110,8 @@ int testPlayBaron()
 int randomizePlayerCount(){
     int n;
     n = rand() % 4 + 1;
+    if (n == 1)
+       n = 2;
     return n;
 }
 
