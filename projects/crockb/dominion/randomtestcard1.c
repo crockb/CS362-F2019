@@ -46,7 +46,7 @@
     Requirements for Random Tester:
        --- randomizeGameState ()
           --- handPosition of card (leave at 0?)
-          --- set of cards in the game (set a constant state?)
+          --- set of cards in the game (set a constant state?) -- leave as is
           --- number of cards in hand (minion (4), tribute 1 or 0)
           --- number of cards in discard (tribute 1 or 0)
           --- number of cards in deck (tribute 1 or 0)
@@ -97,8 +97,6 @@ int testPlayBaron()
 
     // initialize the game
     initializeGame(2, k, 1234, &state);
-
-    printAllSupplyCounts(&state);
     printAllGameStateVariables(&state);
 
     return 0;
