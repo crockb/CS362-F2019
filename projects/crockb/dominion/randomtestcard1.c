@@ -48,7 +48,8 @@
           --- handPosition of card (leave at 0?) - GOOD
           --- set of cards in the game (set a constant state?) - GOOD
           --- number of players in the game (2 to 4) - GOOD
-          --- number of cards in hand (minion (4), tribute 1 or 0) = randomizeHand()
+          --- randomize type of cards in the hand - GOOD
+          --- number of cards in hand (minion (4))
           --- number of cards in discard (tribute 1 or 0) = randomizeDiscard
           --- number of cards in deck (tribute 1 or 0) = randomizeDeck
           --- supply counts for estate (baron 0 or 2) --- can be a 50/50
@@ -73,7 +74,6 @@ int testPlayBaron();
 // helper functions for randomizing the game state
 int randomizePlayerCount();
 void randomizeDeckCards(struct gameState *state, int kingdomCards[10]);
-
 
 // helper print functions
 void printPlayersCards(int player, struct gameState *state);
@@ -147,6 +147,8 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
       }
   }
 }
+
+
 
 /*
 int playBaron(int choice1, struct gameState *state, int handPos)
