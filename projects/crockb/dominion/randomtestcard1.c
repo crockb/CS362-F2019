@@ -91,17 +91,20 @@ int testPlayBaron()
 {
     //n = rand() % 10;
     int player1 = 0;
-    struct gameState state, preState;
+    struct gameState state;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
+
+    // initialize the game
+    initializeGame(2, k, randomSeed, &state);
 
     printPlayersCards(player1, &state);
     printAllSupplyCounts(&state);
     printAllGameStateVariables(&state);
 
     return 0;
-    
+
 }
 
 
