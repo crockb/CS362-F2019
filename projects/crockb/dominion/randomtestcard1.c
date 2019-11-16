@@ -124,7 +124,7 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
 
   // randomly swap out a deck card with another from the gameset
   for (i = 0; i < state->numPlayers; i++) {
-      shuffle(i, &state);
+      shuffle(i, state);
       for (j = 0; j < 20; j++) {
           j = rand() % 10;
           n = rand() % 10;
