@@ -20,12 +20,21 @@
         2. Decremented the supplyCount of estates after executing the gainCard() function 
            (duplicative reduction of supplyCount).  May cause the game to end too soon by over 
            removing estate cards when referenced in the Baron cards.
+
+    
+
+    int playBaron(int choice1, struct gameState *state, int handPos)
+    Requirements for Random Tester:
+       --- randomizeGameState
+          --- handPosition of Baron
+          --- 
 */
 
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
@@ -36,6 +45,7 @@ int testPlayBaron();
 // call randomtestcard1
 int main()
 {
+    srand(time(NULL));
     testPlayBaron();
     return 0;
 }
@@ -43,8 +53,16 @@ int main()
 // function to execute the set of conditions for unittest#1
 int testPlayBaron()
 {
+  int n, i;
 
-  printf("Hello world.\n");
+  for (i = 0; i < 10; i++)
+  {
+      n = rand() % 10
+      printf("Random number: %d\n", n);
+
+  }
+
+
   return 0;
 }
 
