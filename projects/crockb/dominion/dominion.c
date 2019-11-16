@@ -38,7 +38,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
                    struct gameState *state) {
     int i;
     int j;
-    //int it;
+    int it;
 
     //set up random number generator
     SelectStream(1);
