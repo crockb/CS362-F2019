@@ -57,7 +57,7 @@ int testPlayBaron()
 
   for (i = 0; i < 10; i++)
   {
-      n = rand() % 10
+      n = rand() % 10;
       printf("Random number: %d\n", n);
 
   }
