@@ -88,7 +88,7 @@ int main()
 int testPlayBaron()
 {
     //n = rand() % 10;
-    int player1 = 0;
+    //int player1 = 0;
     struct gameState state;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
