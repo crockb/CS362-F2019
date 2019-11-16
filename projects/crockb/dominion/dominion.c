@@ -187,14 +187,14 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     state->numBuys = 1;
     state->playedCardCount = 0;
     state->whoseTurn = 0;
-    state->handCount[state->whoseTurn] = 0;
+    //state->handCount[state->whoseTurn] = 0;
     //int it; move to top
 
-    //Moved draw cards to here, only drawing at the start of a turn
+    // 11/9/19 COMMENTED OUT --- Moved draw cards to here, only drawing at the start of a turn
+    //for (it = 0; it < 5; it++) {
+        //drawCard(state->whoseTurn, state);
+    //}
 
-    for (it = 0; it < 5; it++) {
-        drawCard(state->whoseTurn, state);
-    }
 
     updateCoins(state->whoseTurn, state, 0);
 
