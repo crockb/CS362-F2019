@@ -47,13 +47,13 @@
        --- randomizeGameState ()
           --- handPosition of card (leave at 0?)
           --- set of cards in the game (set a constant state?) -- leave as is
-          --- number of cards in hand (minion (4), tribute 1 or 0)
-          --- number of cards in discard (tribute 1 or 0)
-          --- number of cards in deck (tribute 1 or 0)
-          --- number of players in the game (2 to 4)
-          --- supply counts for estate (baron 0 or 2)
-          --- number of estates in hand (yes/no)
-          --- whos turn is it (number of players)
+          --- number of cards in hand (minion (4), tribute 1 or 0) = randomizeHand()
+          --- number of cards in discard (tribute 1 or 0) = randomizeDiscard
+          --- number of cards in deck (tribute 1 or 0) = randomizeDeck
+          --- number of players in the game (2 to 4) --- can be taken care of early
+          --- supply counts for estate (baron 0 or 2) --- can be a 50/50
+          --- number of estates in hand (yes/no) --- can be a 50/50
+          --- whos turn is it (number of players) --- can be taken care of early
 
 */
 
@@ -68,6 +68,10 @@
 
 // helper function signatures
 int testPlayBaron();
+
+
+// helper functions for randomizing the game state
+int randomizePlayerCount();
 
 
 // helper print functions
@@ -96,11 +100,17 @@ int testPlayBaron()
             };
 
     // initialize the game
-    initializeGame(2, k, 1234, &state);
+    initializeGame(randomizePlayerCount(), k, 1234, &state);
     printAllGameStateVariables(&state);
 
     return 0;
 
+}
+
+int randomizePlayerCount(){
+    int n;
+    n = rand() % 4 + 1;
+    return n;
 }
 
 
