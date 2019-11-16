@@ -129,6 +129,7 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
           j = rand() % 10;
           n = rand() % 10;
           state->deck[i][j] = kingdomCards[n];
+          printf("Infinite loop?\n");
       }
   }
 }
