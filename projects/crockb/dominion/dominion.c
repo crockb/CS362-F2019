@@ -42,7 +42,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 
     //set up random number generator
     SelectStream(1);
-    PutSeed((long)time(NULL));
+    PutSeed((long)randomSeed);
 
     //check number of players
     if (numPlayers > MAX_PLAYERS || numPlayers < 2)
