@@ -42,8 +42,6 @@
     int playedCards[MAX_DECK]; // 
     int playedCardCount;
 
-    remember to pull out bugs from assignment3
-
     int playBaron(int choice1, struct gameState *state, int handPos)
     Requirements for Random Tester:
        --- randomizeGameState ()
@@ -52,9 +50,8 @@
           --- number of cards in hand (minion (4), tribute 1 or 0)
           --- number of cards in discard (tribute 1 or 0)
           --- number of cards in deck (tribute 1 or 0)
-          --- supply counts for estate (0 or 2)
+          --- supply counts for estate (baron 0 or 2)
           --- number of estates in hand (yes/no)
-          --- number in each player's deck
           --- whos turn it is
 
 */
@@ -76,6 +73,7 @@ int testPlayBaron();
 void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
+void printCardName(int card);
 
 
 // call randomtestcard1
@@ -99,7 +97,6 @@ int testPlayBaron()
     // initialize the game
     initializeGame(2, k, 1234, &state);
 
-    printPlayersCards(player1, &state);
     printAllSupplyCounts(&state);
     printAllGameStateVariables(&state);
 
@@ -170,18 +167,24 @@ void printPlayersCards(int player, struct gameState *state)
 
     // print the hand
   printf("Player's hand:\n");
-  for (i = 0; i < state->handCount[player]; i++)
-    printf("  Card #%d: %d\n", i+1, state->hand[player][i]);
+  for (i = 0; i < state->handCount[player]; i++) {
+    printf("  Card #%d: ", i+1);
+    printCardName(state->hand[player][i]);
+  }
 
   // print the discard
   printf("Player's discard pile:\n");
-  for (i = 0; i < state->discardCount[player]; i++)
-    printf("  Card #%d: %d\n", i+1, state->discard[player][i]);
+  for (i = 0; i < state->discardCount[player]; i++) {
+    printf("  Card #%d: ", i+1);
+    printCardName(state->discard[player][i]);
+  }
 
   // print the deck
   printf("Player's deck:\n");
-  for (i = 0; i < state->deckCount[player]; i++)
-    printf("  Card #%d: %d\n", i+1, state->deck[player][i]);
+  for (i = 0; i < state->deckCount[player]; i++) {
+    printf("  Card #%d: ", i+1);
+    printCardName(state->deck[player][i]);
+  }
 }
 
 
@@ -210,7 +213,7 @@ void printAllSupplyCounts(struct gameState *state)
 void printAllGameStateVariables(struct gameState *state)
 {
 
-  int i;
+  int i, j;
 
     // print out the results of the game state
   printf("numPlayers: %d\n", state->numPlayers);
@@ -235,28 +238,95 @@ void printAllGameStateVariables(struct gameState *state)
   printf("numActions: %d\n", state->numActions);
   printf("numBuys: %d\n", state->numBuys);
 
-  printf("Player 1's hand:\n");
-  for (i = 0; i < state->handCount[0]; i++)
-    printf("  Card #%d: %d\n", i+1, state->hand[0][i]);
+  // print all player's hands
 
-  printf("Player 2's hand:\n");
-  for (i = 0; i < state->handCount[1]; i++)
-    printf("  Card #%d: %d\n", i+1, state->hand[1][i]);
+  for(j = 0; j < state->numPlayers; j++) {
+      // print the hand
+      printf("Player %d's hand:\n", j+1);
+      for (i = 0; i < state->handCount[j]; i++) {
+        printf("  Card #%d: ", i+1);
+        printCardName(state->hand[j][i]);
+      }
 
-  printf("Player 1's deck:\n");
-  for (i = 0; i < state->deckCount[0]; i++)
-    printf("  Card #%d: %d\n", i+1, state->deck[0][i]);
+      // print the discard
+      printf("Player %d's discard pile:\n", j+1);
+      for (i = 0; i < state->discardCount[j]; i++) {
+        printf("  Card #%d: ", i+1);
+        printCardName(state->discard[j][i]);
+      }
 
-  printf("Player 2's deck:\n");
-  for (i = 0; i < state->deckCount[1]; i++)
-    printf("  Card #%d: %d\n", i+1, state->deck[1][i]);
+      // print the deck
+      printf("Player %d's deck:\n", j+1);
+      for (i = 0; i < state->deckCount[j]; i++) {
+        printf("  Card #%d: ", i+1);
+        printCardName(state->deck[j][i]);
+      }
 
-  printf("Player 1's discards:\n");
-  for (i = 0; i < state->discardCount[0]; i++)
-    printf("  Card #%d: %d\n", i+1, state->discard[0][i]);
+  }
 
-  printf("Player 2's discards:\n");
-  for (i = 0; i < state->discardCount[1]; i++)
-    printf("  Card #%d: %d\n", i+1, state->discard[1][i]);
+}
+
+
+void printCardName(int card)
+{
+
+    switch(card)
+    {
+    case curse:
+        printf("curse\n");
+    case estate:
+        printf("estate\n");
+    case duchy:
+        printf("duchy\n");
+    case province:
+        printf("province\n");
+    case copper:
+        printf("copper\n");
+    case silver:
+        printf("silver\n");
+    case gold:
+        printf("gold\n");
+    case adventurer:
+        printf("adventurer\n");
+    case council_room:
+        printf("council_room\n");
+    case feast:
+        printf("feast\n");
+    case gardens:
+        printf("gardens\n");
+    case mine:
+        printf("mine\n");
+    case remodel:
+        printf("remodel\n");
+    case smithy:
+        printf("smithy\n");
+    case village:
+        printf("village\n");
+    case baron:
+        printf("baron\n");
+    case great_hall:
+        printf("great_hall\n");
+    case minion:
+        printf("minion\n");
+    case steward:
+        printf("steward\n");
+    case tribute:
+        printf("tribute\n");
+    case ambassador:
+        printf("ambassador\n");
+    case cutpurse:
+        printf("cutpurse\n");
+    case embargo:
+        printf("embargo\n");
+    case outpost:
+        printf("outpost\n");
+    case salvager:
+        printf("salvager\n");
+    case sea_hag:
+        printf("sea_hag\n");
+    case treasure_map:
+        printf("treasure_map\n");
+
+    }
 
 }

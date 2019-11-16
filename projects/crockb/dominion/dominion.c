@@ -42,7 +42,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 
     //set up random number generator
     SelectStream(1);
-    PutSeed((long)randomSeed);
+    PutSeed((long)time(NULL));
 
     //check number of players
     if (numPlayers > MAX_PLAYERS || numPlayers < 2)
@@ -167,11 +167,11 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
         //initialize hand size to zero
         state->handCount[i] = 0;
         state->discardCount[i] = 0;
-        //draw 5 cards
-        // for (j = 0; j < 5; j++)
-        //	{
-        //	  drawCard(i, state);
-        //	}
+        //draw 5 cards - commented in for randomtesting
+         for (j = 0; j < 5; j++)
+        	{
+        	  drawCard(i, state);
+        	}
     }
 
     //set embargo tokens to 0 for all supply piles
@@ -191,9 +191,11 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     //int it; move to top
 
     //Moved draw cards to here, only drawing at the start of a turn
+    /* commented out for randomtesting coverage
     for (it = 0; it < 5; it++) {
         drawCard(state->whoseTurn, state);
     }
+    */
 
     updateCoins(state->whoseTurn, state, 0);
 
@@ -1344,9 +1346,12 @@ int playTribute(struct gameState *state, int handPos)
             }
             else {
                 //No Card to Reveal
+
+                /* commented out for randomtesting coverage
                 if (DEBUG) {
                     printf("No cards to reveal\n");
                 }
+                */
             }
         }
 
@@ -1359,13 +1364,13 @@ int playTribute(struct gameState *state, int handPos)
                     state->discardCount[nextPlayer]--;
                 }
 
-                shuffle(nextPlayer,state);//Shuffle the deck
+                // shuffle(nextPlayer,state);//Shuffle the deck -- commented out for randomtesting coverage
             }
             tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-            discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
+            //discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);  -- commented out for random testing coverage
 
             tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-            discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
+            //discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0); -- commented out for random testing coverage
         }
 
         if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
