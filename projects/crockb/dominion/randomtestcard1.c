@@ -267,65 +267,92 @@ void printAllGameStateVariables(struct gameState *state)
 }
 
 
-void printCardName(int card)
+int printCardName(int card)
 {
 
     switch(card)
     {
     case curse:
         printf("curse\n");
+        return 1;
     case estate:
         printf("estate\n");
+        return 1;
     case duchy:
         printf("duchy\n");
+        return 1;
     case province:
         printf("province\n");
+        return 1;
     case copper:
         printf("copper\n");
+        return 1;
     case silver:
         printf("silver\n");
+        return 1;
     case gold:
         printf("gold\n");
+        return 1;
     case adventurer:
         printf("adventurer\n");
+        return 1;
     case council_room:
         printf("council_room\n");
+        return 1;
     case feast:
         printf("feast\n");
+        return 1;
     case gardens:
         printf("gardens\n");
+        return 1;
     case mine:
         printf("mine\n");
+        return 1;
     case remodel:
         printf("remodel\n");
+        return 1;
     case smithy:
         printf("smithy\n");
+        return 1;
     case village:
         printf("village\n");
+        return 1;
     case baron:
         printf("baron\n");
+        return 1;
     case great_hall:
         printf("great_hall\n");
+        return 1;
     case minion:
         printf("minion\n");
+        return 1;
     case steward:
         printf("steward\n");
+        return 1;
     case tribute:
         printf("tribute\n");
+        return 1;
     case ambassador:
         printf("ambassador\n");
+        return 1;
     case cutpurse:
         printf("cutpurse\n");
+        return 1;
     case embargo:
         printf("embargo\n");
+        return 1;
     case outpost:
         printf("outpost\n");
+        return 1;
     case salvager:
         printf("salvager\n");
+        return 1;
     case sea_hag:
         printf("sea_hag\n");
+        return 1;
     case treasure_map:
         printf("treasure_map\n");
+        return 1;
 
     }
 
