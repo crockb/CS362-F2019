@@ -73,7 +73,7 @@ int testPlayBaron();
 void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
-void printCardName(int card);
+int printCardName(int card);
 
 
 // call randomtestcard1
