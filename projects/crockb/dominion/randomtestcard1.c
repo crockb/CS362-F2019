@@ -356,4 +356,5 @@ int printCardName(int card)
 
     }
 
+    return -1;
 }
