@@ -97,7 +97,7 @@ int testPlayBaron()
             };
 
     // initialize the game
-    initializeGame(2, k, randomSeed, &state);
+    initializeGame(2, k, 1234, &state);
 
     printPlayersCards(player1, &state);
     printAllSupplyCounts(&state);
