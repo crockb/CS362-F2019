@@ -140,7 +140,7 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
       }   
       state->handCount[player] = 0;
 
-      for (j = 0; j < 20; j++) {
+      for (i = 0; i < 20; i++) {
           j = rand() % state->deckCount[player];
           n = rand() % 10;
           state->deck[player][j] = kingdomCards[n];
