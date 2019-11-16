@@ -45,12 +45,12 @@
     int playBaron(int choice1, struct gameState *state, int handPos)
     Requirements for Random Tester:
        --- randomizeGameState ()
-          --- handPosition of card (leave at 0?)
-          --- set of cards in the game (set a constant state?) -- leave as is
+          --- handPosition of card (leave at 0?) - GOOD
+          --- set of cards in the game (set a constant state?) - GOOD
+          --- number of players in the game (2 to 4) - GOOD
           --- number of cards in hand (minion (4), tribute 1 or 0) = randomizeHand()
           --- number of cards in discard (tribute 1 or 0) = randomizeDiscard
           --- number of cards in deck (tribute 1 or 0) = randomizeDeck
-          --- number of players in the game (2 to 4) --- can be taken care of early
           --- supply counts for estate (baron 0 or 2) --- can be a 50/50
           --- number of estates in hand (yes/no) --- can be a 50/50
           --- whos turn is it (number of players) --- can be taken care of early
@@ -72,6 +72,7 @@ int testPlayBaron();
 
 // helper functions for randomizing the game state
 int randomizePlayerCount();
+void randomizeDeckCards(struct gameState *state, int kingdomCards[10]);
 
 
 // helper print functions
@@ -101,6 +102,7 @@ int testPlayBaron()
 
     // initialize the game
     initializeGame(randomizePlayerCount(), k, 1234, &state);
+    randomizeDeckCards(&state, k);
     printAllGameStateVariables(&state);
 
     return 0;
@@ -113,6 +115,22 @@ int randomizePlayerCount(){
     if (n == 1)
        n = 2;
     return n;
+}
+
+// int shuffle(int player, struct gameState *state)
+void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
+
+  int i, j, n;
+
+  // randomly swap out a deck card with another from the gameset
+  for (i = 0; i < state->numPlayers; i++) {
+      shuffle(i, &state);
+      for (j = 0; j < 20; j++) {
+          j = rand() % 10;
+          n = rand() % 10;
+          state->deck[i][j] = kingdomCards[n];
+      }
+  }
 }
 
 
