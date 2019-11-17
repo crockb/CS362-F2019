@@ -106,6 +106,14 @@ int testPlayMinion()
 }
 
 
+int assert(int expected, int actual)
+{
+  if (expected == actual)
+    return 1;
+  else
+    return 0;
+}
+
 
 void randomizeGameState(struct gameState *state, int kingdomCards[10]) {
 
