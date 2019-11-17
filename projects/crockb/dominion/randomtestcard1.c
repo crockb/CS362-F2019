@@ -44,7 +44,7 @@
 
     int playBaron(int choice1, struct gameState *state, int handPos)
     Requirements for Random Tester:
-       --- randomizeGameState ()
+       --- randomizeGameStates ()
           --- handPosition of card (leave at 0?) - GOOD
           --- set of cards in the game (set a constant state?) - GOOD
           --- number of players in the game (2 to 4) - GOOD
@@ -75,6 +75,7 @@ int testPlayBaron();
 int randomizePlayerCount();
 void randomizeDeckCards(struct gameState *state, int kingdomCards[10]);
 void randomizePiles(struct gameState *state);
+void randomizeGameState(struct gameState *state, int kingdomCards[10]);
 
 // helper print functions
 void printPlayersCards(int player, struct gameState *state);
@@ -95,7 +96,6 @@ int main()
 int testPlayBaron()
 {
 
-    int n;
     struct gameState state;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
@@ -103,21 +103,30 @@ int testPlayBaron()
 
     // initialize the game
     initializeGame(randomizePlayerCount(), k, 1234, &state);
-    randomizeDeckCards(&state, k);
-    randomizePiles(&state);
 
-    // randomize who's turn, # of estates
-    n = rand() % state.numPlayers;
-    state.whoseTurn = n;
-
-    n = rand() % 10;
-    state.supplyCount[estate] = n;
-
+    // randomize the game state
+    randomizeGameState(&state, k);
     printAllGameStateVariables(&state);
 
     return 0;
 
 }
+
+void randomizeGameState(struct gameState *state, int kingdomCards[10]) {
+
+    int n;
+    randomizeDeckCards(state, kingdomCards);
+    randomizePiles(state);
+
+    // randomize who's turn, # of estates
+    n = rand() % state->numPlayers;
+    state->whoseTurn = n;
+
+    n = rand() % 10;
+    state->supplyCount[estate] = n;
+
+}
+
 
 int randomizePlayerCount(){
     int n;
