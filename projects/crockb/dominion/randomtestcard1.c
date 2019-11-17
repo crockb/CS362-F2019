@@ -95,7 +95,7 @@ int main()
 // function to execute the set of conditions for unittest#1
 int testPlayBaron()
 {
-    int bonus = 0;
+    int choice1, choice2, bonus = 0;
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
@@ -113,15 +113,11 @@ int testPlayBaron()
     memcpy(&preState, &state, sizeof(struct gameState));
 
     // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-    int n1, n2;
-    n1 = rand() % 2;
-    n2 = rand() % 2;
-    printf("choice1 = %d\n", n1);
-    printf("choice2 = %d\n", n2);
+    choice1 = rand() % 2;
+    choice2 = rand() % 2;
 
-    playCard(0, n1, n2, 0, &state);
+    playCard(0, choice1, choice2, 0, &state);
     
-
     //printAllGameStateVariables(&state);
     return 0;
 
