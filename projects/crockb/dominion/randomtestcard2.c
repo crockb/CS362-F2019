@@ -60,7 +60,7 @@ int main()
 int testPlayMinion()
 {
 
-   	//int choice1, choice2, bonus = 0;
+   	int choice1, choice2, bonus = 0;
     int iterations = 0;
 
     struct gameState state; //, preState;
@@ -70,14 +70,10 @@ int testPlayMinion()
 
     printf("\n\n----- RANDOM TEST #2 - playMinion() - STARTED -----\n\n");
 
-    //while (condition1 == 0 || condition2 == 0) {
-    while (iterations < 1) {
+    while (condition1 == 0 || condition2 == 0) {
     	// randomize the game state
     	randomizeGameState(&state, k);
-    	printAllGameStateVariables(&state);
 
-
-    	/*
         // provide player1 with a minion card
         state.hand[state.whoseTurn][0] = minion;
         state.supplyCount[minion]--;
@@ -92,7 +88,7 @@ int testPlayMinion()
 
         playCard(0, choice1, choice2, 0, &state);
 		printTestResults(&state, &preState, choice1, choice2);
-		*/
+
     	iterations++;
 	
 	}
@@ -336,65 +332,6 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
 }
 
-/* assignment #2 - a function to play the minion card */
-/*
-int playMinion(int choice1, int choice2, struct gameState *state, int handPos)
-{
-
-    int i;
-    int j;
-    int currentPlayer = whoseTurn(state);
-
-    //discard card from hand
-    discardCard(handPos, currentPlayer, state, 0);
-
-    if (choice1)
-    {
-        state->coins = state->coins + 2;
-    }
-    else if (choice2)       //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
-    {
-        //discard hand
-        while(numHandCards(state) > 0)
-        {
-            discardCard(0, currentPlayer, state, 0);
-        }
-
-        //draw 4
-        for (i = 0; i < 4; i++)
-        {
-            drawCard(currentPlayer, state);
-        }
-
-        //other players discard hand and redraw if hand size > 4
-        for (i = 0; i < state->numPlayers; i++)
-        {
-            if (i != currentPlayer)
-            {
-                if ( state->handCount[i] > 4 )
-                {
-                    //discard hand
-                    while( state->handCount[i] > 0 )
-                    {
-                        discardCard(0, i, state, 0);
-                    }
-
-                    //draw 4
-                    for (j = 0; j < 4; j++)
-                    {
-                        drawCard(j, state);
-                    }
-                }
-            }
-        }
-
-    }
-    return 0;
-}
-*/
-
-
-
 
 void printPlayersCards(int player, struct gameState *state)
 {
@@ -449,7 +386,6 @@ void printAllGameStateVariables(struct gameState *state) {
 
   int i, j;
 
-/*
     // print out the results of the game state
   printf("numPlayers: %d\n", state->numPlayers);
   printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
@@ -472,7 +408,7 @@ void printAllGameStateVariables(struct gameState *state) {
   printf("phase: %d\n", state->phase);
   printf("numActions: %d\n", state->numActions);
   printf("numBuys: %d\n", state->numBuys);
-*/
+
   // print all player's hands
 
   for(j = 0; j < state->numPlayers; j++) {
