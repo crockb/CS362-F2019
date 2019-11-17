@@ -38,7 +38,7 @@
 
 
 // global variables to check when conditions 1-10 are met
-int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0; // c7 = 0, c8 = 0;
+int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0; //c8 = 0;
 int returnValue;
 
 // helper function signatures
@@ -84,7 +84,7 @@ int testPlayTribute()
 
     printf("\n\n----- RANDOM TEST #3 - playTribute() - STARTED -----\n\n");
 
-    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0) {
+    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0) {
 
     	// randomize the game state
   		randomizeGameState(&state, k);
@@ -258,6 +258,33 @@ int testPlayTribute()
     			printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - tribute = duplicate action cards\n");  
         		// update condition met criteria
         		c6 = 1;
+    		}
+    	}
+
+   		// CONDITION #7:  Left player has 2 or more cards in discard/deck - treasure = money and victory
+    	if (state.deckCount[nextPlayer] >= 2) {
+    	
+    		card1 = (rand() % 3) + 4;
+    		card2 = (rand() % 3) + 1;
+		
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-1] = card1;
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-2] = card2;
+    	
+    		t1 = state.deck[nextPlayer][state.deckCount[nextPlayer]-1]; 
+    		t2 = state.deck[nextPlayer][state.deckCount[nextPlayer]-2];
+
+    		// save the game states
+        	updateCoins(0, &state, bonus);
+        	memcpy(&preState, &state, sizeof(struct gameState));
+
+        	// play the card
+        	returnValue = playCard(0, 0, 0, 0, &state);
+
+    		if (c7 == 0) {
+
+    			printf("\nCONDITION #7 met: Left player has 2 or more cards in discard/deck - tribute = money and victory\n");  
+        		// update condition met criteria
+        		c7 = 1;
     		}
     	}
 
