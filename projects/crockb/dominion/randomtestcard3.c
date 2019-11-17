@@ -281,7 +281,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
 	int currentPlayer = state->whoseTurn;
 	int nextPlayer = currentPlayer + 1;
-	int t1 = -1, t2 = -1;
+	int t1 = -1, t2 = -1, card1 = -1, card2 = -1;
    
    	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0
     if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
@@ -313,16 +313,17 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
    	// CONDITION #4:  Left player has 2 or more cards in discard/deck - duplicate money card
     if (state->deckCount[nextPlayer] >= 2) {
+    	card1 = (rand() % 3) + 4;
+    	card2 = (rand() % 3) + 4;
     	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
     	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
-    }
 
-    if (c4 == 0 && state->deckCount[nextPlayer] >= 2 && (t1 <= 4 && t1 >= 6) && (t1 == t2)) {
+    	if (c4 == 0 && (t1 == t2)) {
 
-    	printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - duplicate tribue money cards\n");
-  
-        // update condition met criteria
-        c4 = 1;
+    		printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - duplicate tribue money cards\n");  
+        	// update condition met criteria
+        	c4 = 1;
+    	}
     }
 
 }
