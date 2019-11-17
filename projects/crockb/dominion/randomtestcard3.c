@@ -75,7 +75,7 @@ int testPlayTribute()
 {
     int iterations = 0, bonus = 0;
     int currentPlayer, nextPlayer, t1, card1, result;
-    int t2, card2;
+    //int t2, card2;
 
 
     struct gameState state, preState;
@@ -93,7 +93,7 @@ int testPlayTribute()
 
   		currentPlayer = state.whoseTurn;
         nextPlayer = currentPlayer + 1;
-        t1 = -1, card1 = -1;
+        card1 = -1;
 
         // provide player1 with a minion card
         state.hand[currentPlayer][0] = tribute;
@@ -109,7 +109,7 @@ int testPlayTribute()
     			card1++;
 			
 			state.deck[nextPlayer][state.deckCount[nextPlayer]-1] = card1;
-    		t1 = state.deck[nextPlayer][state.deckCount[nextPlayer]-1];
+    		//t1 = state.deck[nextPlayer][state.deckCount[nextPlayer]-1];
 
     		// save the game states
         	updateCoins(0, &state, bonus);
