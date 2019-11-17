@@ -119,7 +119,7 @@ int testPlayBaron()
     printf("choice1 = %d\n", n1);
     printf("choice2 = %d\n", n2);
 
-    playCard(state.whoseTurn, n1, n2, 0, &state);
+    playCard(0, n1, n2, 0, &state);
     
 
     //printAllGameStateVariables(&state);
