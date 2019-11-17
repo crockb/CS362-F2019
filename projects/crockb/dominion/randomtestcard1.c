@@ -235,7 +235,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
   int deck = 2;
 
   // check the hand
-  if (pileToCheck == 0) {
+  if (pileToCheck == hand) {
     for (i = 0; i < state->handCount[player]; i++) {
       if (state->hand[player][i] == card)
         count++;
@@ -244,7 +244,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
   }
 
   // check the discard
-  if (pileToCheck == 1) {
+  if (pileToCheck == discard) {
     for (i = 0; i < state->discardCount[player]; i++) {
       if (state->discard[player][i] == card)
         count++;
@@ -253,7 +253,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
   }
 
   // check the deck
-  if (pileToCheck == 2) {
+  if (pileToCheck == deck) {
     for (i = 0; i < state->deckCount[player]; i++) {
       if (state->deck[player][i] == card)
         count++;
@@ -285,6 +285,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
     int player = state->whoseTurn;
+    int result;
 
     // CONDITION #1:  Remove Estate (Has Estate)
     if (choice1 == 1 && countCardType(estate, state, 0) >=1) {
