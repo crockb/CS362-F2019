@@ -128,7 +128,7 @@ int testPlayBaron()
         playCard(0, choice1, choice2, 0, &state);
 
         printTestResults(&state, &preState, choice1, choice2);
-        iteration++;
+        iterations++;
       }
 
 
