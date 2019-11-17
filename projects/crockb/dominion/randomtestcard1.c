@@ -49,9 +49,9 @@
           --- set of cards in the game (set a constant state?) - GOOD
           --- number of players in the game (2 to 4) - GOOD
           --- randomize type of cards in the hand - GOOD
-          --- number of cards in hand (minion (4))
-          --- number of cards in discard (tribute 1 or 0) = randomizeDiscard
-          --- number of cards in deck (tribute 1 or 0) = randomizeDeck
+          --- number of cards in hand (minion (4)) - GOOD
+          --- number of cards in discard (tribute 1 or 0) = randomizeDiscard - GOOD
+          --- number of cards in deck (tribute 1 or 0) = randomizeDeck - GOOD
           --- supply counts for estate (baron 0 or 2) --- can be a 50/50
           --- number of estates in hand (yes/no) --- can be a 50/50
           --- whos turn is it (number of players) --- can be taken care of early
@@ -94,7 +94,7 @@ int main()
 // function to execute the set of conditions for unittest#1
 int testPlayBaron()
 {
-    //n = rand() % 10;
+
     //int player1 = 0;
     struct gameState state;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -105,6 +105,13 @@ int testPlayBaron()
     initializeGame(randomizePlayerCount(), k, 1234, &state);
     randomizeDeckCards(&state, k);
     randomizePiles(&state);
+
+    // randomize who's turn, # of estates
+    n = rand() % state.numPlayers;
+    state->whosTurn = n;
+
+    n = rand() % 10;
+    state.supplyCount[estate] = n;
 
     printAllGameStateVariables(&state);
 
