@@ -160,7 +160,8 @@ void randomizePiles(struct gameState *state){
         printf("numHand: %d\n", numHand);
         if (numHand < 3)
             numHand = numHand + 3;
-
+        printf("numHand: %d\n", numHand);
+        
         // draw cards
         for (i = 0; i < numHand; i++){
           drawCard(player, state);
