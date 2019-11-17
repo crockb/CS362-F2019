@@ -155,6 +155,7 @@ void randomizePiles(struct gameState *state){
     int player, i, numHand, numDiscard;
 
     for (player = 0; player < state->numPlayers; player++) {
+        printf("deckCount: %d\n", state->deckCount[player]);
         numHand = rand() % state->deckCount[player];
         if (numHand < 3)
             numHand = numHand + 3;
@@ -166,7 +167,7 @@ void randomizePiles(struct gameState *state){
 
         // randomly set discard pile from back of deck pile
         numDiscard = rand() % (state->deckCount[player] - numHand);
-        printf("NumHand: %d, NumDiscard: %d\n", numHand, numDiscard);
+
         for (i = 0; i < numDiscard; i++){
             state->discardCount[player]++;
             state->discard[player][i] = state->deck[player][state->deckCount[player]-1];
