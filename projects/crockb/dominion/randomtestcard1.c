@@ -224,7 +224,7 @@ void randomizePiles(struct gameState *state){
 }
 
 
-int countCardType(int card, struct gameState *state, int pileToCheck);
+int countCardType(int card, struct gameState *state, int pileToCheck)
 {
 
   int i;
@@ -292,9 +292,9 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         // precondition #1 - player has one less estate in hand
         result = assert(countCardType(estate, preState, 0)-1, countCardType(estate, state, 0));
         if (result == 0)
-            printf("precondition #1 fail: # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState)-1, 0);
+            printf("precondition #1 fail: # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)-1);
         else
-            printf("precondition #1 pass: # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState)-1, 0);
+            printf("precondition #1 pass: # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)-1);
 
         // precondition #2 - player has one less baron in hand
         result = assert(countCardType(baron, preState, 0)-1, countCardType(baron, state, 0));
