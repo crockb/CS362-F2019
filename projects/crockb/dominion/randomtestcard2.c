@@ -192,6 +192,49 @@ void randomizePiles(struct gameState *state){
 }
 
 
+int countCardType(int card, struct gameState *state, int pileToCheck)
+{
+
+  int i;
+  int count = 0;
+  int player = state->whoseTurn;
+  int hand = 0;
+  int discard = 1;
+  int deck = 2;
+
+  // check the hand
+  if (pileToCheck == hand) {
+    for (i = 0; i < state->handCount[player]; i++) {
+      if (state->hand[player][i] == card)
+        count++;
+    }
+    return count;
+  }
+
+  // check the discard
+  if (pileToCheck == discard) {
+    for (i = 0; i < state->discardCount[player]; i++) {
+      if (state->discard[player][i] == card)
+        count++;
+    }
+    return count;
+  }
+
+  // check the deck
+  if (pileToCheck == deck) {
+    for (i = 0; i < state->deckCount[player]; i++) {
+      if (state->deck[player][i] == card)
+        count++;
+    }
+    return count;
+  }
+
+  // error - no pile indicated
+  return -1;
+
+}
+
+
 /*
 
 	CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
