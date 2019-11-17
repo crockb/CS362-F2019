@@ -239,7 +239,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
-    int i, result1, result2;
+    int i, result1, result2, pHandTooMany;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
     if (choice1 == 1 && condition1 == 0) {
@@ -306,6 +306,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     		// found a player with > 4 hand cards
     		if (state->handCount[i] > 4) {
     			result2 = 0;
+    			pHAndTooMany = i;
     		}
     		else {
     			// do nothing
@@ -314,9 +315,19 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	result1 = assert(1, result2);
     	if (result1 == 0)
-      		printf("precondition #2 fail: all players have <= 4 hand cards\n");
+      		printf("precondition #2 fail: all players have <= 4 hand cards: p%d has %d hand cards.\n", pHAndTooMany+1, state->handCount[pHAndTooMany]);
     	else
       		printf("precondition #2 pass: all players have <= 4 hand cards\n");
+
+
+    	// precondition #3 - player has 1 action
+    	result1 = assert(1, state->numActions);
+    	if (result1 == 0)
+      		printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
+    	else
+       		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
+
+
 
  	}
 
