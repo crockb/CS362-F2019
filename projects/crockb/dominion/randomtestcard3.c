@@ -8,16 +8,14 @@
 		 		- Treasure Card: +2 coins
 		 		- Victory Card: +2 cards
 
-	CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action) -- 
-				 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (treasure)
-				 3: Left player has 1 or less cards in discard/deck - no cards (failure)
-				 4: Left player has 2 or more cards in discard/deck - no deck cards (shuffle)
-				   4.1:   has duplicates at the backend
-				     4.1.1: 2 coppers
-				     4.1.2: 2 estates
-				     4.1.3: 2 mines
-				   4.2:   has a copper, has an estate
-				   4.3:   has a mine, has a great_hall 
+	CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0
+				 2: Left player has 1 or less cards in discard/deck - discardCount = 1
+				 3: Left player has 1 or less cards in discard/deck - no cards
+				 4: Left player has 2 or more cards in discard/deck - 2 duplicate money cards
+				 5: Left player has 2 or more cards in discard/deck - 2 duplicate victory cards
+				 6: Left player has 2 or more cards in discard/deck - 2 duplicate action cards
+				 7: Left player has 2 or more cards in discard/deck - money and victory card
+				 8: Left player has 2 or more cards in discard/deck - action and great_hall
 					   
    	Known Bugs Inserted in Assignment 2:
 		1. 	Within the duplicate tribute card check, removed the statement that set 
@@ -40,7 +38,8 @@
 
 
 // global variables to check when conditions 1-10 are met
-int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0, c9 = 0, c10 = 0; 
+int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0;
+int returnValue;
 
 // helper function signatures
 int testPlayTribute();
@@ -75,6 +74,7 @@ int main()
 int testPlayTribute()
 {
     int iterations = 0, bonus = 0;
+    int currentPlayer, nextPlayer, t1, t2, card1, card2, result;
 
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -89,30 +89,45 @@ int testPlayTribute()
     	// randomize the game state
   		randomizeGameState(&state, k);
 
+  		currentPlayer = state->whoseTurn;
+        nextPlayer = currentPlayer + 1;
+        t1 = -1, t2 = -1, card1 = -1, card2 = -1;
+
         // provide player1 with a minion card
-        state.hand[state.whoseTurn][0] = tribute;
+        state.hand[currentPlayer][0] = tribute;
         state.supplyCount[tribute]--;
 
-        // update the states
-        updateCoins(0, &state, bonus);
-        memcpy(&preState, &state, sizeof(struct gameState));
+   		// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
+    	if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
 
-        // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+    		printf("\nCONDITION #1 met:  Left player has 1 or less cards in discard/deck - deckCount > 0\n");
+ 
+    		card1 = (rand() % 19) + 7;  // range of action cards
+    		if (card1 == 10 || card1 == 16)  // avoid garden and great hall
+    			card1++;
+			
+			state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+    		t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
 
-        playCard(0, 0, 0, 0, &state);
+    		// save the game states
+        	updateCoins(0, &state, bonus);
+        	memcpy(&preState, &state, sizeof(struct gameState));
+
+        	// play the card
+        	returnValue = playCard(0, 0, 0, 0, &state);
+
+    		// expected results: +2 actions (-1 of current turn)
+    		result = assert(preState->numActions+1, state->numActions);
+    		if (result == 0)
+    			printf("condition #1 - FAIL: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+1);
+    		else
+    			printf("condition #1 - PASS: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+1);
+
+        	// update condition met criteria
+        	c1 = 1;
+    	}
+
 		printTestResults(&state, &preState, 0, 0);
-
-
-  		//c1 = 1;
-  		//c2 = 1;
-  		//c3 = 1;
-  		//c4 = 1;
-  		//c5 = 1;
-  		//c6 = 1;
-  		//c7 = 1;
-  		//c8 = 1;
-  		c9 = 1;
-  		c10 = 1;
 
   		iterations++;
 
@@ -261,34 +276,56 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 }
 
-/*
 
-		8:   has a mine, has a great_hall
-
-int nextPlayer = currentPlayer + 1;
-
-*/
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
 	int currentPlayer = state->whoseTurn;
 	int nextPlayer = currentPlayer + 1;
 	int t1 = -1, t2 = -1, card1 = -1, card2 = -1;
+	int result;
    
-   	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0
+   /*
+   	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
     if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
 
     	printf("\nCONDITION #1 met:  Left player has 1 or less cards in discard/deck - deckCount > 0\n");
-  
+ 
+    	card1 = (rand() % 19) + 7;  // range of action cards
+    	if (card1 == 10 || card1 == 16)  // avoid garden and great hall
+    		card1++;
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+    	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+
+    	// expected results: +2 actions (-1 of current turn)
+    	result = assert(preState->numActions+1, state->numActions);
+    	if (result == 0)
+    		printf("condition #1 - FAIL: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+1);
+    	else
+    		printf("condition #1 - PASS: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+1);
+
         // update condition met criteria
         c1 = 1;
     }
+	*/
 
-   	// CONDITION #2:  Left player has 1 or less cards in discard/deck - discardCount > 0
+   	// CONDITION #2:  Left player has 1 or less cards in discard/deck - discardCount > 0 (treasure)
     if (c2 == 0 && state->discardCount[nextPlayer] == 1 && state->deckCount[nextPlayer] == 0) {
 
     	printf("\nCONDITION #2 met:  Left player has 1 or less cards in discard/deck - discardCount > 0\n");
   
+    	card1 = (rand() % 3) + 4;  // range of money cards
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+    	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+
+
+
+    	result = assert(preState->coins, state->coins);
+    	if (result == 0)
+    		printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", state->coins, preState->coins);
+    	else
+    		printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", state->coins, preState->coins);
+
         // update condition met criteria
         c2 = 1;
     }
@@ -297,13 +334,20 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     if (c3 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 0) {
 
     	printf("\nCONDITION #3 met:  Left player has 1 or less cards in discard/deck - no cards\n");
+
+    	// expected results: (failure)
+    	result = assert(-1, returnValue);
+    	if (result == 0)
+    		printf("condition 3.0 - FAIL: (fail flag not returned): actual %d, expected: %d\n", returnValue, -1);
+    	else
+    		printf("condition 3.0 - PASS: (fail flag returned): actual %d, expected: %d\n", returnValue, -1);
   
         // update condition met criteria
         c3 = 1;
     }
 
 
-   	// CONDITION #4:  Left player has 2 or more cards in discard/deck - treasure = duplicate money card
+   	// CONDITION #4:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card
     if (state->deckCount[nextPlayer] >= 2) {
 
     	card1 = (rand() % 3) + 4;
@@ -317,7 +361,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c4 == 0 && (t1 == t2)) {
 
-    		printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - treasure = duplicate money card\n");  
+    		printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card\n");  
         	// update condition met criteria
         	c4 = 1;
     	}
@@ -402,9 +446,6 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         	c8 = 1;
     	}
     }
-
-
-
 }
 
 
