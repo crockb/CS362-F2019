@@ -181,16 +181,16 @@ int testPlayTribute()
     	}
 
    		// CONDITION #4:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card
-    	if (state->deckCount[nextPlayer] >= 2) {
+    	if (state.deckCount[nextPlayer] >= 2) {
 
     		card1 = (rand() % 3) + 4;
     		card2 = (rand() % 3) + 4;
 		
-			state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
-			state->deck[nextPlayer][state->deckCount[nextPlayer]-2] = card2;
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-1] = card1;
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-2] = card2;
     	
-    		t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
-    		t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
+    		t1 = state.deck[nextPlayer][state.deckCount[nextPlayer]-1]; 
+    		t2 = state.deck[nextPlayer][state.deckCount[nextPlayer]-2];
 
     		// save the game states
         	updateCoins(0, &state, bonus);
@@ -449,7 +449,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	}
     }
 	*/
-	
+
    	// CONDITION #5:  Left player has 2 or more cards in discard/deck - treasure = duplicate victory cards
     if (state->deckCount[nextPlayer] >= 2) {
 
