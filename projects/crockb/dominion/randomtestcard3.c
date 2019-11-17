@@ -265,13 +265,13 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 	1: Left player has 1 or less cards in discard/deck - deckCount > 0
 	2: Left player has 1 or less cards in discard/deck - discardCount > 0
 	3: Left player has 1 or less cards in discard/deck - no cards
-	4: Left player has 2 or more cards in discard/deck - no deck cards
-		5:   has duplicates at the backend
-			6: 2 coppers
-			7: 2 estates
-			8: 2 mines
-		9:   has a copper, has an estate
-		10:   has a mine, has a great_hall
+	Left player has 2 or more cards in discard/deck
+		has duplicates at the backend
+			4: 2 coppers
+			5: 2 estates
+			6: 2 mines
+		7:   has a copper, has an estate
+		8:   has a mine, has a great_hall
 
 int nextPlayer = currentPlayer + 1;
 
@@ -281,6 +281,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
 	int currentPlayer = state->whoseTurn;
 	int nextPlayer = currentPlayer + 1;
+	int t1 = -1, t2 = -1;
    
    	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0
     if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
@@ -309,6 +310,20 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         c3 = 1;
     }
 
+
+   	// CONDITION #4:  Left player has 2 or more cards in discard/deck - duplicate money card
+    if (state->deckCount[nextPlayer] >= 2) {
+    	t1 = state=>deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
+    	t2 = state=>deck[nextPlayer][state->deckCount[nextPlayer]-2];
+    }
+
+    if (c4 == 0 && state->discardCount[nextPlayer] + state->deckCount[nextPlayer] >= 2 && (t1 <= 4 && t1 >= 6) && (t1 == t2)) {
+
+    	printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - duplicate tribue money cards\n");
+  
+        // update condition met criteria
+        c4 = 1;
+    }
 
 
 
