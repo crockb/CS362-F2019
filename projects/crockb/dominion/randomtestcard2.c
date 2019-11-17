@@ -26,6 +26,9 @@
 
 
 
+// helper function signatures
+int testPlayMinion();
+
 
 // call randomtestcard2
 int main()
@@ -37,7 +40,7 @@ int main()
 
 
 // function to execute the set of conditions for unittest#1
-int testPlayBaron()
+int testPlayMinion()
 {
 	printf("Hello world\n");
 	return 0;
