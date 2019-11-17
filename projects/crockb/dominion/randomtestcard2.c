@@ -315,12 +315,9 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	result1 = assert(1, result2);
     	if (result1 == 0) {
       		printf("precondition #2 fail: all players have <= 4 hand cards: p%d has %d hand cards.\n", pHandTooMany+1, state->handCount[pHandTooMany]);
-      		printf("whoseTurn = %d\n", state->whoseTurn);
-      		printAllGameStateVariables(state);
     	}
     	else
       		printf("precondition #2 pass: all players have <= 4 hand cards\n");
-
 
     	// precondition #3 - player has 1 action
     	result1 = assert(1, state->numActions);
