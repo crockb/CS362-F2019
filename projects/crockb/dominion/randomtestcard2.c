@@ -70,7 +70,7 @@ int testPlayMinion()
 
     printf("\n\n----- RANDOM TEST #2 - playMinion() - STARTED -----\n\n");
 
-    while (condition1 == 0 || condition2 == 0 || condition3 == 0) {
+    while (condition1 == 0 || condition2 == 0) {
 
     	// randomize the game state
     	randomizeGameState(&state, k);
