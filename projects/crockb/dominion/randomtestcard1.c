@@ -152,7 +152,7 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
 }
 
 void randomizePiles(struct gameState *state){
-    int player, i, numHand, numDiscard;
+    int player, i, numHand, numDiscard, temp;
 
     for (player = 0; player < state->numPlayers; player++) {
         printf("deckCount: %d\n", state->deckCount[player]);
@@ -161,14 +161,14 @@ void randomizePiles(struct gameState *state){
         if (numHand < 3)
             numHand = numHand + 3;
         printf("numHand: %d\n", numHand);
-        
+
         // draw cards
         for (i = 0; i < numHand; i++){
           drawCard(player, state);
         }
 
         // randomly set discard pile from back of deck pile
-        numDiscard = rand() % (state->deckCount[player] - numHand);
+        numDiscard = rand() % state->deckCount[player];
 
         for (i = 0; i < numDiscard; i++){
             state->discardCount[player]++;
