@@ -274,6 +274,14 @@ int testPlayTribute()
     		if (c6 == 0 && (t1 == t2) && (card1 != 10 || card1 != 16)) {
 
     			printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - tribute = duplicate action cards\n");  
+        		
+    			// expected results: +2 actions (-1 of current turn) (no double counting)
+    			result = assert(preState.numActions+1, state.numActions);
+    			if (result == 0)
+    				printf("condition 4.1.3 - FAIL: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
+    			else
+    				printf("condition 4.1.3 - PASS: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
+
         		// update condition met criteria
         		c6 = 1;
     		}
