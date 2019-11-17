@@ -129,6 +129,37 @@ int testPlayTribute()
         	c1 = 1;
     	}
 
+   		// CONDITION #2:  Left player has 1 or less cards in discard/deck - discardCount > 0 (treasure)
+    	if (c2 == 0 && state.discardCount[nextPlayer] == 1 && state.deckCount[nextPlayer] == 0) {
+
+    		printf("\nCONDITION #2 met:  Left player has 1 or less cards in discard/deck - discardCount > 0\n");
+  
+    		card1 = (rand() % 3) + 4;  // range of money cards
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-1] = card1;
+    		//t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+
+    		// save the game states
+        	updateCoins(0, &state, bonus);
+        	memcpy(&preState, &state, sizeof(struct gameState));
+
+        	// play the card
+        	returnValue = playCard(0, 0, 0, 0, &state);
+
+    		// expected results: +2 coins (treasure card)
+    		updateCoins(currentPlayer, &preState, 2);
+    		updateCoins(currentPlayer, &state, state.coins);
+
+    		result = assert(preState.coins, state.coins);
+    		if (result == 0)
+    			printf("condition 2.0 - FAIL: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+    		else
+    			printf("condition 2.0 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+
+        	// update condition met criteria
+        	c2 = 1;
+    	}
+
+
 		printTestResults(&state, &preState, 0, 0);
 
   		iterations++;
@@ -309,7 +340,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         // update condition met criteria
         c1 = 1;
     }
-	*/
+
 
    	// CONDITION #2:  Left player has 1 or less cards in discard/deck - discardCount > 0 (treasure)
     if (c2 == 0 && state->discardCount[nextPlayer] == 1 && state->deckCount[nextPlayer] == 0) {
@@ -331,6 +362,8 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         // update condition met criteria
         c2 = 1;
     }
+
+	*/
 
    	// CONDITION #3:  Left player has 1 or less cards in discard/deck - no cards
     if (c3 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 0) {
@@ -383,7 +416,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c5 == 0 && (t1 == t2)) {
 
-    		printf("\nCONDITION #5 met: Left player has 2 or more cards in discard/deck - treasure = duplicate victory cards\n");  
+    		printf("\nCONDITION #5 met: Left player has 2 or more cards in discard/deck - tribute = duplicate victory cards\n");  
         	// update condition met criteria
         	c5 = 1;
     	}
@@ -403,7 +436,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c6 == 0 && (t1 == t2) && (card1 != 10 || card1 != 16)) {
 
-    		printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - treasure = duplicate action cards\n");  
+    		printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - tribute = duplicate action cards\n");  
         	// update condition met criteria
         	c6 = 1;
     	}
@@ -423,7 +456,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c7 == 0) {
 
-    		printf("\nCONDITION #7 met: Left player has 2 or more cards in discard/deck - treasure = money and victory\n");  
+    		printf("\nCONDITION #7 met: Left player has 2 or more cards in discard/deck - tribute = money and victory\n");  
         	// update condition met criteria
         	c7 = 1;
     	}
@@ -443,7 +476,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c8 == 0 && (card1 != 10 || card1 != 16) ) {
 
-    		printf("\nCONDITION #8 met: Left player has 2 or more cards in discard/deck - treasure = action and great hall\n");  
+    		printf("\nCONDITION #8 met: Left player has 2 or more cards in discard/deck - tribute = action and great hall\n");  
         	// update condition met criteria
         	c8 = 1;
     	}
