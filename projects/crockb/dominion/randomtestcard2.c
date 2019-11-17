@@ -255,7 +255,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     int i, result1, result2;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
-    if (choice1 == 1) {
+    if (choice1 == 1 && condition1 == 0) {
 
     	printf("\nCONDITION #1 met:  Choice 1 - Add 2 coins\n");
         
@@ -299,9 +299,9 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	}
     }
 
- 	if (choice1 == 0 && choice2 == 1 && result2 == 1) {
+ 	if (choice1 == 0 && choice2 == 1 && result2 == 1 && condition2 == 0) {
 
-    	printf("\nCONDITION #1 met:  Choice 2 - Discard Hand (other players all have > 4 cards)\n");
+    	printf("\nCONDITION #2 met:  Choice 2 - Discard Hand (other players all have > 4 cards)\n");
         
         // update condition met criteria
         condition2 = 1;
