@@ -201,8 +201,8 @@ void randomizePiles(struct gameState *state){
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
-    int player = state->whoseTurn;
-    int result;
+    //int player = state->whoseTurn;
+    //int result;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
     if (choice1 == 1) {
