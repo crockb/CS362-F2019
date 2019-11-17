@@ -38,8 +38,7 @@
 
 
 // global variables to check when conditions 1-10 are met
-int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0; //c8 = 0;
-int returnValue;
+int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0;
 
 // helper function signatures
 int testPlayTribute();
@@ -73,7 +72,7 @@ int main()
 // function to execute the set of conditions for randomtest #3
 int testPlayTribute()
 {
-    int iterations = 0, bonus = 0;
+    int iterations = 0, bonus = 0, returnValue = 0;
     int currentPlayer, nextPlayer, card1, result, t1, t2, card2;
 
     struct gameState state, preState;
@@ -84,7 +83,7 @@ int testPlayTribute()
 
     printf("\n\n----- RANDOM TEST #3 - playTribute() - STARTED -----\n\n");
 
-    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0) {
+    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0 || c8 == 0) {
 
     	// randomize the game state
   		randomizeGameState(&state, k);
@@ -285,6 +284,33 @@ int testPlayTribute()
     			printf("\nCONDITION #7 met: Left player has 2 or more cards in discard/deck - tribute = money and victory\n");  
         		// update condition met criteria
         		c7 = 1;
+    		}
+    	}
+
+   		// CONDITION #8:  Left player has 2 or more cards in discard/deck - treasure = action and great_hall
+    	if (state.deckCount[nextPlayer] >= 2) {
+    	
+    		card1 = (rand() % 19) + 7;
+    		card2 = great_hall;
+		
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-1] = card1;
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-2] = card2;
+    	
+    		t1 = state.deck[nextPlayer][state.deckCount[nextPlayer]-1]; 
+    		t2 = state.deck[nextPlayer][state.deckCount[nextPlayer]-2];
+
+    		// save the game states
+        	updateCoins(0, &state, bonus);
+        	memcpy(&preState, &state, sizeof(struct gameState));
+
+        	// play the card
+        	returnValue = playCard(0, 0, 0, 0, &state);
+
+    		if (c8 == 0 && (card1 != 10 || card1 != 16) ) {
+
+    			printf("\nCONDITION #8 met: Left player has 2 or more cards in discard/deck - tribute = action and great hall\n");  
+        		// update condition met criteria
+        		c8 = 1;
     		}
     	}
 
