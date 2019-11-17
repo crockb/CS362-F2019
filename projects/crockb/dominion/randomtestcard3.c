@@ -74,8 +74,8 @@ int main()
 int testPlayTribute()
 {
     int iterations = 0, bonus = 0;
-    int currentPlayer, nextPlayer, t1, card1, result;
-    //int t2, card2;
+    int currentPlayer, nextPlayer, card1, result;
+    //int t1, t2, card2;
 
 
     struct gameState state, preState;
