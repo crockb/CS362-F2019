@@ -307,8 +307,8 @@ int testPlayTribute()
         	returnValue = playCard(0, 0, 0, 0, &state);
 
         	// expected results: +2 coins, +2 cards
-    		updateCoins(player1, &preState, 2);
-    		updateCoins(player1, &state, state.coins);
+    		updateCoins(currentPlayer, &preState, 2);
+    		updateCoins(currentPlayer, &state, state.coins);
 
     		if (c7 == 0) {
 
