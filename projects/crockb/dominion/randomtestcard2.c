@@ -202,15 +202,23 @@ void randomizePiles(struct gameState *state){
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
     //int player = state->whoseTurn;
-    //int result;
+    int result;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
     if (choice1 == 1) {
 
-    	printf("\nCONDITION #1 met:  Remove Estate (Player Has An Estate)\n");
+    	printf("\nCONDITION #1 met:  Choice 1 - Add 2 coins\n");
         
         // update condition met criteria
         condition1 = 1;
+
+    	// precondition #1 - player has one less minion in hand
+    	result = assert(countCardType(minion, preState, 0)-1, countCardType(minion, state, 0));
+    	if (result == 0)
+      		printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
+    	else
+      		printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
+
     }
 
 }
