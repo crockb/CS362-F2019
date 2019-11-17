@@ -288,6 +288,8 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     int result;
 
     // CONDITION #1:  Remove Estate (Has Estate)
+    printf("CONDITION #1 - choice1: %d, # estates: %d\n", choice1, countCardType(estate, state, 0));
+    
     if (choice1 == 1 && countCardType(estate, state, 0) >=1) {
 
         // precondition #1 - player has one less estate in hand
