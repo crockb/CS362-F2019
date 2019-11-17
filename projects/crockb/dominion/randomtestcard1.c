@@ -74,6 +74,7 @@ int testPlayBaron();
 // helper functions for randomizing the game state
 int randomizePlayerCount();
 void randomizeDeckCards(struct gameState *state, int kingdomCards[10]);
+void randomizePiles(struct gameState *state);
 
 // helper print functions
 void printPlayersCards(int player, struct gameState *state);
@@ -103,6 +104,8 @@ int testPlayBaron()
     // initialize the game
     initializeGame(randomizePlayerCount(), k, 1234, &state);
     randomizeDeckCards(&state, k);
+    randomizePiles(&state);
+
     printAllGameStateVariables(&state);
 
     return 0;
@@ -146,6 +149,31 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
           state->deck[player][j] = kingdomCards[n];
       }
   }
+}
+
+void randomizePiles(struct gameState *state){
+    int player, i, numHand, numDiscard;
+
+    for (player = 0; player < state->numPlayers; player++) {
+        numHand = rand() % state->deckCount[player];
+        if (numHand < 3)
+            numHand = numHand + 3;
+
+        // draw cards
+        for (i = 0; i < numHand; i++){
+          drawCard(player, state);
+        }
+
+        // randomly set discard pile from back of deck pile
+        numDiscard = rand() % (state->deckCount[player] - numHand);
+        for (i = 0; i < numDiscard; i++){
+            state->discardCount[player]++;
+            state->discard[player][i] = state->deck[player][state->deckCount[player]-1];
+            state->deckCount[player]--;
+        }
+
+    }
+
 }
 
 
