@@ -96,7 +96,6 @@ int main()
 int testPlayBaron()
 {
     int bonus = 0;
-    int n;
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
