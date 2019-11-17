@@ -106,7 +106,7 @@ int testPlayTribute()
   		//c1 = 1;
   		//c2 = 1;
   		//c3 = 1;
-  		c4 = 1;
+  		//c4 = 1;
   		c5 = 1;
   		c6 = 1;
   		c7 = 1;
@@ -317,15 +317,13 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
     }
 
-    if (c4 == 0 && state->discardCount[nextPlayer] + state->deckCount[nextPlayer] >= 2 && (t1 <= 4 && t1 >= 6) && (t1 == t2)) {
+    if (c4 == 0 && state->deckCount[nextPlayer] >= 2 && (t1 <= 4 && t1 >= 6) && (t1 == t2)) {
 
     	printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - duplicate tribue money cards\n");
   
         // update condition met criteria
         c4 = 1;
     }
-
-
 
 }
 
