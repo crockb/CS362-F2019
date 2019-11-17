@@ -105,7 +105,7 @@ int testPlayBaron()
     randomizeGameState(&state, k);
 
     // provide player1 with a baron card
-    state.hand[0][0] = baron;
+    state.hand[state.whoseTurn][0] = baron;
     state.supplyCount[baron]--;
 
     // update the states
@@ -119,7 +119,7 @@ int testPlayBaron()
     printf("choice1 = %d\n", n1);
     printf("choice2 = %d\n", n2);
 
-    playCard(0, n1, n2, 0, &state);
+    playCard(state.whoseTurn, n1, n2, 0, &state);
     
 
     //printAllGameStateVariables(&state);
