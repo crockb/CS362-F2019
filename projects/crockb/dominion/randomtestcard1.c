@@ -152,7 +152,7 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
 }
 
 void randomizePiles(struct gameState *state){
-    int player, i, numHand, numDiscard, temp;
+    int player, i, numHand, numDiscard;
 
     for (player = 0; player < state->numPlayers; player++) {
         printf("deckCount: %d\n", state->deckCount[player]);
