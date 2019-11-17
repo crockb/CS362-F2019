@@ -8,7 +8,7 @@
 		 		- Treasure Card: +2 coins
 		 		- Victory Card: +2 cards
 
-	CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
+	CONDITIONS:  1: Left player has 1 or less cards in discard/deck - deckCount > 0 (action) -- 
 				 2: Left player has 1 or less cards in discard/deck - discardCount = 1 (treasure)
 				 3: Left player has 1 or less cards in discard/deck - no cards (failure)
 				 4: Left player has 2 or more cards in discard/deck - no deck cards (shuffle)
@@ -38,6 +38,9 @@
 #include "dominion_helpers.h"
 #include "rngs.h"
 
+
+// global variables to check when conditions 1-10 are met
+int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0, c9 = 0, c10 = 0; 
 
 // helper function signatures
 int testPlayTribute();
@@ -72,7 +75,7 @@ int main()
 int testPlayTribute()
 {
    	//int choice1, choice2, bonus = 0;
-    //int iterations = 0;
+    int iterations = 0;
 
     struct gameState state; //preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -82,12 +85,30 @@ int testPlayTribute()
 
     printf("\n\n----- RANDOM TEST #3 - playTribute() - STARTED -----\n\n");
 
-    // randomize the game state
-  	randomizeGameState(&state, k);
+    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0 || c8 == 0 || c9 == 0 || c10 == 0) {
 
-  	printAllGameStateVariables(&state);
+    	// randomize the game state
+  		randomizeGameState(&state, k);
 
+  		//c1 = 1;
+  		c2 = 1;
+  		c3 = 1;
+  		c4 = 1;
+  		c5 = 1;
+  		c6 = 1;
+  		c7 = 1;
+  		c8 = 1;
+  		c9 = 1;
+  		c10 = 1;
 
+  		iterations++;
+
+  		//printAllGameStateVariables(&state);
+
+    }
+
+    printf("\n----- RANDOM TEST #3 - playTribute() - COMPLETED - (%d iterations) -----\n", iterations);
+	
 	return 0;
 }
 
@@ -227,99 +248,37 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 }
 
+/*
+	1: Left player has 1 or less cards in discard/deck - deckCount > 0
+	2: Left player has 1 or less cards in discard/deck - discardCount
+	3: Left player has 1 or less cards in discard/deck - no cards
+	4: Left player has 2 or more cards in discard/deck - no deck cards
+		5:   has duplicates at the backend
+			6: 2 coppers
+			7: 2 estates
+			8: 2 mines
+		9:   has a copper, has an estate
+		10:   has a mine, has a great_hall
+
+int nextPlayer = currentPlayer + 1;
+
+*/
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
-/*
-    int i, result1, result2, pHandTooMany;
+	int currentPlayer = state->whoseTurn;
+	int nextPlayer = currentPlayer + 1;
+   
+   	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0
+    if (state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
 
-    // CONDITION #1:  Choice 1 - Add 2 coins
-    if (choice1 == 1 && condition1 == 0) {
-
-    	printf("\nCONDITION #1 met:  Choice 1 - Add 2 coins\n");
-        
+    	printf("\nCONDITION #1 met:  Left player has 1 or less cards in discard/deck - deckCount > 0\n");
+  
         // update condition met criteria
-        condition1 = 1;
+        c1 = 1;
 
-    	// precondition #1 - player has one less minion in hand
-    	result1 = assert(countCardType(minion, preState, 0)-1, countCardType(minion, state, 0));
-    	if (result1 == 0)
-      		printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
-    	else
-      		printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
+    } 
 
-    	// precondition #2 - player has +2 coins
-    	result1 = assert(preState->coins+2, state->coins);
-    	if (result1 == 0)
-      		printf("precondition #2 fail: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);
-    	else
-       		printf("precondition #2 pass: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);   
-    
-    	// precondition #3 - player has 1 action
-    	result1 = assert(1, state->numActions);
-    	if (result1 == 0)
-      		printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
-    	else
-       		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
-
-    }
-
-    // CONDITION #2:  Choice 2 - Discard Hand (at least 1 other player has > 4 hand cards)
-    result2 = 0;
-    for (i = 0; i < state->numPlayers; i++) {
-    	if (state->whoseTurn != i) {
-    		// found a player with > 4 hand cards
-    		if (state->handCount[i] > 4) {
-    			result2 = 1;
-    		}
-    		else {
-    			// do nothing
-    		}
-    	}
-    }
-
- 	if (choice1 == 0 && choice2 == 1 && result2 == 1 && condition2 == 0) {
-
-    	printf("\nCONDITION #2 met:  Choice 2 - Discard Hand (at least 1 other player has > 4 hand cards)\n");
-        
-        // update condition met criteria
-        condition2 = 1;
-
-    	// precondition #1 - player has one less minion in hand
-    	result1 = assert(countCardType(minion, preState, 0)-1, countCardType(minion, state, 0));
-    	if (result1 == 0)
-      		printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
-    	else
-      		printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
-
-		// precondition #2 - all players should have <= 4 cards
-    	result2 = 1;
-    	for (i = 0; i < state->numPlayers; i++) {
-    		// found a player with > 4 hand cards
-    		if (state->handCount[i] > 4) {
-    			result2 = 0;
-    			pHandTooMany = i;
-    		}
-    		else {
-    			// do nothing
-    		}
-    	}
-
-    	result1 = assert(1, result2);
-    	if (result1 == 0) {
-      		printf("precondition #2 fail: all players have <= 4 hand cards: p%d has %d hand cards.\n", pHandTooMany+1, state->handCount[pHandTooMany]);
-    	}
-    	else
-      		printf("precondition #2 pass: all players have <= 4 hand cards\n");
-
-    	// precondition #3 - player has 1 action
-    	result1 = assert(1, state->numActions);
-    	if (result1 == 0)
-      		printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
-    	else
-       		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
- 	}
-*/
 
 }
 
