@@ -86,7 +86,6 @@ int testPlayBaron()
         updateCoins(0, &state, bonus);
         memcpy(&preState, &state, sizeof(struct gameState));
 
-        // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
         choice1 = rand() % 2;
         choice2 = rand() % 2;
 
