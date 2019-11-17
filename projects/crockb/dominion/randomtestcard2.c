@@ -7,9 +7,8 @@
 		 3. Choice 2:  Discard hand, +4 cards, each other player discards their hand and draws 4
 	Test Conditions Identified and Expected End States:
 		CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
-		CONDITION #2:  Choice 2 - Discard Hand (players 2 & 3 have 5 cards):   -1 hand[minion], +4 discard[] each player, -4 deck[] each player, 4 cards in hand[] each player
-		CONDITION #3:  Choice 2 - Discard Hand (player 3 does not have 5 cards):   	-1 hand[minion], +4 discard[] p1 &p2 and 0 discard p3, -4 deck[] pl & p2, no change to p3, p3 should have 3 cards
-	
+		CONDITION #2:  Choice 2 - Discard Hand (at least 1 other player has > 4 hand cards)
+
    	Known Bugs Inserted in Assignment 2:
 		1. Removed the +1 Action of the card at the beginning.
         2. In the draw4 cards set of statements i has been replaced with j'
@@ -24,8 +23,8 @@
 #include "dominion_helpers.h"
 #include "rngs.h"
 
-// global variables to check when conditions 1-3 conditions are met
-int condition1 = 0, condition2 = 0, condition3 = 0;
+// global variables to check when conditions 1 & 2 conditions are met
+int condition1 = 0, condition2 = 0;
 
 // helper function signatures
 int testPlayMinion();
@@ -46,7 +45,6 @@ void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
 int printCardName(int card);
-
 
 
 // call randomtestcard2
@@ -91,10 +89,6 @@ int testPlayMinion()
 
         playCard(0, choice1, choice2, 0, &state);
 		printTestResults(&state, &preState, choice1, choice2);
-    	
-    	//condition1 = 1;
-    	//condition2 = 1;
-    	condition3 = 1;
 
     	iterations++;
 	
@@ -243,15 +237,8 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 }
 
 
-/*
-
-	CONDITION #2:  Choice 2 - Discard Hand (players 2 & 3 have 5 cards):   -1 hand[minion], +4 discard[] each player, -4 deck[] each player, 4 cards in hand[] each player
-	CONDITION #3:  Choice 2 - Discard Hand (player 3 does not have 5 cards):   	-1 hand[minion], +4 discard[] p1 &p2 and 0 discard p3, -4 deck[] pl & p2, no change to p3, p3 should have 3 cards
-*/
-
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
-    //int player = state->whoseTurn;
     int i, result1, result2;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
@@ -301,17 +288,37 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
  	if (choice1 == 0 && choice2 == 1 && result2 == 1 && condition2 == 0) {
 
-    	printf("\nCONDITION #2 met:  Choice 2 - Discard Hand (other players all have > 4 cards)\n");
+    	printf("\nCONDITION #2 met:  Choice 2 - Discard Hand (at least 1 other player has > 4 hand cards)\n");
         
         // update condition met criteria
         condition2 = 1;
 
+    	// precondition #1 - player has one less minion in hand
+    	result1 = assert(countCardType(minion, preState, 0)-1, countCardType(minion, state, 0));
+    	if (result1 == 0)
+      		printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
+    	else
+      		printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
+
+		// precondition #2 - all players should have <= 4 cards
+    	result2 = 1;
+    	for (i = 0; i < state->numPlayers; i++) {
+    		// found a player with > 4 hand cards
+    		if (state->handCount[i] > 4) {
+    			result2 = 0;
+    		}
+    		else {
+    			// do nothing
+    		}
+    	}
+
+    	result1 = assert(1, result2);
+    	if (result == 0)
+      		printf("precondition #2 fail: all players have <= 4 hand cards\n");
+    	else
+      		printf("precondition #2 pass: all players have <= 4 hand cards\n");
+
  	}
-
-
-
-
-
 
 }
 
