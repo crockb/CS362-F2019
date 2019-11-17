@@ -161,7 +161,7 @@ int testPlayTribute()
 
 
 		printTestResults(&state, &preState, 0, 0);
-
+		
   		iterations++;
 
   		//printAllGameStateVariables(&state);
