@@ -74,8 +74,7 @@ int main()
 // function to execute the set of conditions for randomtest #3
 int testPlayTribute()
 {
-   	//int choice1, choice2, bonus = 0;
-    int iterations = 0;
+    int iterations = 0, bonus = 0;
 
     struct gameState state; //preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -89,6 +88,20 @@ int testPlayTribute()
 
     	// randomize the game state
   		randomizeGameState(&state, k);
+
+        // provide player1 with a minion card
+        state.hand[state.whoseTurn][0] = tribute;
+        state.supplyCount[tribute]--;
+
+        // update the states
+        updateCoins(0, &state, bonus);
+        memcpy(&preState, &state, sizeof(struct gameState));
+
+        // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+
+        playCard(0, 0, 0, 0, &state);
+		printTestResults(&state, &preState, 0, 0);
+
 
   		//c1 = 1;
   		c2 = 1;
