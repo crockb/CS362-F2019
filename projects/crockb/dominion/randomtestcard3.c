@@ -74,9 +74,7 @@ int main()
 int testPlayTribute()
 {
     int iterations = 0, bonus = 0;
-    int currentPlayer, nextPlayer, card1, result;
-    //int t1, t2, card2;
-
+    int currentPlayer, nextPlayer, card1, result, t1, t2, card2;
 
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -180,6 +178,33 @@ int testPlayTribute()
   
         	// update condition met criteria
         	c3 = 1;
+    	}
+
+   		// CONDITION #4:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card
+    	if (state->deckCount[nextPlayer] >= 2) {
+
+    		card1 = (rand() % 3) + 4;
+    		card2 = (rand() % 3) + 4;
+		
+			state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+			state->deck[nextPlayer][state->deckCount[nextPlayer]-2] = card2;
+    	
+    		t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
+    		t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
+
+    		// save the game states
+        	updateCoins(0, &state, bonus);
+        	memcpy(&preState, &state, sizeof(struct gameState));
+
+        	// play the card
+        	returnValue = playCard(0, 0, 0, 0, &state);
+
+    		if (c4 == 0 && (t1 == t2)) {
+
+    			printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card\n");  
+        		// update condition met criteria
+        		c4 = 1;
+    		}
     	}
 
 		printTestResults(&state, &preState, 0, 0);
@@ -402,7 +427,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         // update condition met criteria
         c3 = 1;
     }
-	*/
+
 
    	// CONDITION #4:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card
     if (state->deckCount[nextPlayer] >= 2) {
@@ -423,7 +448,8 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         	c4 = 1;
     	}
     }
-
+	*/
+	
    	// CONDITION #5:  Left player has 2 or more cards in discard/deck - treasure = duplicate victory cards
     if (state->deckCount[nextPlayer] >= 2) {
 
