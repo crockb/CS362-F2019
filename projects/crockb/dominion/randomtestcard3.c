@@ -230,6 +230,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
+/*
     int i, result1, result2, pHandTooMany;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
@@ -318,6 +319,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	else
        		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
  	}
+*/
 
 }
 
