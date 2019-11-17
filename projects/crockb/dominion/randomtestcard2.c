@@ -313,7 +313,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	}
 
     	result1 = assert(1, result2);
-    	if (result == 0)
+    	if (result1 == 0)
       		printf("precondition #2 fail: all players have <= 4 hand cards\n");
     	else
       		printf("precondition #2 pass: all players have <= 4 hand cards\n");
