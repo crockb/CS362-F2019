@@ -287,7 +287,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     // CONDITION #2:  Choice 2 - Discard Hand (other players all have > 4 cards)
     result2 = 1;
-    for (i = 0, i < state->numPlayers, i++) {
+    for (i = 0; i < state->numPlayers; i++) {
     	if (state->whoseTurn != i) {
     		if (state->handCount[i] > 4) {
     			// do nothing
@@ -299,7 +299,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	}
     }
 
- 	if (choice1 == 0 && choice2 == 1 && result2 = 1) {
+ 	if (choice1 == 0 && choice2 == 1 && result2 == 1) {
 
     	printf("\nCONDITION #1 met:  Choice 2 - Discard Hand (other players all have > 4 cards)\n");
         
