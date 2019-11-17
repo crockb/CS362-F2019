@@ -108,7 +108,7 @@ int testPlayBaron()
 
     // randomize who's turn, # of estates
     n = rand() % state.numPlayers;
-    state.whosTurn = n;
+    state.whoseTurn = n;
 
     n = rand() % 10;
     state.supplyCount[estate] = n;
