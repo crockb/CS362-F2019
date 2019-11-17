@@ -198,9 +198,20 @@ int testPlayTribute()
         	// play the card
         	returnValue = playCard(0, 0, 0, 0, &state);
 
+    		// expected results: +2 coins (treasure card) - no double counting
+    		updateCoins(currentPlayer, &preState, 2);
+    		updateCoins(currentPlayer, &state, state.coins);
+
     		if (c4 == 0 && (t1 == t2)) {
 
     			printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - tribute = duplicate money card\n");  
+        		
+        		result = assert(preState.coins, state.coins);
+    			if (result == 0)
+    				printf("condition 4 - FAIL: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+    			else
+    				printf("condition 4 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+
         		// update condition met criteria
         		c4 = 1;
     		}
