@@ -306,7 +306,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     		// found a player with > 4 hand cards
     		if (state->handCount[i] > 4) {
     			result2 = 0;
-    			pHAndTooMany = i;
+    			pHandTooMany = i;
     		}
     		else {
     			// do nothing
@@ -315,7 +315,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	result1 = assert(1, result2);
     	if (result1 == 0)
-      		printf("precondition #2 fail: all players have <= 4 hand cards: p%d has %d hand cards.\n", pHAndTooMany+1, state->handCount[pHAndTooMany]);
+      		printf("precondition #2 fail: all players have <= 4 hand cards: p%d has %d hand cards.\n", pHandTooMany+1, state->handCount[pHandTooMany]);
     	else
       		printf("precondition #2 pass: all players have <= 4 hand cards\n");
 
