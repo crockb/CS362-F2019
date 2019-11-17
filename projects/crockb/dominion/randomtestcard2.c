@@ -41,7 +41,7 @@ void randomizeGameState(struct gameState *state, int kingdomCards[10]);
 
 
 // helper print functions
-//void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2);
+void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2);
 void printPlayersCards(int player, struct gameState *state);
 void printAllSupplyCounts(struct gameState *state);
 void printAllGameStateVariables(struct gameState *state);
@@ -90,8 +90,9 @@ int testPlayMinion()
         choice2 = rand() % 2;
 
         playCard(0, choice1, choice2, 0, &state);
-
-    	condition1 = 1;
+		printTestResults(&state, &preState, choice1, choice2);
+    	
+    	//condition1 = 1;
     	condition2 = 1;
     	condition3 = 1;
 
@@ -191,8 +192,28 @@ void randomizePiles(struct gameState *state){
 }
 
 
+/*
 
+	CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
+	CONDITION #2:  Choice 2 - Discard Hand (players 2 & 3 have 5 cards):   -1 hand[minion], +4 discard[] each player, -4 deck[] each player, 4 cards in hand[] each player
+	CONDITION #3:  Choice 2 - Discard Hand (player 3 does not have 5 cards):   	-1 hand[minion], +4 discard[] p1 &p2 and 0 discard p3, -4 deck[] pl & p2, no change to p3, p3 should have 3 cards
+*/
 
+void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
+
+    int player = state->whoseTurn;
+    int result;
+
+    // CONDITION #1:  Choice 1 - Add 2 coins
+    if (choice1 == 1) {
+
+    	printf("\nCONDITION #1 met:  Remove Estate (Player Has An Estate)\n");
+        
+        // update condition met criteria
+        condition1 = 1;
+    }
+
+}
 
 /* assignment #2 - a function to play the minion card */
 /*
