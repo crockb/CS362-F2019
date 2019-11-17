@@ -96,6 +96,7 @@ int main()
 int testPlayBaron()
 {
     int bonus = 0;
+    int n;
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
@@ -113,7 +114,7 @@ int testPlayBaron()
     memcpy(&preState, &state, sizeof(struct gameState));
 
     // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-    playCard(0, 0, 1, 0, &state);
+    playCard(0, rand() % 2, rand() % 2, 0, &state);
     
     //printAllGameStateVariables(&state);
     return 0;
@@ -134,7 +135,7 @@ void randomizeGameState(struct gameState *state, int kingdomCards[10]) {
     n = rand() % state->numPlayers;
     state->whoseTurn = n;
 
-    n = rand() % 10;
+    n = rand() % 4;
     state->supplyCount[estate] = n;
 
 }
