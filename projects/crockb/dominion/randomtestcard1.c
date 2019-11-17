@@ -96,17 +96,26 @@ int main()
 int testPlayBaron()
 {
 
-    struct gameState state;
+    struct gameState state, &preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
 
-
     // randomize the game state
     randomizeGameState(&state, k);
-    
 
-    printAllGameStateVariables(&state);
+    // provide player1 with a baron card
+    state.hand[player1][0] = baron;
+    state.supplyCount[baron]--;
+
+    // update the states
+    updateCoins(0, &state, bonus);
+    memcpy(&preState, &state, sizeof(struct gameState));
+
+    // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+    playCard(0, 0, 1, 0, &state);
+    
+    //printAllGameStateVariables(&state);
     return 0;
 
 }
