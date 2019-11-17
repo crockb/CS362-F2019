@@ -33,5 +33,8 @@ randomtestcard1: dominion.o randomtestcard1.c
 randomtestcard2: dominion.o randomtestcard2.c
 	gcc -o randomtestcard2 randomtestcard2.c -g dominion.o rngs.o $(CFLAGS)
 
+randomtestcard3: dominion.o randomtestcard3.c
+	gcc -o randomtestcard3 randomtestcard3.c -g dominion.o rngs.o $(CFLAGS)
+
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
