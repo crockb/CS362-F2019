@@ -157,6 +157,7 @@ void randomizePiles(struct gameState *state){
     for (player = 0; player < state->numPlayers; player++) {
         printf("deckCount: %d\n", state->deckCount[player]);
         numHand = rand() % state->deckCount[player];
+        printf("numHand: %d\n", numHand);
         if (numHand < 3)
             numHand = numHand + 3;
 
