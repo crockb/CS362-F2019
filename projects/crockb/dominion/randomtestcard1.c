@@ -67,6 +67,9 @@
 #include "dominion_helpers.h"
 #include "rngs.h"
 
+// global variables to check when 1-4 conditions already met
+int condition1, condition2, condition3, condition4 = 0;
+
 // helper function signatures
 int testPlayBaron();
 int assert(int expected, int actual);
@@ -97,35 +100,42 @@ int main()
 // function to execute the set of conditions for unittest#1
 int testPlayBaron()
 {
-    int choice1, choice2, bonus = 0;
+    int choice1, choice2, bonus, iterations = 0;
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
 
-    //printf("\n\n----- RANDOM TEST #1 - playBaron() - STARTED -----\n\n");
+    printf("\n\n----- RANDOM TEST #1 - playBaron() - STARTED -----\n\n");
 
-    // randomize the game state
-    randomizeGameState(&state, k);
+    while (condition1 == 0) {
 
-    // provide player1 with a baron card
-    state.hand[state.whoseTurn][0] = baron;
-    state.supplyCount[baron]--;
+        // randomize the game state
+        randomizeGameState(&state, k);
 
-    // update the states
-    updateCoins(0, &state, bonus);
-    memcpy(&preState, &state, sizeof(struct gameState));
+        // provide player1 with a baron card
+        state.hand[state.whoseTurn][0] = baron;
+        state.supplyCount[baron]--;
 
-    // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-    choice1 = rand() % 2;
-    choice2 = rand() % 2;
+        // update the states
+        updateCoins(0, &state, bonus);
+        memcpy(&preState, &state, sizeof(struct gameState));
 
-    playCard(0, choice1, choice2, 0, &state);
+        // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
+        choice1 = rand() % 2;
+        choice2 = rand() % 2;
 
-    printTestResults(&state, &preState, choice1, choice2);
-    
-    //printf("\n----- RANDOM TEST #1 - playBaron() - COMPLETED -----\n");
+        playCard(0, choice1, choice2, 0, &state);
+
+        printTestResults(&state, &preState, choice1, choice2);
+        iteration++;
+      }
+
+
+    printf("\n----- RANDOM TEST #1 - playBaron() - COMPLETED - (#%d iterations) -----\n", iterations);
+
     return 0;
+
 
 }
 
@@ -288,9 +298,12 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     int result;
 
     // CONDITION #1:  Remove Estate (Has Estate)
-    printf("CONDITION #1 - choice1: %d, # estates: %d\n", choice1, countCardType(estate, state, 0));
-    
-    if (choice1 == 1 && countCardType(estate, state, 0) >=1) {
+    printf("CONDITION #1:  Remove Estate (Player Has An Estate)");
+
+    if (choice1 == 1 && countCardType(estate, state, 0) >=1 && condition1 == 0) {
+
+        // update condition met criteria
+        condition1 = 1;
 
         // precondition #1 - player has one less estate in hand
         result = assert(countCardType(estate, preState, 0)-1, countCardType(estate, state, 0));
