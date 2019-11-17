@@ -105,7 +105,7 @@ int testPlayBaron()
     randomizeGameState(&state, k);
 
     // provide player1 with a baron card
-    state.hand[player1][0] = baron;
+    state.hand[0][0] = baron;
     state.supplyCount[baron]--;
 
     // update the states
