@@ -313,8 +313,8 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
    	// CONDITION #4:  Left player has 2 or more cards in discard/deck - duplicate money card
     if (state->deckCount[nextPlayer] >= 2) {
-    	t1 = state=>deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
-    	t2 = state=>deck[nextPlayer][state->deckCount[nextPlayer]-2];
+    	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
+    	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
     }
 
     if (c4 == 0 && state->discardCount[nextPlayer] + state->deckCount[nextPlayer] >= 2 && (t1 <= 4 && t1 >= 6) && (t1 == t2)) {
