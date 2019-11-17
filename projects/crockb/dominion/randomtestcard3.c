@@ -108,7 +108,7 @@ int testPlayTribute()
   		//c3 = 1;
   		//c4 = 1;
   		//c5 = 1;
-  		c6 = 1;
+  		//c6 = 1;
   		c7 = 1;
   		c8 = 1;
   		c9 = 1;
@@ -348,6 +348,26 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     		printf("\nCONDITION #5 met: Left player has 2 or more cards in discard/deck - duplicate victory cards\n");  
         	// update condition met criteria
         	c5 = 1;
+    	}
+    }
+
+   	// CONDITION #6:  Left player has 2 or more cards in discard/deck - duplicate action cards
+    if (state->deckCount[nextPlayer] >= 2) {
+
+    	card1 = (rand() % 3) + 1;
+    	card2 = (rand() % 3) + 1;
+		
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-2] = card2;
+    	
+    	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
+    	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
+
+    	if (c6 == 0 && (t1 == t2)) {
+
+    		printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - duplicate action cards\n");  
+        	// update condition met criteria
+        	c6 = 1;
     	}
     }
 
