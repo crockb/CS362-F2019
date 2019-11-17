@@ -239,6 +239,14 @@ int testPlayTribute()
     		if (c5 == 0 && (t1 == t2)) {
 
     			printf("\nCONDITION #5 met: Left player has 2 or more cards in discard/deck - tribute = duplicate victory cards\n");  
+        		
+    			// expected results: +2 cards (-1 for the tribute)  (no double counting)
+    			result = assert(preState.handCount[currentPlayer]+1, state.handCount[currentPlayer]);
+    			if (result == 0)
+    				printf("condition 5 - FAIL: +2 cards: actual %d, expected: %d\n", state.handCount[currentPlayer], preState.handCount[currentPlayer]+1);
+    			else
+    				printf("condition 5 - PASS: +2 cards: actual %d, expected: %d\n", state.handCount[currentPlayer], preState.handCount[currentPlayer]+1);
+
         		// update condition met criteria
         		c5 = 1;
     		}
