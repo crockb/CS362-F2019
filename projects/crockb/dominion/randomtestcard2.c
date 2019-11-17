@@ -30,6 +30,22 @@
 int testPlayMinion();
 
 
+// helper functions for randomizing the game state
+int randomizePlayerCount();
+void randomizeDeckCards(struct gameState *state, int kingdomCards[10]);
+void randomizePiles(struct gameState *state);
+void randomizeGameState(struct gameState *state, int kingdomCards[10]);
+
+
+// helper print functions
+//void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2);
+void printPlayersCards(int player, struct gameState *state);
+void printAllSupplyCounts(struct gameState *state);
+void printAllGameStateVariables(struct gameState *state);
+int printCardName(int card);
+
+
+
 // call randomtestcard2
 int main()
 {
@@ -42,8 +58,106 @@ int main()
 // function to execute the set of conditions for unittest#1
 int testPlayMinion()
 {
-	printf("Hello world\n");
+
+    struct gameState state, preState;
+    int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
+               sea_hag, tribute, smithy
+            };
+
+    // randomize the game state
+    randomizeGameState(&state, k);
+
+    // print game state
+	printAllGameStateVariables(&state);
+
+
 	return 0;
+}
+
+
+
+void randomizeGameState(struct gameState *state, int kingdomCards[10]) {
+
+    int n;
+
+    // initialize the game
+    initializeGame(randomizePlayerCount(), kingdomCards, 1234, state);
+
+    randomizeDeckCards(state, kingdomCards);
+    randomizePiles(state);
+
+    // randomize who's turn, # of estates
+    n = rand() % state->numPlayers;
+    state->whoseTurn = n;
+
+    n = rand() % 4;
+    state->supplyCount[estate] = n;
+
+}
+
+
+int randomizePlayerCount(){
+    int n;
+    n = rand() % 4 + 1;
+    if (n == 1)
+       n = 2;
+    return n;
+}
+
+// int shuffle(int player, struct gameState *state)
+void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
+
+  int player, i, j, n;
+
+  // randomly swap out a deck card with another from the gameset
+  for (player = 0; player < state->numPlayers; player++) {
+
+      // move all hand cards to the deck
+      for (i = 0; i < state->handCount[player]; i++) {
+          state->deck[player][state->deckCount[player]] = state->hand[player][i];
+          state->deckCount[player]++;
+      }
+      state->handCount[player] = 0;
+
+      // move all hand cards to the deck
+      for (i = 0; i < state->discardCount[player]; i++) {
+          state->deck[player][state->deckCount[player]] = state->discard[player][i];
+          state->deckCount[player]++;
+      }   
+      state->handCount[player] = 0;
+
+      for (i = 0; i < 20; i++) {
+          j = rand() % state->deckCount[player];
+          n = rand() % 10;
+          state->deck[player][j] = kingdomCards[n];
+      }
+  }
+}
+
+void randomizePiles(struct gameState *state){
+    int player, i, numHand, numDiscard;
+
+    for (player = 0; player < state->numPlayers; player++) {
+        numHand = rand() % state->deckCount[player];
+        if (numHand < 3)
+            numHand = numHand + 3;
+
+        // draw cards
+        for (i = 0; i < numHand; i++){
+          drawCard(player, state);
+        }
+
+        // randomly set discard pile from back of deck pile
+        numDiscard = rand() % state->deckCount[player];
+
+        for (i = 0; i < numDiscard; i++){
+            state->discardCount[player]++;
+            state->discard[player][i] = state->deck[player][state->deckCount[player]-1];
+            state->deckCount[player]--;
+        }
+
+    }
+
 }
 
 
@@ -106,3 +220,204 @@ int playMinion(int choice1, int choice2, struct gameState *state, int handPos)
     return 0;
 }
 */
+
+
+
+
+void printPlayersCards(int player, struct gameState *state)
+{
+    int i;
+
+    // print the hand
+  printf("Player's hand:\n");
+  for (i = 0; i < state->handCount[player]; i++) {
+    printf("  Card #%d: ", i+1);
+    printCardName(state->hand[player][i]);
+  }
+
+  // print the discard
+  printf("Player's discard pile:\n");
+  for (i = 0; i < state->discardCount[player]; i++) {
+    printf("  Card #%d: ", i+1);
+    printCardName(state->discard[player][i]);
+  }
+
+  // print the deck
+  printf("Player's deck:\n");
+  for (i = 0; i < state->deckCount[player]; i++) {
+    printf("  Card #%d: ", i+1);
+    printCardName(state->deck[player][i]);
+  }
+}
+
+
+void printAllSupplyCounts(struct gameState *state)
+{
+  printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
+  printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
+  printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
+  printf("supplyCount (province): %d\n", state->supplyCount[province]);
+  printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
+  printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
+  printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
+  printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
+  printf("supplyCount (gardens): %d\n", state->supplyCount[gardens]);
+  printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
+  printf("supplyCount (village): %d\n", state->supplyCount[village]);
+  printf("supplyCount (minion): %d\n", state->supplyCount[minion]);
+  printf("supplyCount (mine): %d\n", state->supplyCount[mine]);
+  printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
+  printf("supplyCount (tribute): %d\n", state->supplyCount[tribute]);
+  printf("supplyCount (smithy): %d\n", state->supplyCount[smithy]);
+
+}
+
+
+void printAllGameStateVariables(struct gameState *state)
+{
+
+  int i, j;
+
+    // print out the results of the game state
+  printf("numPlayers: %d\n", state->numPlayers);
+  printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
+  printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
+  printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
+  printf("supplyCount (province): %d\n", state->supplyCount[province]);
+  printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
+  printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
+  printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
+  printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
+  printf("supplyCount (gardens): %d\n", state->supplyCount[gardens]);
+  printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
+  printf("supplyCount (village): %d\n", state->supplyCount[village]);
+  printf("supplyCount (minion): %d\n", state->supplyCount[minion]);
+  printf("supplyCount (mine): %d\n", state->supplyCount[mine]);
+  printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
+  printf("supplyCount (tribute): %d\n", state->supplyCount[tribute]);
+  printf("supplyCount (smithy): %d\n", state->supplyCount[smithy]);
+  printf("whoseTurn (1): %d\n", state->whoseTurn);
+  printf("phase: %d\n", state->phase);
+  printf("numActions: %d\n", state->numActions);
+  printf("numBuys: %d\n", state->numBuys);
+
+  // print all player's hands
+
+  for(j = 0; j < state->numPlayers; j++) {
+      // print the hand
+      printf("Player %d's hand:\n", j+1);
+      for (i = 0; i < state->handCount[j]; i++) {
+        printf("  Card #%d: ", i+1);
+        printCardName(state->hand[j][i]);
+      }
+
+      // print the discard
+      printf("Player %d's discard pile:\n", j+1);
+      for (i = 0; i < state->discardCount[j]; i++) {
+        printf("  Card #%d: ", i+1);
+        printCardName(state->discard[j][i]);
+      }
+
+      // print the deck
+      printf("Player %d's deck:\n", j+1);
+      for (i = 0; i < state->deckCount[j]; i++) {
+        printf("  Card #%d: ", i+1);
+        printCardName(state->deck[j][i]);
+      }
+
+  }
+
+}
+
+
+int printCardName(int card)
+{
+
+    switch(card)
+    {
+    case curse:
+        printf("curse\n");
+        return 1;
+    case estate:
+        printf("estate\n");
+        return 1;
+    case duchy:
+        printf("duchy\n");
+        return 1;
+    case province:
+        printf("province\n");
+        return 1;
+    case copper:
+        printf("copper\n");
+        return 1;
+    case silver:
+        printf("silver\n");
+        return 1;
+    case gold:
+        printf("gold\n");
+        return 1;
+    case adventurer:
+        printf("adventurer\n");
+        return 1;
+    case council_room:
+        printf("council_room\n");
+        return 1;
+    case feast:
+        printf("feast\n");
+        return 1;
+    case gardens:
+        printf("gardens\n");
+        return 1;
+    case mine:
+        printf("mine\n");
+        return 1;
+    case remodel:
+        printf("remodel\n");
+        return 1;
+    case smithy:
+        printf("smithy\n");
+        return 1;
+    case village:
+        printf("village\n");
+        return 1;
+    case baron:
+        printf("baron\n");
+        return 1;
+    case great_hall:
+        printf("great_hall\n");
+        return 1;
+    case minion:
+        printf("minion\n");
+        return 1;
+    case steward:
+        printf("steward\n");
+        return 1;
+    case tribute:
+        printf("tribute\n");
+        return 1;
+    case ambassador:
+        printf("ambassador\n");
+        return 1;
+    case cutpurse:
+        printf("cutpurse\n");
+        return 1;
+    case embargo:
+        printf("embargo\n");
+        return 1;
+    case outpost:
+        printf("outpost\n");
+        return 1;
+    case salvager:
+        printf("salvager\n");
+        return 1;
+    case sea_hag:
+        printf("sea_hag\n");
+        return 1;
+    case treasure_map:
+        printf("treasure_map\n");
+        return 1;
+
+    }
+
+    return -1;
+}
