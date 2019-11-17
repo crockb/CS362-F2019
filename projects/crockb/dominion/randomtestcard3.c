@@ -104,7 +104,7 @@ int testPlayTribute()
 
 
   		//c1 = 1;
-  		c2 = 1;
+  		//c2 = 1;
   		c3 = 1;
   		c4 = 1;
   		c5 = 1;
@@ -263,7 +263,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 /*
 	1: Left player has 1 or less cards in discard/deck - deckCount > 0
-	2: Left player has 1 or less cards in discard/deck - discardCount
+	2: Left player has 1 or less cards in discard/deck - discardCount > 0
 	3: Left player has 1 or less cards in discard/deck - no cards
 	4: Left player has 2 or more cards in discard/deck - no deck cards
 		5:   has duplicates at the backend
@@ -289,7 +289,15 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
   
         // update condition met criteria
         c1 = 1;
+    }
 
+   	// CONDITION #2:  Left player has 1 or less cards in discard/deck - discardCount > 0
+    if (state->discardCount[nextPlayer] == 1 && state->deckCount[nextPlayer] == 0) {
+
+    	printf("\nCONDITION #2 met:  Left player has 1 or less cards in discard/deck - discardCount > 0\n");
+  
+        // update condition met criteria
+        c2 = 1;
     } 
 
 
