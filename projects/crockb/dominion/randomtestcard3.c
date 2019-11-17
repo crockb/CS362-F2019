@@ -38,7 +38,7 @@
 
 
 // global variables to check when conditions 1-10 are met
-int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0;
+int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0; // c7 = 0, c8 = 0;
 int returnValue;
 
 // helper function signatures
@@ -84,7 +84,7 @@ int testPlayTribute()
 
     printf("\n\n----- RANDOM TEST #3 - playTribute() - STARTED -----\n\n");
 
-    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0 || c8 == 0) {
+    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0) {
 
     	// randomize the game state
   		randomizeGameState(&state, k);
@@ -261,7 +261,7 @@ int testPlayTribute()
     		}
     	}
 
-		printTestResults(&state, &preState, 0, 0);
+		//printTestResults(&state, &preState, 0, 0);
 
   		iterations++;
 
@@ -413,13 +413,13 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
-
+   /*
 	int currentPlayer = state->whoseTurn;
 	int nextPlayer = currentPlayer + 1;
 	int t1 = -1, t2 = -1, card1 = -1, card2 = -1;
 	//int result;
    
-   /*
+
    	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
     if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
 
@@ -544,7 +544,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         	c6 = 1;
     	}
     }
-	*/
+
 
    	// CONDITION #7:  Left player has 2 or more cards in discard/deck - treasure = money and victory
     if (state->deckCount[nextPlayer] >= 2) {
@@ -585,6 +585,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         	c8 = 1;
     	}
     }
+  	*/
 }
 
 
