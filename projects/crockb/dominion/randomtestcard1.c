@@ -109,7 +109,7 @@ int testPlayBaron()
 
     printf("\n\n----- RANDOM TEST #1 - playBaron() - STARTED -----\n\n");
 
-    while (condition1 == 0) {
+    while (condition1 == 0 || condition2 == 0 || condition3 == 0 || condition4 == 0) {
 
         // randomize the game state
         randomizeGameState(&state, k);
@@ -133,7 +133,7 @@ int testPlayBaron()
       }
 
 
-    printf("\n----- RANDOM TEST #1 - playBaron() - COMPLETED - (#%d iterations) -----\n", iterations);
+    printf("\n----- RANDOM TEST #1 - playBaron() - COMPLETED - (in %d iterations) -----\n", iterations);
 
     return 0;
 
@@ -277,32 +277,17 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 }
 
-/*
-  Business Requirements for Baron:
-     1. +1 Buy
-     2. Choice 1:  Discard an Estate for +4 coins.  If no Estate, receive an Estate
-     3. Choice 2:  Receive an Estate
-
-  Test Conditions Identified and Expected End States:
-    CONDITION #1:  Remove Estate (Has Estate):  -1 hand[estate], -1 hand[baron], 3 handCount, +4 coins, +1 buy, 0 actions, +1 discard[baron], estate supply count unchanged
-    CONDITION #2:  Remove Estate (No Estate):   +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], -1 supply[estate]
-    CONDITION #3:  Gain an Estate (Multiple Estates Available):  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], -1 supply[estate]
-    CONDITION #4:  Gain an Estate (1 Estate Available):  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], -1 supply[estate]
-    int countCardType(int card, struct gameState *state, int pileToCheck);
-
-*/
-
 
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
     int player = state->whoseTurn;
     int result;
 
-    // CONDITION #1:  Remove Estate (Has Estate)
-    printf("CONDITION #1:  Remove Estate (Player Has An Estate)");
-
+    // CONDITION #1:  Remove Estate (Player Has An Estate)
     if (choice1 == 1 && countCardType(estate, state, 0) >=1 && condition1 == 0) {
-
+        
+        printf("CONDITION #1 met:  Remove Estate (Player Has An Estate)");
+        
         // update condition met criteria
         condition1 = 1;
 
@@ -355,7 +340,6 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         else
             printf("precondition #7 pass: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);  
 
-
         // precondition #8 - supplyCount for estate unchanged
         result = assert(preState->supplyCount[estate], state->supplyCount[estate]);
         if (result == 0)
@@ -365,69 +349,208 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     }
 
-    else {
-        printf("Other branches \n");
+
+
+    // CONDITION #2:  Remove Estate (Player Does Not Have An Estate)
+    if (choice1 == 1 && countCardType(estate, state, 0) == 0 && condition2 == 0) {
+        
+        printf("CONDITION #2 met:  Remove Estate (Player Does Not Have An Estate)");
+        
+        // update condition met criteria
+        condition2 = 1;
+
+        // precondition #1 - player gains 1 more estate
+        result = assert(countCardType(estate, preState, 0)+1, countCardType(estate, state, 0));
+        if (result == 0)
+          printf("precondition #1 fail: gain an estate - # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)+1);
+        else
+          printf("precondition #1 pass: gain an estate - # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)+1);
+
+        // precondition #2 - player has one less baron in hand
+        result = assert(countCardType(baron, preState, 0)-1, countCardType(baron, state, 0));
+        if (result == 0)
+            printf("precondition #2 fail: # barons in hand: %d, expected: %d\n", countCardType(baron, state, 0), countCardType(baron, preState, 0)-1);
+        else
+            printf("precondition #2 pass: # barons in hand: %d, expected: %d\n", countCardType(baron, state, 0), countCardType(baron, preState, 0)-1);
+        
+        // precondition #3 - player has same # of cards in hand (lose baron, gain estate)
+        result = assert(preState->handCount[player], state->handCount[player]);
+        if (result == 0)
+            printf("precondition #3 fail: same # of cards in hand: %d, expected: %d\n", state->handCount[player], preState->handCount[player]);
+        else
+            printf("precondition #3 pass: same # of cards in hand: %d, expected: %d\n", state->handCount[player], preState->handCount[player]);    
+    
+        // precondition #4 - player has the same number of coins
+        result = assert(preState->coins, state->coins);
+        if (result == 0)
+            printf("precondition #4 fail: same # of coins: %d, expected: %d\n", state->coins, preState->coins);
+        else
+            printf("precondition #4 pass: same # of coins: %d, expected: %d\n", state->coins, preState->coins); 
+
+        // precondition #5 - player has +1 buys
+        result = assert(preState->numBuys+1, state->numBuys);
+        if (result == 0)
+          printf("precondition #5 fail: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1);
+        else
+          printf("precondition #5 pass: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1); 
+
+        // precondition #6 - player 0 actions
+        result = assert(preState->numActions-1, state->numActions);
+        if (result == 0)
+          printf("precondition #6 fail: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);
+        else
+          printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);     
+
+        // precondition #7 - player has +1 discarded baron
+        result = assert(countCardType(baron, preState, 1)+1, countCardType(baron, state, 1));
+        if (result == 0)
+            printf("precondition #7 fail: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);
+        else
+            printf("precondition #7 pass: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);  
+
+        // precondition #8 - supplyCount for estate -1
+        result = assert(preState->supplyCount[estate]-1, state->supplyCount[estate]);
+        if (result == 0)
+            printf("precondition #8 fail: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
+        else
+            printf("precondition #8 pass: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
+
     }
 
+    // CONDITION #3:  Choose to Gain an Estate (Multiple Estates Available)
+    if (choice1 == 0 && countCardType(estate, state, 0) >= 2 && condition3 == 0) {
+        
+        printf("CONDITION #3 met:  Choose to Gain an Estate (Multiple Estates Available)");
+        
+        // update condition met criteria
+        condition3 = 1;
+
+        // precondition #1 - player gains 1 more estate
+        result = assert(countCardType(estate, preState, 0)+1, countCardType(estate, state, 0));
+        if (result == 0)
+          printf("precondition #1 fail: gain an estate - # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)+1);
+        else
+          printf("precondition #1 pass: gain an estate - # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)+1);
+
+        // precondition #2 - player has one less baron in hand
+        result = assert(countCardType(baron, preState, 0)-1, countCardType(baron, state, 0));
+        if (result == 0)
+            printf("precondition #2 fail: # barons in hand: %d, expected: %d\n", countCardType(baron, state, 0), countCardType(baron, preState, 0)-1);
+        else
+            printf("precondition #2 pass: # barons in hand: %d, expected: %d\n", countCardType(baron, state, 0), countCardType(baron, preState, 0)-1);
+        
+        // precondition #3 - player has same # of cards in hand (lose baron, gain estate)
+        result = assert(preState->handCount[player], state->handCount[player]);
+        if (result == 0)
+            printf("precondition #3 fail: same # of cards in hand: %d, expected: %d\n", state->handCount[player], preState->handCount[player]);
+        else
+            printf("precondition #3 pass: same # of cards in hand: %d, expected: %d\n", state->handCount[player], preState->handCount[player]);    
+    
+        // precondition #4 - player has the same number of coins
+        result = assert(preState->coins, state->coins);
+        if (result == 0)
+            printf("precondition #4 fail: same # of coins: %d, expected: %d\n", state->coins, preState->coins);
+        else
+            printf("precondition #4 pass: same # of coins: %d, expected: %d\n", state->coins, preState->coins); 
+
+        // precondition #5 - player has +1 buys
+        result = assert(preState->numBuys+1, state->numBuys);
+        if (result == 0)
+          printf("precondition #5 fail: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1);
+        else
+          printf("precondition #5 pass: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1); 
+
+        // precondition #6 - player 0 actions
+        result = assert(preState->numActions-1, state->numActions);
+        if (result == 0)
+          printf("precondition #6 fail: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);
+        else
+          printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);     
+
+        // precondition #7 - player has +1 discarded baron
+        result = assert(countCardType(baron, preState, 1)+1, countCardType(baron, state, 1));
+        if (result == 0)
+            printf("precondition #7 fail: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);
+        else
+            printf("precondition #7 pass: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);  
+
+        // precondition #8 - supplyCount for estate -1
+        result = assert(preState->supplyCount[estate]-1, state->supplyCount[estate]);
+        if (result == 0)
+            printf("precondition #8 fail: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
+        else
+            printf("precondition #8 pass: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
+
+    }
+
+    // CONDITION #4:  Choose to Gain an Estate (<= 1 Estate Available)
+    if (choice1 == 0 && countCardType(estate, state, 0) <= 1 && condition4 == 0) {
+
+        printf("CONDITION #4 met:  Choose to Gain an Estate (<= 1 Estate Available)");
+        
+        // update condition met criteria
+        condition4 = 1;
+
+        // precondition #1 - player gains 1 more estate
+        result = assert(countCardType(estate, preState, 0)+1, countCardType(estate, state, 0));
+        if (result == 0)
+          printf("precondition #1 fail: gain an estate - # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)+1);
+        else
+          printf("precondition #1 pass: gain an estate - # estates in hand: %d, expected: %d\n", countCardType(estate, state, 0), countCardType(estate, preState, 0)+1);
+
+        // precondition #2 - player has one less baron in hand
+        result = assert(countCardType(baron, preState, 0)-1, countCardType(baron, state, 0));
+        if (result == 0)
+            printf("precondition #2 fail: # barons in hand: %d, expected: %d\n", countCardType(baron, state, 0), countCardType(baron, preState, 0)-1);
+        else
+            printf("precondition #2 pass: # barons in hand: %d, expected: %d\n", countCardType(baron, state, 0), countCardType(baron, preState, 0)-1);
+        
+        // precondition #3 - player has same # of cards in hand (lose baron, gain estate)
+        result = assert(preState->handCount[player], state->handCount[player]);
+        if (result == 0)
+            printf("precondition #3 fail: same # of cards in hand: %d, expected: %d\n", state->handCount[player], preState->handCount[player]);
+        else
+            printf("precondition #3 pass: same # of cards in hand: %d, expected: %d\n", state->handCount[player], preState->handCount[player]);    
+    
+        // precondition #4 - player has the same number of coins
+        result = assert(preState->coins, state->coins);
+        if (result == 0)
+            printf("precondition #4 fail: same # of coins: %d, expected: %d\n", state->coins, preState->coins);
+        else
+            printf("precondition #4 pass: same # of coins: %d, expected: %d\n", state->coins, preState->coins); 
+
+        // precondition #5 - player has +1 buys
+        result = assert(preState->numBuys+1, state->numBuys);
+        if (result == 0)
+          printf("precondition #5 fail: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1);
+        else
+          printf("precondition #5 pass: # of buys: %d, expected: %d\n", state->numBuys, preState->numBuys+1); 
+
+        // precondition #6 - player 0 actions
+        result = assert(preState->numActions-1, state->numActions);
+        if (result == 0)
+          printf("precondition #6 fail: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);
+        else
+          printf("precondition #6 pass: # of actions: %d, expected: %d\n", state->numActions, preState->numActions-1);     
+
+        // precondition #7 - player has +1 discarded baron
+        result = assert(countCardType(baron, preState, 1)+1, countCardType(baron, state, 1));
+        if (result == 0)
+            printf("precondition #7 fail: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);
+        else
+            printf("precondition #7 pass: # barons in discard: %d, expected: %d\n", countCardType(baron, state, 1), countCardType(baron, preState, 1)+1);  
+
+        // precondition #8 - supplyCount for estate -1
+        result = assert(preState->supplyCount[estate]-1, state->supplyCount[estate]);
+        if (result == 0)
+            printf("precondition #8 fail: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
+        else
+            printf("precondition #8 pass: estate supply count reduced by 1: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]-1);
+
+      }
 
 }
 
-
-
-/*
-int playBaron(int choice1, struct gameState *state, int handPos)
-{
-
-    int currentPlayer = whoseTurn(state);
-    discardCard(handPos, currentPlayer, state, 0);
-
-    state->numBuys++;//Increase buys by 1!
-
-        if (choice1 > 0) { //Boolean true or going to discard an estate
-            int p = 0;//Iterator for hand!
-            int card_not_discarded = 1;//Flag for discard set!
-            while(card_not_discarded) {
-                if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
-                    state->coins += 4;//Add 4 coins to the amount of coins
-                    card_not_discarded = 0;//Exit the loop
-                }
-                else if (p > state->handCount[currentPlayer]) {
-                    if(DEBUG) {
-                        printf("No estate cards in your hand, invalid choice\n");
-                        printf("Must gain an estate if there are any\n");
-                    }
-                    if (supplyCount(estate, state) > 0) {
-                        gainCard(estate, state, 0, currentPlayer);
-                        state->supplyCount[estate]--;
-
-                        if (supplyCount(estate, state) == 0) {
-                            isGameOver(state);
-                        }
-                    }
-                    card_not_discarded = 0;//Exit the loop
-                }
-
-                else {
-                    p++;//Next card
-                }
-            } 
-        } 
-
-        // else - player did not elect to discard an estate
-        else {
-            if (supplyCount(estate, state) > 0) {
-                gainCard(estate, state, 0, currentPlayer);//Gain an estate
-                state->supplyCount[estate]--;
-
-                if (supplyCount(estate, state) == 0) {
-                    isGameOver(state);
-                }
-            }
-        }
-
-        return 0;
-}
-*/
 
 
 void printPlayersCards(int player, struct gameState *state)
