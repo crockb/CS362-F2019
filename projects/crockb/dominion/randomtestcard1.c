@@ -156,7 +156,6 @@ void randomizeDeckCards(struct gameState *state, int kingdomCards[10]) {
   // randomly swap out a deck card with another from the gameset
   for (player = 0; player < state->numPlayers; player++) {
 
-      printf("Player = %d\n", player);
       // move all hand cards to the deck
       for (i = 0; i < state->handCount[player]; i++) {
           state->deck[player][state->deckCount[player]] = state->hand[player][i];
@@ -183,12 +182,9 @@ void randomizePiles(struct gameState *state){
     int player, i, numHand, numDiscard;
 
     for (player = 0; player < state->numPlayers; player++) {
-        printf("deckCount: %d\n", state->deckCount[player]);
         numHand = rand() % state->deckCount[player];
-        printf("numHand: %d\n", numHand);
         if (numHand < 3)
             numHand = numHand + 3;
-        printf("numHand: %d\n", numHand);
 
         // draw cards
         for (i = 0; i < numHand; i++){
