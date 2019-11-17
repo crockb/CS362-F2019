@@ -74,7 +74,9 @@ int main()
 int testPlayTribute()
 {
     int iterations = 0, bonus = 0;
-    int currentPlayer, nextPlayer, t1, t2, card1, card2, result;
+    int currentPlayer, nextPlayer, t1, card1, result;
+    int t2, card2;
+
 
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
@@ -84,21 +86,21 @@ int testPlayTribute()
 
     printf("\n\n----- RANDOM TEST #3 - playTribute() - STARTED -----\n\n");
 
-    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0 || c8 == 0 || c9 == 0 || c10 == 0) {
+    while(c1 == 0 || c2 == 0 || c3 == 0 || c4 == 0 || c5 == 0 || c6 == 0 || c7 == 0 || c8 == 0) {
 
     	// randomize the game state
   		randomizeGameState(&state, k);
 
-  		currentPlayer = state->whoseTurn;
+  		currentPlayer = state.whoseTurn;
         nextPlayer = currentPlayer + 1;
-        t1 = -1, t2 = -1, card1 = -1, card2 = -1;
+        t1 = -1, card1 = -1;
 
         // provide player1 with a minion card
         state.hand[currentPlayer][0] = tribute;
         state.supplyCount[tribute]--;
 
    		// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
-    	if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
+    	if (c1 == 0 && state.discardCount[nextPlayer] == 0 && state.deckCount[nextPlayer] == 1) {
 
     		printf("\nCONDITION #1 met:  Left player has 1 or less cards in discard/deck - deckCount > 0\n");
  
@@ -106,8 +108,8 @@ int testPlayTribute()
     		if (card1 == 10 || card1 == 16)  // avoid garden and great hall
     			card1++;
 			
-			state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
-    		t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
+			state.deck[nextPlayer][state.deckCount[nextPlayer]-1] = card1;
+    		t1 = state.deck[nextPlayer][state.deckCount[nextPlayer]-1];
 
     		// save the game states
         	updateCoins(0, &state, bonus);
@@ -117,11 +119,11 @@ int testPlayTribute()
         	returnValue = playCard(0, 0, 0, 0, &state);
 
     		// expected results: +2 actions (-1 of current turn)
-    		result = assert(preState->numActions+1, state->numActions);
+    		result = assert(preState.numActions+1, state.numActions);
     		if (result == 0)
-    			printf("condition #1 - FAIL: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+1);
+    			printf("condition #1 - FAIL: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+1);
     		else
-    			printf("condition #1 - PASS: +2 actions: actual %d, expected: %d\n", state->numActions, preState->numActions+1);
+    			printf("condition #1 - PASS: +2 actions: actual %d, expected: %d\n", state.numActions, preState.numActions+1);
 
         	// update condition met criteria
         	c1 = 1;
