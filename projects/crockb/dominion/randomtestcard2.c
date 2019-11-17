@@ -78,14 +78,14 @@ int testPlayMinion()
     	randomizeGameState(&state, k);
 
         // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-        choice1 = rand() % 2;
-        choice2 = rand() % 2;
+        //choice1 = rand() % 2;
+        //choice2 = rand() % 2;
 
     	condition1 = 1;
     	condition2 = 1;
     	condition3 = 1;
 
-    	iterations++;
+    	//iterations++;
 	
 	}
 
