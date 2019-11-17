@@ -93,7 +93,7 @@ int testPlayMinion()
 		printTestResults(&state, &preState, choice1, choice2);
     	
     	//condition1 = 1;
-    	condition2 = 1;
+    	//condition2 = 1;
     	condition3 = 1;
 
     	iterations++;
@@ -245,7 +245,6 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 
 /*
 
-	CONDITION #1:  Choice 1 - Add 2 coins:   -1 hand[minion], +2 coins, 1 action
 	CONDITION #2:  Choice 2 - Discard Hand (players 2 & 3 have 5 cards):   -1 hand[minion], +4 discard[] each player, -4 deck[] each player, 4 cards in hand[] each player
 	CONDITION #3:  Choice 2 - Discard Hand (player 3 does not have 5 cards):   	-1 hand[minion], +4 discard[] p1 &p2 and 0 discard p3, -4 deck[] pl & p2, no change to p3, p3 should have 3 cards
 */
@@ -253,7 +252,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 void printTestResults(struct gameState *state, struct gameState *preState, int choice1, int choice2) {
 
     //int player = state->whoseTurn;
-    int result;
+    int i, result1, result2;
 
     // CONDITION #1:  Choice 1 - Add 2 coins
     if (choice1 == 1) {
@@ -264,13 +263,55 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
         condition1 = 1;
 
     	// precondition #1 - player has one less minion in hand
-    	result = assert(countCardType(minion, preState, 0)-1, countCardType(minion, state, 0));
-    	if (result == 0)
+    	result1 = assert(countCardType(minion, preState, 0)-1, countCardType(minion, state, 0));
+    	if (result1 == 0)
       		printf("precondition #1 fail: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
     	else
       		printf("precondition #1 pass: # minions in hand: %d, expected: %d\n", countCardType(minion, state, 0), countCardType(minion, preState, 0)-1);
 
+    	// precondition #2 - player has +2 coins
+    	result1 = assert(preState->coins+2, state->coins);
+    	if (result1 == 0)
+      		printf("precondition #2 fail: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);
+    	else
+       		printf("precondition #2 pass: # of coins: %d, expected: %d\n", state->coins, preState->coins+2);   
+    
+    	// precondition #3 - player has 1 action
+    	result1 = assert(1, state->numActions);
+    	if (result1 == 0)
+      		printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
+    	else
+       		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
+
     }
+
+    // CONDITION #2:  Choice 2 - Discard Hand (other players all have > 4 cards)
+    result2 = 1;
+    for (i = 0, i < state->numPlayers, i++) {
+    	if (state->whoseTurn != i) {
+    		if (state->handCount[i] > 4) {
+    			// do nothing
+    		}
+    		// found a player with < 4 hand cards
+    		else {
+    			result2 = 0;
+    		}
+    	}
+    }
+
+ 	if (choice1 == 0 && choice2 == 1 && result2 = 1) {
+
+    	printf("\nCONDITION #1 met:  Choice 2 - Discard Hand (other players all have > 4 cards)\n");
+        
+        // update condition met criteria
+        condition2 = 1;
+
+ 	}
+
+
+
+
+
 
 }
 
