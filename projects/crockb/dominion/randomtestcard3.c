@@ -338,7 +338,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 	int currentPlayer = state->whoseTurn;
 	int nextPlayer = currentPlayer + 1;
 	int t1 = -1, t2 = -1, card1 = -1, card2 = -1;
-	int result;
+	//int result;
    
    /*
    	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0 (action)
