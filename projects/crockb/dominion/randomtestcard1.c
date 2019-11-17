@@ -100,7 +100,8 @@ int main()
 // function to execute the set of conditions for unittest#1
 int testPlayBaron()
 {
-    int choice1, choice2, bonus, iterations = 0;
+    int choice1, choice2, bonus = 0;
+    int iterations = 0;
     struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
