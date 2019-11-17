@@ -27,6 +27,26 @@
 
 
 
+// call randomtestcard2
+int main()
+{
+    srand(time(NULL));
+    testPlayBaron();
+    return 0;
+}
+
+
+// function to execute the set of conditions for unittest#1
+int testPlayBaron()
+{
+	printf("Hello world\n");
+	return 0;
+}
+
+
+
+
+
 /* assignment #2 - a function to play the minion card */
 /*
 int playMinion(int choice1, int choice2, struct gameState *state, int handPos)

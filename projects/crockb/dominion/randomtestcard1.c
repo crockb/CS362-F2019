@@ -12,7 +12,6 @@
     CONDITION #3:  Gain an Estate (Multiple Estates Available):  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], -1 supply[estate]
     CONDITION #4:  Gain an Estate (1 Estate Available):  +1 hand[estate], -1 hand[baron], 5 handCount, same coins, +1 buy, 0 actions, +1 discard[baron], -1 supply[estate]
 
-
     Known Bugs Inserted in Assignment 2:
         1. Omitted a necessary step(s) to “discardCard” when the estate card was found.  
            This will cause the player’s hand to incorrectly retain an estate during gameplay.
@@ -20,41 +19,6 @@
         2. Decremented the supplyCount of estates after executing the gainCard() function 
            (duplicative reduction of supplyCount).  May cause the game to end too soon by over 
            removing estate cards when referenced in the Baron cards.
-
-    
-    struct gameState {
-    int numPlayers; //number of players
-    int supplyCount[treasure_map+1];  //this is the amount of a specific type of card given a specific number.
-    int embargoTokens[treasure_map+1];
-    int outpostPlayed; // flag indicating if an outpost was played during the turn
-    int outpostTurn; // 
-    int whoseTurn; // set to the current player's turn
-    int phase; // keeps track of the phase number within the game
-    int numActions; // Starts at 1 each turn
-    int coins; // Use as you see fit!
-    int numBuys; // Starts at 1 each turn
-    int hand[MAX_PLAYERS][MAX_HAND];  // holds the cards within each player's hand
-    int handCount[MAX_PLAYERS]; // holds the number of cards within each player's hand
-    int deck[MAX_PLAYERS][MAX_DECK]; // holds the cards within each player's deck
-    int deckCount[MAX_PLAYERS]; // holds the number of cards in each player's deck
-    int discard[MAX_PLAYERS][MAX_DECK]; // holds the cards within each player's discard pile
-    int discardCount[MAX_PLAYERS]; // holds the number of cards in each player's discard pile
-    int playedCards[MAX_DECK]; // 
-    int playedCardCount;
-
-    int playBaron(int choice1, struct gameState *state, int handPos)
-    Requirements for Random Tester:
-       --- randomizeGameStates ()
-          --- handPosition of card (leave at 0?) - GOOD
-          --- set of cards in the game (set a constant state?) - GOOD
-          --- number of players in the game (2 to 4) - GOOD
-          --- randomize type of cards in the hand - GOOD
-          --- number of cards in hand (minion (4)) - GOOD
-          --- number of cards in discard (tribute 1 or 0) = randomizeDiscard - GOOD
-          --- number of cards in deck (tribute 1 or 0) = randomizeDeck - GOOD
-          --- supply counts for estate (baron 0 or 2) --- can be a 50/50
-          --- number of estates in hand (yes/no) --- can be a 50/50
-          --- whos turn is it (number of players) --- can be taken care of early
 
 */
 
@@ -67,7 +31,7 @@
 #include "dominion_helpers.h"
 #include "rngs.h"
 
-// global variables to check when 1-4 conditions already met
+// global variables to check when conditions 1-4 conditions are met
 int condition1, condition2, condition3, condition4 = 0;
 
 // helper function signatures
@@ -97,7 +61,7 @@ int main()
     return 0;
 }
 
-// function to execute the set of conditions for unittest#1
+// function to execute the set of conditions for randomtest1
 int testPlayBaron()
 {
     int choice1, choice2, bonus = 0;
