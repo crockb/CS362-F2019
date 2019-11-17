@@ -60,7 +60,7 @@ int main()
 int testPlayMinion()
 {
 
-   	int choice1, choice2, bonus = 0;
+   	//int choice1, choice2, bonus = 0;
     int iterations = 0;
 
     struct gameState state, preState;
@@ -70,12 +70,15 @@ int testPlayMinion()
 
     printf("\n\n----- RANDOM TEST #2 - playMinion() - STARTED -----\n\n");
 
-    while (condition1 == 0 || condition2 == 0) {
-
+    //while (condition1 == 0 || condition2 == 0) {
+    while (iterations < 1) {
     	// randomize the game state
     	randomizeGameState(&state, k);
+    	printAllGameStateVariables(&state);
 
-        // provide player1 with a baron card
+
+    	/*
+        // provide player1 with a minion card
         state.hand[state.whoseTurn][0] = minion;
         state.supplyCount[minion]--;
 
@@ -89,7 +92,7 @@ int testPlayMinion()
 
         playCard(0, choice1, choice2, 0, &state);
 		printTestResults(&state, &preState, choice1, choice2);
-
+		*/
     	iterations++;
 	
 	}
@@ -184,8 +187,8 @@ void randomizePiles(struct gameState *state){
         numDiscard = rand() % state->deckCount[player];
 
         for (i = 0; i < numDiscard; i++){
-            state->discardCount[player]++;
             state->discard[player][i] = state->deck[player][state->deckCount[player]-1];
+            state->discardCount[player]++;
             state->deckCount[player]--;
         }
 
@@ -329,9 +332,6 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
       		printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
     	else
        		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
-
-
-
  	}
 
 }

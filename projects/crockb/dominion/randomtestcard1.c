@@ -188,8 +188,8 @@ void randomizePiles(struct gameState *state){
         numDiscard = rand() % state->deckCount[player];
 
         for (i = 0; i < numDiscard; i++){
-            state->discardCount[player]++;
             state->discard[player][i] = state->deck[player][state->deckCount[player]-1];
+            state->discardCount[player]++;
             state->deckCount[player]--;
         }
 
