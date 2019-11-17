@@ -322,11 +322,11 @@ int testPlayTribute()
     				printf("condition 7 (part 1) - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
 
 				// check +2 cards
-    			result = assert(preState.handCount[player1]+1, state.handCount[player1]);
+    			result = assert(preState.handCount[currentPlayer]+1, state.handCount[currentPlayer]);
     			if (result == 0)
-    				printf("condition 7 (part 2) - FAIL: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
+    				printf("condition 7 (part 2) - FAIL: +2 cards: actual %d, expected: %d\n", state.handCount[currentPlayer], preState.handCount[currentPlayer]+1);
     			else
-    				printf("condition 9 (part 2) - PASS: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
+    				printf("condition 7 (part 2) - PASS: +2 cards: actual %d, expected: %d\n", state.handCount[currentPlayer], preState.handCount[currentPlayer]+1);
 	
         		// update condition met criteria
         		c7 = 1;
