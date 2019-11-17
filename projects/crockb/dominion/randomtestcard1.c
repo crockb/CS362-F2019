@@ -133,7 +133,7 @@ int testPlayBaron()
       }
 
 
-    printf("\n----- RANDOM TEST #1 - playBaron() - COMPLETED - (in %d iterations) -----\n", iterations);
+    printf("\n----- RANDOM TEST #1 - playBaron() - COMPLETED - (%d iterations) -----\n", iterations);
 
     return 0;
 
@@ -286,7 +286,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     // CONDITION #1:  Remove Estate (Player Has An Estate)
     if (choice1 == 1 && countCardType(estate, state, 0) >=1 && condition1 == 0) {
         
-        printf("CONDITION #1 met:  Remove Estate (Player Has An Estate)");
+        printf("CONDITION #1 met:  Remove Estate (Player Has An Estate)\n");
         
         // update condition met criteria
         condition1 = 1;
@@ -354,7 +354,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     // CONDITION #2:  Remove Estate (Player Does Not Have An Estate)
     if (choice1 == 1 && countCardType(estate, state, 0) == 0 && condition2 == 0) {
         
-        printf("CONDITION #2 met:  Remove Estate (Player Does Not Have An Estate)");
+        printf("CONDITION #2 met:  Remove Estate (Player Does Not Have An Estate)\n");
         
         // update condition met criteria
         condition2 = 1;
@@ -420,7 +420,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     // CONDITION #3:  Choose to Gain an Estate (Multiple Estates Available)
     if (choice1 == 0 && countCardType(estate, state, 0) >= 2 && condition3 == 0) {
         
-        printf("CONDITION #3 met:  Choose to Gain an Estate (Multiple Estates Available)");
+        printf("CONDITION #3 met:  Choose to Gain an Estate (Multiple Estates Available)\n");
         
         // update condition met criteria
         condition3 = 1;
@@ -486,7 +486,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     // CONDITION #4:  Choose to Gain an Estate (<= 1 Estate Available)
     if (choice1 == 0 && countCardType(estate, state, 0) <= 1 && condition4 == 0) {
 
-        printf("CONDITION #4 met:  Choose to Gain an Estate (<= 1 Estate Available)");
+        printf("CONDITION #4 met:  Choose to Gain an Estate (<= 1 Estate Available)\n");
         
         // update condition met criteria
         condition4 = 1;

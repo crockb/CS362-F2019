@@ -1149,12 +1149,10 @@ int playBaron(int choice1, struct gameState *state, int handPos)
     state->numBuys++;//Increase buys by 1!
 
         if (choice1 > 0) { //Boolean true or going to discard an estate
-            printf("Entered branch #1\n");
             int p = 0;//Iterator for hand!
             int card_not_discarded = 1;//Flag for discard set!
             while(card_not_discarded) {
                 if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
-                    printf("Entered branch #2\n");
                     state->coins += 4;//Add 4 coins to the amount of coins
                     card_not_discarded = 0;//Exit the loop
                 }
@@ -1163,13 +1161,11 @@ int playBaron(int choice1, struct gameState *state, int handPos)
                         printf("No estate cards in your hand, invalid choice\n");
                         printf("Must gain an estate if there are any\n");
                     }
-                    printf("Entered branch #3\n");
                     if (supplyCount(estate, state) > 0) {
                         gainCard(estate, state, 0, currentPlayer);
                         state->supplyCount[estate]--;
 
                         if (supplyCount(estate, state) == 0) {
-                            printf("Entered branch #4\n");
                             isGameOver(state);
                         }
                     }
@@ -1184,13 +1180,11 @@ int playBaron(int choice1, struct gameState *state, int handPos)
 
         // else - player did not elect to discard an estate
         else {
-            printf("Entered branch #5\n");
             if (supplyCount(estate, state) > 0) {
                 gainCard(estate, state, 0, currentPlayer);//Gain an estate
                 state->supplyCount[estate]--;
 
                 if (supplyCount(estate, state) == 0) {
-                    printf("Entered branch #6\n");
                     isGameOver(state);
                 }
             }
