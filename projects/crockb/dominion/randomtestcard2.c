@@ -34,7 +34,7 @@ int testPlayMinion();
 int main()
 {
     srand(time(NULL));
-    testPlayBaron();
+    testPlayMinion();
     return 0;
 }
 
