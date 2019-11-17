@@ -283,7 +283,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 	int nextPlayer = currentPlayer + 1;
    
    	// CONDITION #1:  Left player has 1 or less cards in discard/deck - deckCount > 0
-    if (state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
+    if (c1 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 1) {
 
     	printf("\nCONDITION #1 met:  Left player has 1 or less cards in discard/deck - deckCount > 0\n");
   
@@ -292,7 +292,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     }
 
    	// CONDITION #2:  Left player has 1 or less cards in discard/deck - discardCount > 0
-    if (state->discardCount[nextPlayer] == 1 && state->deckCount[nextPlayer] == 0) {
+    if (c2 == 0 && state->discardCount[nextPlayer] == 1 && state->deckCount[nextPlayer] == 0) {
 
     	printf("\nCONDITION #2 met:  Left player has 1 or less cards in discard/deck - discardCount > 0\n");
   
