@@ -62,10 +62,10 @@ int main()
 int testPlayMinion()
 {
 
-   //int choice1, choice2, bonus = 0;
+   	int choice1, choice2, bonus = 0;
    //int iterations = 0;
 
-    struct gameState state; //preState;
+    struct gameState state, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
@@ -77,19 +77,30 @@ int testPlayMinion()
     	// randomize the game state
     	randomizeGameState(&state, k);
 
+        // provide player1 with a baron card
+        state.hand[state.whoseTurn][0] = minion;
+        state.supplyCount[minion]--;
+
+        // update the states
+        updateCoins(0, &state, bonus);
+        memcpy(&preState, &state, sizeof(struct gameState));
+
         // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-        //choice1 = rand() % 2;
-        //choice2 = rand() % 2;
+        choice1 = rand() % 2;
+        choice2 = rand() % 2;
+
+        playCard(0, choice1, choice2, 0, &state);
 
     	condition1 = 1;
     	condition2 = 1;
     	condition3 = 1;
 
-    	//iterations++;
+    	iterations++;
 	
 	}
 
-
+    printf("\n----- RANDOM TEST #2 - playMinion() - COMPLETED - (%d iterations) -----\n", iterations);
+	
 	return 0;
 }
 
