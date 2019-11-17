@@ -1208,12 +1208,10 @@ int playMinion(int choice1, int choice2, struct gameState *state, int handPos)
 
     if (choice1)
     {
-        printf("Branch #1\n");
         state->coins = state->coins + 2;
     }
     else if (choice2)       //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
     {
-        printf("Branch #2\n");
         //discard hand
         while(numHandCards(state) > 0)
         {
@@ -1233,7 +1231,6 @@ int playMinion(int choice1, int choice2, struct gameState *state, int handPos)
             {
                 if ( state->handCount[i] > 4 )
                 {
-                    printf("Branch #3\n");
                     //discard hand
                     while( state->handCount[i] > 0 )
                     {
