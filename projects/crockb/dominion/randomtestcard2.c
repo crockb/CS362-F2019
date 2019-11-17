@@ -63,7 +63,7 @@ int testPlayMinion()
    	//int choice1, choice2, bonus = 0;
     int iterations = 0;
 
-    struct gameState state, preState;
+    struct gameState state; //, preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
