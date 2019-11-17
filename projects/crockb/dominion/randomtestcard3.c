@@ -278,9 +278,9 @@ int testPlayTribute()
     			// expected results: +2 actions (-1 of current turn) (no double counting)
     			result = assert(preState.numActions+1, state.numActions);
     			if (result == 0)
-    				printf("condition 4.1.3 - FAIL: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
+    				printf("condition 6 - FAIL: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
     			else
-    				printf("condition 4.1.3 - PASS: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
+    				printf("condition 6 - PASS: +2 actions (-1 of current turn) (no double counting): actual %d, expected: %d\n", state.numActions, preState.numActions+1);
 
         		// update condition met criteria
         		c6 = 1;
@@ -306,9 +306,28 @@ int testPlayTribute()
         	// play the card
         	returnValue = playCard(0, 0, 0, 0, &state);
 
+        	// expected results: +2 coins, +2 cards
+    		updateCoins(player1, &preState, 2);
+    		updateCoins(player1, &state, state.coins);
+
     		if (c7 == 0) {
 
     			printf("\nCONDITION #7 met: Left player has 2 or more cards in discard/deck - tribute = money and victory\n");  
+        	    
+        	    // check +2 coins
+    			result = assert(preState.coins, state.coins);
+    			if (result == 0)
+    				printf("condition 7 (part 1) - FAIL: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+    			else
+    				printf("condition 7 (part 1) - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
+
+				// check +2 cards
+    			result = assert(preState.handCount[player1]+1, state.handCount[player1]);
+    			if (result == 0)
+    				printf("condition 7 (part 2) - FAIL: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
+    			else
+    				printf("condition 9 (part 2) - PASS: +2 cards: actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+1);
+	
         		// update condition met criteria
         		c7 = 1;
     		}
