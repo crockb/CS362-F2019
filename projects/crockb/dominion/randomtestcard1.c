@@ -101,13 +101,12 @@ int testPlayBaron()
                sea_hag, tribute, smithy
             };
 
-    // initialize the game
-    initializeGame(randomizePlayerCount(), k, 1234, &state);
 
     // randomize the game state
     randomizeGameState(&state, k);
-    printAllGameStateVariables(&state);
+    
 
+    printAllGameStateVariables(&state);
     return 0;
 
 }
@@ -115,6 +114,10 @@ int testPlayBaron()
 void randomizeGameState(struct gameState *state, int kingdomCards[10]) {
 
     int n;
+
+    // initialize the game
+    initializeGame(randomizePlayerCount(), kingdomCards, 1234, state);
+
     randomizeDeckCards(state, kingdomCards);
     randomizePiles(state);
 
