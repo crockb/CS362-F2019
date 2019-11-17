@@ -113,9 +113,15 @@ int testPlayBaron()
     memcpy(&preState, &state, sizeof(struct gameState));
 
     // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-    playCard(0, rand() % 2, rand() % 2, 0, &state);
+    int n1, n2;
+    n1 = rand() % 2;
+    n2 = rand() % 2;
+    printf("choice1 = %d\n", n1);
+    printf("choice2 = %d\n", n2);
+
+    playCard(0, n1, n2, 0, &state);
     
-    
+
     //printAllGameStateVariables(&state);
     return 0;
 
