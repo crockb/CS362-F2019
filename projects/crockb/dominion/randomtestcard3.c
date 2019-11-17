@@ -109,8 +109,8 @@ int testPlayTribute()
   		//c4 = 1;
   		//c5 = 1;
   		//c6 = 1;
-  		c7 = 1;
-  		c8 = 1;
+  		//c7 = 1;
+  		//c8 = 1;
   		c9 = 1;
   		c10 = 1;
 
@@ -262,15 +262,7 @@ int countCardType(int card, struct gameState *state, int pileToCheck)
 }
 
 /*
-	1: Left player has 1 or less cards in discard/deck - deckCount > 0
-	2: Left player has 1 or less cards in discard/deck - discardCount > 0
-	3: Left player has 1 or less cards in discard/deck - no cards
-	Left player has 2 or more cards in discard/deck
-		has duplicates at the backend
-			4: 2 coppers
-			5: 2 estates
-			6: 2 mines
-		7:   has a copper, has an estate
+
 		8:   has a mine, has a great_hall
 
 int nextPlayer = currentPlayer + 1;
@@ -311,7 +303,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     }
 
 
-   	// CONDITION #4:  Left player has 2 or more cards in discard/deck - duplicate money card
+   	// CONDITION #4:  Left player has 2 or more cards in discard/deck - treasure = duplicate money card
     if (state->deckCount[nextPlayer] >= 2) {
 
     	card1 = (rand() % 3) + 4;
@@ -325,13 +317,13 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c4 == 0 && (t1 == t2)) {
 
-    		printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - duplicate tribute money cards\n");  
+    		printf("\nCONDITION #4 met:  Left player has 2 or more cards in discard/deck - treasure = duplicate money card\n");  
         	// update condition met criteria
         	c4 = 1;
     	}
     }
 
-   	// CONDITION #5:  Left player has 2 or more cards in discard/deck - duplicate victory cards
+   	// CONDITION #5:  Left player has 2 or more cards in discard/deck - treasure = duplicate victory cards
     if (state->deckCount[nextPlayer] >= 2) {
 
     	card1 = (rand() % 3) + 1;
@@ -345,16 +337,36 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     	if (c5 == 0 && (t1 == t2)) {
 
-    		printf("\nCONDITION #5 met: Left player has 2 or more cards in discard/deck - duplicate victory cards\n");  
+    		printf("\nCONDITION #5 met: Left player has 2 or more cards in discard/deck - treasure = duplicate victory cards\n");  
         	// update condition met criteria
         	c5 = 1;
     	}
     }
 
-   	// CONDITION #6:  Left player has 2 or more cards in discard/deck - duplicate action cards
+   	// CONDITION #6:  Left player has 2 or more cards in discard/deck - treasure = duplicate action cards
     if (state->deckCount[nextPlayer] >= 2) {
 
-    	card1 = (rand() % 3) + 1;
+    	card1 = (rand() % 19) + 7;
+    	card2 = (rand() % 19) + 7;
+		
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-2] = card2;
+    	
+    	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
+    	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
+
+    	if (c6 == 0 && (t1 == t2) && (card1 != 10 || card1 != 16)) {
+
+    		printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - treasure = duplicate action cards\n");  
+        	// update condition met criteria
+        	c6 = 1;
+    	}
+    }
+
+   	// CONDITION #7:  Left player has 2 or more cards in discard/deck - treasure = money and victory
+    if (state->deckCount[nextPlayer] >= 2) {
+    	
+    	card1 = (rand() % 3) + 4;
     	card2 = (rand() % 3) + 1;
 		
 		state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
@@ -363,13 +375,34 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
     	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
 
-    	if (c6 == 0 && (t1 == t2)) {
+    	if (c7 == 0) {
 
-    		printf("\nCONDITION #6 met: Left player has 2 or more cards in discard/deck - duplicate action cards\n");  
+    		printf("\nCONDITION #7 met: Left player has 2 or more cards in discard/deck - treasure = money and victory\n");  
         	// update condition met criteria
-        	c6 = 1;
+        	c7 = 1;
     	}
     }
+
+   	// CONDITION #8:  Left player has 2 or more cards in discard/deck - treasure = action and great_hall
+    if (state->deckCount[nextPlayer] >= 2) {
+    	
+    	card1 = (rand() % 19) + 7;
+    	card2 = great_hall;
+		
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = card1;
+		state->deck[nextPlayer][state->deckCount[nextPlayer]-2] = card2;
+    	
+    	t1 = state->deck[nextPlayer][state->deckCount[nextPlayer]-1]; 
+    	t2 = state->deck[nextPlayer][state->deckCount[nextPlayer]-2];
+
+    	if (c8 == 0 && (card1 != 10 || card1 != 16) ) {
+
+    		printf("\nCONDITION #8 met: Left player has 2 or more cards in discard/deck - treasure = action and great hall\n");  
+        	// update condition met criteria
+        	c8 = 1;
+    	}
+    }
+
 
 
 }
