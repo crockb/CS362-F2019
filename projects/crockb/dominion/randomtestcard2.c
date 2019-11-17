@@ -24,10 +24,13 @@
 #include "dominion_helpers.h"
 #include "rngs.h"
 
-
+// global variables to check when conditions 1-3 conditions are met
+int condition1 = 0, condition2 = 0, condition3 = 0;
 
 // helper function signatures
 int testPlayMinion();
+int assert(int expected, int actual);
+int countCardType(int card, struct gameState *state, int pileToCheck);
 
 
 // helper functions for randomizing the game state
@@ -59,16 +62,25 @@ int main()
 int testPlayMinion()
 {
 
+    int choice1, choice2, bonus = 0;
+    int iterations = 0;
+
     struct gameState state; //preState;
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
 
-    // randomize the game state
-    randomizeGameState(&state, k);
+    printf("\n\n----- RANDOM TEST #2 - playMinion() - STARTED -----\n\n");
 
-    // print game state
-	printAllGameStateVariables(&state);
+    while (condition1 == 0 || condition2 == 0 || condition3 == 0) {
+
+    	// randomize the game state
+    	randomizeGameState(&state, k);
+    	condition1 = 1;
+    	condition2 = 1;
+    	condition3 = 1;
+	
+	}
 
 
 	return 0;
