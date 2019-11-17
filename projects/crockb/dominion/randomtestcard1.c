@@ -115,6 +115,7 @@ int testPlayBaron()
     // int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
     playCard(0, rand() % 2, rand() % 2, 0, &state);
     
+    
     //printAllGameStateVariables(&state);
     return 0;
 
