@@ -105,7 +105,7 @@ int testPlayTribute()
 
   		//c1 = 1;
   		//c2 = 1;
-  		c3 = 1;
+  		//c3 = 1;
   		c4 = 1;
   		c5 = 1;
   		c6 = 1;
@@ -298,7 +298,18 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
   
         // update condition met criteria
         c2 = 1;
-    } 
+    }
+
+   	// CONDITION #3:  Left player has 1 or less cards in discard/deck - no cards
+    if (c3 == 0 && state->discardCount[nextPlayer] == 0 && state->deckCount[nextPlayer] == 0) {
+
+    	printf("\nCONDITION #3 met:  Left player has 1 or less cards in discard/deck - no cards\n");
+  
+        // update condition met criteria
+        c3 = 1;
+    }
+
+
 
 
 }
