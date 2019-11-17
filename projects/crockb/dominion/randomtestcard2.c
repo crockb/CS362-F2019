@@ -285,16 +285,16 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
     }
 
-    // CONDITION #2:  Choice 2 - Discard Hand (other players all have > 4 cards)
-    result2 = 1;
+    // CONDITION #2:  Choice 2 - Discard Hand (at least 1 other player has > 4 hand cards)
+    result2 = 0;
     for (i = 0; i < state->numPlayers; i++) {
     	if (state->whoseTurn != i) {
+    		// found a player with > 4 hand cards
     		if (state->handCount[i] > 4) {
-    			// do nothing
+    			result2 = 1;
     		}
-    		// found a player with < 4 hand cards
     		else {
-    			result2 = 0;
+    			// do nothing
     		}
     	}
     }
