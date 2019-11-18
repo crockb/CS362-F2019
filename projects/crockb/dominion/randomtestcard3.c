@@ -355,17 +355,27 @@ int testPlayTribute()
     		if (c8 == 0 && (card1 != 10 || card1 != 16) ) {
 
     			printf("\nCONDITION #8 met: Left player has 2 or more cards in discard/deck - tribute = action and great hall\n");  
+        		
+        		// check +4 cards (-1 for card played)
+    			result = assert(preState.handCount[player1]+3, state.handCount[player1]);
+    			if (result == 0)
+    				printf("condition 8 (part 1) - FAIL: +4 cards (-1 of current turn): actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+3);
+    			else
+    				printf("condition 8 (part 1) - PASS: +4 cards (-1 of current turn): actual %d, expected: %d\n", state.handCount[player1], preState.handCount[player1]+3);
+
+    			// check +4 actions (-1 of current turn)
+    			result = assert(preState.numActions+3, state.numActions);
+    			if (result == 0)
+    				printf("condition 8 (part 2) - FAIL: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
+    			else
+    				printf("condition 8 (part 2) - PASS: +4 actions (-1 of current turn): actual %d, expected: %d\n", state.numActions, preState.numActions+3);
+
         		// update condition met criteria
         		c8 = 1;
     		}
     	}
-
-		//printTestResults(&state, &preState, 0, 0);
-
+    	
   		iterations++;
-
-  		//printAllGameStateVariables(&state);
-
     }
 
     printf("\n----- RANDOM TEST #3 - playTribute() - COMPLETED - (%d iterations) -----\n", iterations);
