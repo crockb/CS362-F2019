@@ -37,7 +37,7 @@
 #include "rngs.h"
 
 
-// global variables to check when conditions 1-10 are met
+// global variables to check when conditions 1-8 are met
 int c1 = 0, c2 = 0, c3 = 0, c4 = 0, c5 = 0, c6 = 0, c7 = 0, c8 = 0;
 
 // helper function signatures
@@ -59,7 +59,7 @@ void printAllGameStateVariables(struct gameState *state);
 int printCardName(int card);
 
 
-// call randomtestcard2
+// call randomtestcard3
 int main()
 {
     srand(time(NULL));
@@ -714,91 +714,3 @@ int printCardName(int card)
 
     return -1;
 }
-
-/*
-
-int playTribute(struct gameState *state, int handPos)
-{
-    int i;
-    int currentPlayer = whoseTurn(state);
-    int nextPlayer = currentPlayer + 1;
-    int tributeRevealedCards[2] = {-1, -1};
-
-    // check to see if the next player is player 0
-    if (nextPlayer > (state->numPlayers - 1)) {
-        nextPlayer = 0;
-    }
-
-    // discard tribute card
-    discardCard(handPos, currentPlayer, state, 0);
-
-    // check the availability of nextplayer cards and set them to the tribute cards
-        if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
-            if (state->deckCount[nextPlayer] > 0) {
-                tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-                discardCard(state->deckCount[nextPlayer]-1, nextPlayer, state, 0);
-                state->deckCount[nextPlayer]--;
-            }
-            else if (state->discardCount[nextPlayer] > 0) {
-                tributeRevealedCards[0] = state->discard[nextPlayer][state->discardCount[nextPlayer]-1];
-            }
-            else {
-                //No Card to Reveal
-                if (DEBUG) {
-                    printf("No cards to reveal\n");
-                }
-            }
-        }
-
-        else {
-            if (state->deckCount[nextPlayer] == 0) {
-                for (i = 0; i < state->discardCount[nextPlayer]; i++) {
-                    state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
-                    state->deckCount[nextPlayer]++;
-                    state->discard[nextPlayer][i] = -1;
-                    state->discardCount[nextPlayer]--;
-                }
-
-                shuffle(nextPlayer,state);//Shuffle the deck
-            }
-            tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-            discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
-
-            tributeRevealedCards[1] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
-            discardCard(state->deckCount[nextPlayer], nextPlayer, state, 0);
-        }
-
-        if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
-            state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
-            state->playedCardCount++;
-        }
-
-        for (i = 0; i < 2; i ++) {
-            if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-                state->coins += 2;
-            }
-
-            else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
-                drawCard(currentPlayer, state);
-                drawCard(currentPlayer, state);
-
-                // great hall receives bonus from Action as well
-                if (tributeRevealedCards[i] == great_hall) {
-                    state->numActions = state->numActions + 2;
-                }
-            }
-
-            else if (tributeRevealedCards[i] == -1)
-            {
-                // do nothing - invalid card
-            }
-
-            else { //Action Card
-                state->numActions = state->numActions + 2;
-            }
-        }
-
-        return 0;
-}
-
-*/
