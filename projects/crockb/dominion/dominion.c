@@ -1345,7 +1345,7 @@ int playTribute(struct gameState *state, int handPos)
             }
             else {
                 //No Card to Reveal
-
+                return -1;
                 /* commented out for randomtesting coverage
                 if (DEBUG) {
                     printf("No cards to reveal\n");
