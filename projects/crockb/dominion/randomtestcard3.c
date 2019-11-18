@@ -91,7 +91,7 @@ int testPlayTribute()
         nextPlayer = currentPlayer + 1;
 
         // check to see if the next player is player 0
-    	if (nextPlayer > (state->numPlayers - 1)) {
+    	if (nextPlayer > (state.numPlayers - 1)) {
         	nextPlayer = 0;
     	}
 
