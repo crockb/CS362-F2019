@@ -90,11 +90,6 @@ int testPlayTribute()
   		currentPlayer = state.whoseTurn;
         nextPlayer = currentPlayer + 1;
 
-        // check to see if the next player is player 0
-    	if (nextPlayer > (state.numPlayers - 1)) {
-        	nextPlayer = 0;
-    	}
-
         card1 = -1;
 
         // provide player1 with a minion card
