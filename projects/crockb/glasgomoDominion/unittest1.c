@@ -15,7 +15,7 @@
 
 // signature for playBaron()
 int cardEffectBaron(int choice1, struct gameState *state)
-
+int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 
 */
 
