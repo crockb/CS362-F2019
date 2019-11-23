@@ -1113,14 +1113,14 @@ int cardEffectBaron(int choice1, struct gameState *state)
         while(card_not_discarded) {
             if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
                 state->coins += 4;//Add 4 coins to the amount of coins
-                state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
-                state->discardCount[currentPlayer]++;
+                //state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
+                //state->discardCount[currentPlayer]++;
                 for (; p < state->handCount[currentPlayer]; p++) {
                     //state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
                 }
-                state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
-                state->handCount[currentPlayer]--;
-                // card_not_discarded = 0;//Exit the loop //**BUG**
+                //state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
+                //state->handCount[currentPlayer]--;
+                card_not_discarded = 0;//Exit the loop //**BUG**
             }
             else if (p > state->handCount[currentPlayer]) {
                 if(DEBUG) {
