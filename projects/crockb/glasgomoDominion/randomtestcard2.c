@@ -325,11 +325,14 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
       		printf("precondition #3 fail: # of actions: %d, expected: 1\n", state->numActions);
     	else
        		printf("precondition #3 pass: # of actions: %d, expected: 1\n", state->numActions);
- 	}
-
-      // ASSIGNMENT #5 - ADDITIONAL BREAKPOINT TO STEP THROUGH CODE
+ 
+       // ASSIGNMENT #5 - ADDITIONAL BREAKPOINT TO STEP THROUGH CODE
       condition2 = 0;
       condition2 = 1;
+
+
+ 	}
+
 
 }
 
