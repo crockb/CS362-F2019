@@ -243,7 +243,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     int result;
 
     // CONDITION #1:  Remove Estate (Player Has An Estate)
-    if (choice1 == 1 && countCardType(estate, state, 0) >=1 && condition1 == 0) {
+    if (choice1 == 1 && countCardType(estate, preState, 0) >=1 && condition1 == 0) {
         
         printf("\nCONDITION #1 met:  Remove Estate (Player Has An Estate)\n");
         
@@ -316,7 +316,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
 
 
     // CONDITION #2:  Remove Estate (Player Does Not Have An Estate)
-    if (choice1 == 1 && countCardType(estate, state, 0) == 0 && condition2 == 0) {
+    if (choice1 == 1 && countCardType(estate, preState, 0) == 0 && condition2 == 0) {
         
         printf("\nCONDITION #2 met:  Remove Estate (Player Does Not Have An Estate)\n");
         
@@ -382,7 +382,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     }
 
     // CONDITION #3:  Choose to Gain an Estate (Multiple Estates Available)
-    if (choice1 == 0 && countCardType(estate, state, 0) >= 2 && condition3 == 0) {
+    if (choice1 == 0 && preState->supplyCount[estate] >= 2 && condition3 == 0) {
         
         printf("\nCONDITION #3 met:  Choose to Gain an Estate (Multiple Estates Available)\n");
         
@@ -448,7 +448,7 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
     }
 
     // CONDITION #4:  Choose to Gain an Estate (<= 1 Estate Available)
-    if (choice1 == 0 && countCardType(estate, state, 0) <= 1 && condition4 == 0) {
+    if (choice1 == 0 && preState->supplyCount[estate] <= 1 && condition4 == 0) {
 
         printf("\nCONDITION #4 met:  Choose to Gain an Estate (<= 1 Estate Available)\n");
         
@@ -628,85 +628,85 @@ int printCardName(int card)
 
     switch(card)
     {
-    case curse:
+    case curse: // 0
         printf("curse\n");
         return 1;
-    case estate:
+    case estate: // 1
         printf("estate\n");
         return 1;
-    case duchy:
+    case duchy: // 2
         printf("duchy\n");
         return 1;
-    case province:
+    case province: // 3
         printf("province\n");
         return 1;
-    case copper:
+    case copper: // 4
         printf("copper\n");
         return 1;
-    case silver:
+    case silver: // 5
         printf("silver\n");
         return 1;
-    case gold:
+    case gold:  // 6
         printf("gold\n");
         return 1;
-    case adventurer:
+    case adventurer: // 7
         printf("adventurer\n");
         return 1;
-    case council_room:
+    case council_room: // 8
         printf("council_room\n");
         return 1;
-    case feast:
+    case feast:  // 9
         printf("feast\n");
         return 1;
-    case gardens:
+    case gardens: // 10
         printf("gardens\n");
         return 1;
-    case mine:
+    case mine: // 11
         printf("mine\n");
         return 1;
-    case remodel:
+    case remodel: // 12
         printf("remodel\n");
         return 1;
-    case smithy:
+    case smithy: // 13
         printf("smithy\n");
         return 1;
-    case village:
+    case village: // 14
         printf("village\n");
         return 1;
-    case baron:
+    case baron:  // 15
         printf("baron\n");
         return 1;
-    case great_hall:
+    case great_hall: // 16
         printf("great_hall\n");
         return 1;
-    case minion:
+    case minion:  // 17
         printf("minion\n");
         return 1;
-    case steward:
+    case steward: // 18
         printf("steward\n");
         return 1;
-    case tribute:
+    case tribute: // 19
         printf("tribute\n");
         return 1;
-    case ambassador:
+    case ambassador: // 20
         printf("ambassador\n");
         return 1;
-    case cutpurse:
+    case cutpurse:  // 21
         printf("cutpurse\n");
         return 1;
-    case embargo:
+    case embargo: // 22
         printf("embargo\n");
         return 1;
-    case outpost:
+    case outpost: // 23
         printf("outpost\n");
         return 1;
-    case salvager:
+    case salvager: // 24
         printf("salvager\n");
         return 1;
-    case sea_hag:
+    case sea_hag: // 25
         printf("sea_hag\n");
         return 1;
-    case treasure_map:
+    case treasure_map: // 26
         printf("treasure_map\n");
         return 1;
 
