@@ -89,10 +89,6 @@ int testPlayMinion()
     updateCoins(player1, &state, bonus);
     memcpy(&preState, &state, sizeof(struct gameState));
 
-    // inserted for assignment #5
-    printPlayersCards(0, &state);
-    printPlayersCards(1, &state);
-    printPlayersCards(2, &state);
 
     // run the refactored function playMinion() function
     playCard(0, 0, 1, 0, &state);
