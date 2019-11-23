@@ -1116,7 +1116,7 @@ int cardEffectBaron(int choice1, struct gameState *state)
                 state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
                 state->discardCount[currentPlayer]++;
                 for (; p < state->handCount[currentPlayer]; p++) {
-                    state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
+                    //state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
                 }
                 state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
                 state->handCount[currentPlayer]--;
