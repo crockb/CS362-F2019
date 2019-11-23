@@ -77,6 +77,10 @@ int testPlayBaron()
         state.hand[state.whoseTurn][0] = baron;
         state.supplyCount[baron]--;
 
+        // provide 2 estates to the player
+        state.hand[state.whoseTurn][1] = estate;
+        state.hand[state.whoseTurn][2] = estate;
+
         // update the states
         updateCoins(0, &state, bonus);
         memcpy(&preState, &state, sizeof(struct gameState));
