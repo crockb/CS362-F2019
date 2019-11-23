@@ -1,3 +1,5 @@
+// Assignment 5 - Author:  Monique Glasgow
+
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
