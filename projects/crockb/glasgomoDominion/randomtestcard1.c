@@ -77,10 +77,6 @@ int testPlayBaron()
         state.hand[state.whoseTurn][0] = baron;
         state.supplyCount[baron]--;
 
-        // provide 2 estates to the player
-        state.hand[state.whoseTurn][1] = estate;
-        state.hand[state.whoseTurn][2] = estate;
-        state.hand[state.whoseTurn][3] = estate;
 
         // update the states
         updateCoins(0, &state, bonus);
@@ -309,6 +305,11 @@ void printTestResults(struct gameState *state, struct gameState *preState, int c
             printf("precondition #8 fail: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
         else
             printf("precondition #8 pass: estate supply count unchanged: %d, expected: %d\n", state->supplyCount[estate], preState->supplyCount[estate]);
+
+        // INSERTED FOR ASSIGNMENT 5 FOR ADDITIONAL GDB BREAKPOINT
+        condition1 = 0;
+        condition1 = 1;
+
 
     }
 
