@@ -1120,7 +1120,7 @@ int cardEffectBaron(int choice1, struct gameState *state)
                 }
                 state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
                 state->handCount[currentPlayer]--;
-                //card_not_discarded = 0;//Exit the loop //**BUG**
+                card_not_discarded = 0;//Exit the loop //**BUG**
             }
             else if (p > state->handCount[currentPlayer]) {
                 if(DEBUG) {
