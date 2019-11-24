@@ -33,12 +33,12 @@ int cardEffectTribute(struct gameState *state)
 #include "dominion_helpers.h"
 #include "rngs.h"
 
+//
+int pauseVariable = 0;
 
 // helper function signatures
 int testPlayTribute();
 int assert(int expected, int actual);
-int pauseStatement1(struct gameState *state, struct gameState *preState);
-int pauseStatement2();
 
 // helper function to set conditions before playing card
 void setCondition1(struct gameState *state, int card);     			// #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
@@ -184,7 +184,7 @@ int testPlayTribute()
     else
     	printf("condition 4.1.1 - PASS: +2 coins: actual %d, expected: %d\n", state.coins, preState.coins);
 
-    pauseStatement1(&state, &preState);
+    pauseVariable = 1;
 
 	// ----- CONDITION 4.1.2 ---------
 
@@ -319,16 +319,6 @@ int testPlayTribute()
     printf("\n----- UNIT TEST #4 - playTribute() - COMPLETED -----\n");
 
 	return 0;
-}
-
-int pauseStatement1(struct gameState *state, struct gameState *preState){
-    
-    pauseStatement2();
-    return 0;
-}
-
-int pauseStatement2(){
-    return 0;
 }
 
 
