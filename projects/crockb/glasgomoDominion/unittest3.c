@@ -119,6 +119,13 @@ int testPlayAmbassador()
     confirmNumCoppersInHand(player1, &state, 2);
     copperPos = hasGameCard(copper, &state, 1);
 
+    // add an estate to the discard pile to p2, p3
+    state.discardCount[1]++;
+    state.discard[1][0] = estate;
+    state.discardCount[2]++;
+    state.discard[2][0] = estate;
+
+
     // run the refactored function playAmbassador() function
     returnValue = playCard(0, copperPos, 3, 0, &state);
 
