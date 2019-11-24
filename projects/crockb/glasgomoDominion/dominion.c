@@ -1256,9 +1256,9 @@ int cardEffectTribute(struct gameState *state)
                 state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                 state->deckCount[nextPlayer]++;
                 state->discard[nextPlayer][i] = -1;
-                state->discardCount[nextPlayer]--;  // BUG
+                //state->discardCount[nextPlayer]--;  // BUG
             }
-
+            state->discardCount[nextPlayer] = 0;
             // shuffle(nextPlayer,state);//Shuffle the deck //**BUG**
         }
         tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer]-1];
