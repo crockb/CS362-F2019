@@ -99,6 +99,7 @@ int testPlayAmbassador()
 
     //playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
     // run the refactored function playAmbassador() function
+
     returnValue = playCard(0, copperPos, 2, 0, &state);
     
     // check the results
