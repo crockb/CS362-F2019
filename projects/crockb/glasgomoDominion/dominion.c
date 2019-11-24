@@ -1232,8 +1232,6 @@ int cardEffectTribute(struct gameState *state)
         nextPlayer = 0;
     }
 
-    printf("Did this fire?\n");
-
 
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
         if (state->deckCount[nextPlayer] > 0) {
