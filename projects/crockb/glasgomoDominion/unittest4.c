@@ -37,6 +37,7 @@ int cardEffectTribute(struct gameState *state)
 // helper function signatures
 int testPlayTribute();
 int assert(int expected, int actual);
+int exitStatement();
 
 // helper function to set conditions before playing card
 void setCondition1(struct gameState *state, int card);     			// #1 - Left player has 1 or less cards in discard/deck - deckCount = 1, discard = 0
@@ -315,11 +316,14 @@ int testPlayTribute()
 
     printf("\n----- UNIT TEST #4 - playTribute() - COMPLETED -----\n");
 
+    exitStatement();
 
 	return 0;
 }
 
-
+int exitStatement(){
+    return 0;
+}
 
 
 int assert(int expected, int actual)
