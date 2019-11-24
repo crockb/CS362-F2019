@@ -1078,7 +1078,7 @@ int cardEffectAmbassador(int choice1, int choice2, struct gameState *state, int 
     {
         if (i != currentPlayer)
         {
-            gainCard(state->hand[currentPlayer][choice2], state, 0, i); //**BUG**
+            gainCard(state->hand[currentPlayer][choice1], state, 0, i); //**BUG**
         }
     }
 
