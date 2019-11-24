@@ -1232,6 +1232,7 @@ int cardEffectTribute(struct gameState *state)
         nextPlayer = 0;
     }
 
+    printf("Did this fire?\n");
 
 
     if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
@@ -1257,7 +1258,7 @@ int cardEffectTribute(struct gameState *state)
                 state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
                 state->deckCount[nextPlayer]++;
                 state->discard[nextPlayer][i] = -1;
-                state->discardCount[nextPlayer]--;
+                state->discardCount[nextPlayer]--;  // BUG
             }
 
             // shuffle(nextPlayer,state);//Shuffle the deck //**BUG**
