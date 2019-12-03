@@ -267,6 +267,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     state->numActions--;
 
     //update coins (Treasure cards may be added with card draws)
+    print("state->coins = %d", state->coins);
     updateCoins(state->whoseTurn, state, state->coins);
 
     return 0;
