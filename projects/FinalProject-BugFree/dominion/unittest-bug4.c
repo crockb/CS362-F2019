@@ -97,7 +97,7 @@ int runTest(struct gameState *state)
 
 void printAllSupplyCounts(struct gameState *state)
 {
-  //printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
+  printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
   printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
   printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
   printf("supplyCount (province): %d\n", state->supplyCount[province]);
@@ -123,7 +123,7 @@ void printAllSupplyCounts(struct gameState *state)
   printf("supplyCount (outpost): %d\n", state->supplyCount[outpost]);
   printf("supplyCount (salvager): %d\n", state->supplyCount[salvager]);
   printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
-  printf("supplyCount (sea_hag): %d\n", state->supplyCount[treasure_map]);
+  printf("supplyCount (treasure_map): %d\n", state->supplyCount[treasure_map]);
 }
 
 /*
