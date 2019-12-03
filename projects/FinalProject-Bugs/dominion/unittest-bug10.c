@@ -30,7 +30,7 @@ int main(){
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize a new game
-    int r = initializeGame(2, k, seed, &G); 
+    initializeGame(2, k, seed, &G); 
 
 
     // set any other variables
