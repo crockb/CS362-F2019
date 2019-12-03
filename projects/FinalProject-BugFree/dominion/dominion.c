@@ -235,7 +235,7 @@ int shuffle(int player, struct gameState *state) {
 int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 {
     int card;
-    int coin_bonus = state->coins;   //tracks coins gain from actions
+    int coin_bonus = 0;   //tracks coins gain from actions
 
     //check if it is the right phase
     if (state->phase != 0)
@@ -268,7 +268,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     state->numActions--;
 
     //update coins (Treasure cards may be added with card draws)
-    updateCoins(state->whoseTurn, state, coin_bonus);
+    updateCoins(state->whoseTurn, state, state->coins);
 
     return 0;
 }
