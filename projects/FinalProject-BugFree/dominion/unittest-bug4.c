@@ -46,7 +46,9 @@ int main()
 int setState()
 {
 // set card array
-    int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
+    int k[27] = { curse, estate, duchy, province, copper, silver, gold, adventurer, council_room, feast,
+    gardens, mine, remodel, smithy, village, baron, great_hall, minion, steward, tribute,
+    ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map };
 
 //declare the game state
     struct gameState G;
@@ -100,14 +102,24 @@ void printAllSupplyCounts(struct gameState *state)
   printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
   printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
   printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
-  printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
+  printf("supplyCount (adventurer): %d\n", state->supplyCount[adventurer]);
+  printf("supplyCount (council_room): %d\n", state->supplyCount[council_room]);
+  printf("supplyCount (feast): %d\n", state->supplyCount[feast]);
   printf("supplyCount (gardens): %d\n", state->supplyCount[gardens]);
-  printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
-  printf("supplyCount (village): %d\n", state->supplyCount[village]);
-  printf("supplyCount (minion): %d\n", state->supplyCount[minion]);
   printf("supplyCount (mine): %d\n", state->supplyCount[mine]);
-  printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
-  printf("supplyCount (tribute): %d\n", state->supplyCount[tribute]);
+  printf("supplyCount (remodel): %d\n", state->supplyCount[remodel]);
   printf("supplyCount (smithy): %d\n", state->supplyCount[smithy]);
-
+  printf("supplyCount (village): %d\n", state->supplyCount[village]);
+  printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
+  printf("supplyCount (great_hall): %d\n", state->supplyCount[great_hall]);
+  printf("supplyCount (minion): %d\n", state->supplyCount[minion]);
+  printf("supplyCount (steward): %d\n", state->supplyCount[steward]);
+  printf("supplyCount (tribute): %d\n", state->supplyCount[tribute]);
+  printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
+  printf("supplyCount (cutpurse): %d\n", state->supplyCount[cutpurse]);
+  printf("supplyCount (embargo): %d\n", state->supplyCount[embargo]);
+  printf("supplyCount (outpost): %d\n", state->supplyCount[outpost]);
+  printf("supplyCount (salvager): %d\n", state->supplyCount[salvager]);
+  printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
+  printf("supplyCount (sea_hag): %d\n", state->supplyCount[treasure_map]);
 }
