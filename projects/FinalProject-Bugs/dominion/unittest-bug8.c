@@ -59,7 +59,7 @@ int setState()
   playCard(0, 1, 1, 1, &G);
 
 //run the test
-  runTest(&G);
+  runTest(&G, &preState);
   return 0;
 }
 
