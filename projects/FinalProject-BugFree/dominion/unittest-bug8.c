@@ -27,7 +27,6 @@
 // helper function signatures
 int setState();
 int runTest(struct gameState *state, struct gameState *preState);
-int newInitialize(int numPlayers, int kingdomCards[10], int randomSeed,struct gameState *state);
 
 int main()
 {
@@ -39,24 +38,31 @@ int main()
 int setState()
 {
 // set card array - all Minion cards so they are the only card played
-  int k[10] = { minion, minion, minion, minion, minion, minion, minion, tribute, minion, minion };
+    int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
+               sea_hag, tribute, smithy
+            };
   int bonus = 0;
+  int gameSeed = 1234;
+
 //declare the game state
   struct gameState G, preState;
 
-// initialize a new game
-  int gameSeed = 1234;
+  printf("\n----- UNIT TEST - Bug#8 - The number of bonus coins from actions does not appear to be recorded correctly in cardEffect. ");
 
   //(this is a new, shortened function that removes any code that might grant coins)
   initializeGame(2, k, gameSeed, &G);
-  updateCoins(0,&G,bonus);
+  
+  // provide player1 with a minion card
+  state.hand[0][0] = minion;
+  state.supplyCount[minion]--;
+
+  // copy the preconditions
+  updateCoins(0, &G , bonus);
   memcpy(&preState, &G, sizeof(struct gameState));
 
-  printf("\n----- UNIT TEST - Bug#8 - The number of bonus coins from actions does not appear to be recorded correctly in cardEffect. ");
 
 //player1 plays a card (guaranteed to be a Minion) with choice 1 (+2 coin)
-  //int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
-  playCard(0, 1, 1, 1, &G);
+  playCard(0, 1, 0, 0, &G);
 
 //run the test
   runTest(&G, &preState);
