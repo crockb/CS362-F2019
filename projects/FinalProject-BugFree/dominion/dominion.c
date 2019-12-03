@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+
 int compare(const void* a, const void* b) {
     if (*(int*)a > *(int*)b)
         return 1;
@@ -267,8 +268,8 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     state->numActions--;
 
     //update coins (Treasure cards may be added with card draws)
-    printf("state->coins = %d", state->coins);
-    updateCoins(state->whoseTurn, state, state->coins);
+    printf("coin_bonus = %d", coin_bonus);
+    updateCoins(state->whoseTurn, state, coin_bonus);
 
     return 0;
 }
@@ -965,7 +966,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
         if (choice1)
         {
-            state->coins = state->coins + 2;
+            bonus = bonus + 2;
         }
         else if (choice2)       //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
 
