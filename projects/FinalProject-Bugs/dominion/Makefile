@@ -66,7 +66,6 @@ unittestresults: unittest-bug1 unittest-bug2 unittest-bug3 unittest-bug4 unittes
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
-
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
 	rm -f unittest-bug1 unittest-bug2 unittest-bug3 unittest-bug4 unittest-bug5 unittest-bug7 unittest-bug8 unittest-bug9 unittest-bug10
