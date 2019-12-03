@@ -23,7 +23,7 @@ int main(){
     // declare the game state
     struct gameState G;
 
-    printf("\n----- UNIT TEST 1 - Bug#3- cardEffect() remodel switch branch incorrect cost comparison ------\n");
+    printf("\n----- UNIT TEST (Condition #1) - Bug#3- cardEffect() remodel switch branch incorrect cost comparison ------\n");
     //The player attempts to gain a card that is of a lesser value than 2 coins more than the trashed card.
 
 
@@ -46,11 +46,11 @@ int main(){
 
     // verify that your assertspass, for the bugs your asserts may fail
     newAssert(r == 0,__LINE__); 
-    printf("\n----- UNIT TEST 1 - Bug#3 - complete ------\n");
+    printf("\n----- UNIT TEST (Condition #1) - Bug#3 - complete ------\n");
 
 //----------------------------------------------------------------------------------------------------------------------------
 
-    printf("\n----- UNIT TEST 2 - Bug#3- cardEffect() remodel switch branch incorrect cost comparison ------\n");
+    printf("\n----- UNIT TEST (Condition #2) - Bug#3- cardEffect() remodel switch branch incorrect cost comparison ------\n");
     //The player attempts to gain a card costing more than 2 coins more than the trashed card
 
     // set the game state
@@ -74,7 +74,7 @@ int main(){
     // verify that your assertspass, for the bugs your asserts may fail
     newAssert(r == -1,__LINE__); 
 
-    printf("\n----- UNIT TEST 2 - Bug#3 - complete ------\n");
+    printf("\n----- UNIT TEST (Condition #2) - Bug#3 - complete ------\n");
 
 
     return 0;

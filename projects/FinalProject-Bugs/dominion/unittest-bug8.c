@@ -26,7 +26,7 @@
 
 // helper function signatures
 int setState();
-int runTest(struct gameState *state);
+int runTest(struct gameState *state, struct gameState *preState)
 int newInitialize(int numPlayers, int kingdomCards[10], int randomSeed,struct gameState *state);
 
 int main()
@@ -39,21 +39,23 @@ int main()
 int setState()
 {
 // set card array - all Minion cards so they are the only card played
-int k[10] = { minion, minion, minion, minion, minion, minion, minion, tribute, minion, minion };
-
+  int k[10] = { minion, minion, minion, minion, minion, minion, minion, tribute, minion, minion };
+  int bonus = 0;
 //declare the game state
-  struct gameState G;
+  struct gameState G, preState;
 
 // initialize a new game
   int gameSeed = 1234;
 
   //(this is a new, shortened function that removes any code that might grant coins)
   initializeGame(2, k, gameSeed, &G);
-  updateCoins(0,&G,2);
+  updateCoins(0,&G,bonus);
+  memcpy(&preState, &state, sizeof(struct gameState));
 
   printf("\n----- UNIT TEST - Bug#8 - The number of bonus coins from actions does not appear to be recorded correctly in cardEffect. ");
 
 //player1 plays a card (guaranteed to be a Minion) with choice 1 (+2 coin)
+  //int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
   playCard(0, 1, 1, 1, &G);
 
 //run the test
@@ -64,16 +66,17 @@ int k[10] = { minion, minion, minion, minion, minion, minion, minion, tribute, m
 
 
 //begin the actual test
-int runTest(struct gameState *state)
+int runTest(struct gameState *state, struct gameState *preState)
 {
 //compare resulting coin values to expected coin values
-  int actual = state->coins;
-    if (actual == 0) //Minion card did not update coins
+  int actual = updateCoins(&state);
+  int expected = updateCoins(&preState) + 2;
+    if (actual != expected) //Minion card did not update coins
       {
         printf("Coins FAILED to update\n");
         return 1;
       };
-    if (actual == 2) //Minion card updated coins
+    if (actual == expected) //Minion card updated coins
       {
         printf("Coins SUCCESSFULLY updated\n");
         return 0;
