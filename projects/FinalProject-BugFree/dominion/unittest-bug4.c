@@ -33,6 +33,8 @@
 // helper function signatures
 int setState();
 int runTest(struct gameState *state);
+void printAllSupplyCounts(struct gameState *state);
+
 
 int main()
 {
@@ -82,5 +84,29 @@ int runTest(struct gameState *state)
         printf("Checking cards 26 and 27 in loop - SUCCESS\n");
         return 0;
       };
+
+  printAllSupplyCounts(&state);
 	return 0;
+}
+
+
+void printAllSupplyCounts(struct gameState *state)
+{
+  printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
+  printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
+  printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
+  printf("supplyCount (province): %d\n", state->supplyCount[province]);
+  printf("supplyCount (copper): %d\n", state->supplyCount[copper]);
+  printf("supplyCount (silver): %d\n", state->supplyCount[silver]);
+  printf("supplyCount (gold): %d\n", state->supplyCount[gold]);
+  printf("supplyCount (baron): %d\n", state->supplyCount[baron]);
+  printf("supplyCount (gardens): %d\n", state->supplyCount[gardens]);
+  printf("supplyCount (ambassador): %d\n", state->supplyCount[ambassador]);
+  printf("supplyCount (village): %d\n", state->supplyCount[village]);
+  printf("supplyCount (minion): %d\n", state->supplyCount[minion]);
+  printf("supplyCount (mine): %d\n", state->supplyCount[mine]);
+  printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
+  printf("supplyCount (tribute): %d\n", state->supplyCount[tribute]);
+  printf("supplyCount (smithy): %d\n", state->supplyCount[smithy]);
+
 }
