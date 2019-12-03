@@ -236,7 +236,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
 {
     int card;
     int coin_bonus = 0;   //tracks coins gain from actions
-
+     printf("Anything?\n");
     //check if it is the right phase
     if (state->phase != 0)
     {
