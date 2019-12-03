@@ -79,12 +79,12 @@ int runTest(struct gameState *state)
 //The hands have cards.
 //We will check if the game is over.
   int actual = isGameOver(state);
-    if (actual == 0) //game is over, even when it shouldn't be
+    if (actual == 1) //game is over, even when it shouldn't be
       {
         printf("Checking cards 26 and 27 - FAIL\n");
         return 1;
       };
-    if (actual == 1) //game is not over
+    if (actual == 0) //game is not over
       {
         printf("Checking cards 26 and 27 in loop - SUCCESS\n");
         return 0;
