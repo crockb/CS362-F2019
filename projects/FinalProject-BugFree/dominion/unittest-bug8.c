@@ -53,8 +53,8 @@ int setState()
   initializeGame(2, k, gameSeed, &G);
   
   // provide player1 with a minion card
-  state.hand[0][0] = minion;
-  state.supplyCount[minion]--;
+  G.hand[0][0] = minion;
+  G.supplyCount[minion]--;
 
   // copy the preconditions
   updateCoins(0, &G , bonus);
