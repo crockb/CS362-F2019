@@ -49,7 +49,7 @@ int k[10] = { minion, minion, minion, minion, minion, minion, minion, tribute, m
 
   //(this is a new, shortened function that removes any code that might grant coins)
   initializeGame(2, k, gameSeed, &G);
-  updateCoins(0,state,2);
+  updateCoins(0,&G,2);
 
   printf("\n----- UNIT TEST - Bug#8 - The number of bonus coins from actions does not appear to be recorded correctly in cardEffect. ");
 
