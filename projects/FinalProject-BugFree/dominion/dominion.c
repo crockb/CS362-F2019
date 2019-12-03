@@ -235,7 +235,7 @@ int shuffle(int player, struct gameState *state) {
 int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 {
     int card;
-    int coin_bonus = 0;         //tracks coins gain from actions
+    int coin_bonus = state->coins;         //tracks coins gain from actions
 
     //check if it is the right phase
     if (state->phase != 0)
@@ -403,7 +403,7 @@ int isGameOver(struct gameState *state) {
 
     //if three supply pile are at 0, the game ends
     j = 0;
-    for (i = 0; i < 25; i++)
+    for (i = 0; i < 27; i++)
     {
         if (state->supplyCount[i] == 0)
         {

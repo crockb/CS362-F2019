@@ -24,13 +24,13 @@ int main(){
     // declare the game state
     struct gameState G;
 
-    printf("\n----- UNIT TEST 1 - Bug#10- cardEffect() ambassador switch branch incorrectly calculates number of copies of card in hand ------\n");
+    printf("\n----- UNIT TEST (Condition 1) - Bug#10- cardEffect() ambassador switch branch incorrectly calculates number of copies of card in hand ------\n");
     //Reveal a card in hand and return 2 copies to the supply (where card + 2 copies currently exists in hand)
 
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize a new game
-    int r = initializeGame(2, k, seed, &G); 
+    initializeGame(2, k, seed, &G); 
 
 
     // set any other variables
@@ -60,7 +60,7 @@ int main(){
 
 
     // call the function
-    r = cardEffect(ambassador, 1, 2, 0, &G, 0, 0);
+    cardEffect(ambassador, 1, 2, 0, &G, 0, 0);
 
     // verify that your asserts pass, for the bugs your asserts may fail
     //cards discarded
@@ -77,9 +77,9 @@ int main(){
     newAssert(G.discard[p + 1][0] == copper, __LINE__);
     newAssert(G.supplyCount[copper] == 1, __LINE__);
 
-    printf("\n----- UNIT TEST 1- Bug#10 - complete ------\n");
+    printf("\n----- UNIT TEST (Condition 1) - Bug#10 - complete ------\n");
 
-    printf("\n----- UNIT TEST 2 - Bug#10- cardEffect() ambassador switch branch incorrectly calculates number of copies of card in hand ------\n");
+    printf("\n----- UNIT TEST (Condition 2) - Bug#10- cardEffect() ambassador switch branch incorrectly calculates number of copies of card in hand ------\n");
     //Reveal a card in hand and return 1 copy to the supply (where card + 1 copy currently exists in hand)
 
 
@@ -87,7 +87,7 @@ int main(){
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize a new game
-    r = initializeGame(2, k, seed, &G); 
+    initializeGame(2, k, seed, &G); 
 
 
     // set any other variables
@@ -117,7 +117,7 @@ int main(){
 
 
     // call the function
-    r = cardEffect(ambassador, 1, 1, 0, &G, 0, 0);
+    cardEffect(ambassador, 1, 1, 0, &G, 0, 0);
 
     // verify that your asserts pass, for the bugs your asserts may fail
     //cards discarded
@@ -134,8 +134,8 @@ int main(){
     newAssert(G.discardCount[p + 1] == 1, __LINE__);
     newAssert(G.discard[p + 1][0] == copper, __LINE__);
 
-    printf("\n----- UNIT TEST 2 - Bug#10 - complete ------\n");
-    printf("\n----- UNIT TEST 3 - Bug#10- cardEffect() ambassador switch branch incorrectly calculates number of copies of card in hand ------\n");
+    printf("\n----- UNIT TEST (Condition 2) - Bug#10 - complete ------\n");
+    printf("\n----- UNIT TEST (Condition 3) - Bug#10- cardEffect() ambassador switch branch incorrectly calculates number of copies of card in hand ------\n");
     //Reveal a card in hand (where handPos == supplyPos) and return 1 copy to the supply (where card + 1 copy currently exists in hand)
 
 
@@ -143,7 +143,7 @@ int main(){
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize a new game
-    r = initializeGame(2, k, seed, &G); 
+    initializeGame(2, k, seed, &G); 
 
 
     // set any other variables
@@ -170,7 +170,7 @@ int main(){
     G.numBuys = 0;
     G.coins = 0;
 
-    r = cardEffect(ambassador, 4, 1, 0, &G, 0, 0);
+    cardEffect(ambassador, 4, 1, 0, &G, 0, 0);
 
     // verify that your asserts pass, for the bugs your asserts may fail
     //cards discarded
@@ -187,7 +187,7 @@ int main(){
     newAssert(G.discardCount[p + 1] == 1, __LINE__);
     newAssert(G.discard[p + 1][0] == copper, __LINE__);
 
-    printf("\n----- UNIT TEST 3 - Bug#10 - complete ------\n");
+    printf("\n----- UNIT TEST (Condition 3) - Bug#10 - complete ------\n");
 
     return 0;
 }
