@@ -26,7 +26,7 @@
 
 // helper function signatures
 int setState();
-int runTest(struct gameState *state, struct gameState *preState)
+int runTest(struct gameState *state, struct gameState *preState);
 int newInitialize(int numPlayers, int kingdomCards[10], int randomSeed,struct gameState *state);
 
 int main()
