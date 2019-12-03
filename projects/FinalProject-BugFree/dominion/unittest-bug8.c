@@ -41,7 +41,7 @@ int setState()
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
-  int bonus = 0;
+  //int bonus = 0;
   int gameSeed = 1234;
 
 //declare the game state
