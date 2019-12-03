@@ -69,8 +69,8 @@ int setState()
 int runTest(struct gameState *state, struct gameState *preState)
 {
 //compare resulting coin values to expected coin values
-  int actual = updateCoins(&state);
-  int expected = updateCoins(&preState) + 2;
+  int actual = state.coins;
+  int expected = preState.coins + 2;
     if (actual != expected) //Minion card did not update coins
       {
         printf("\nCoins FAILED to update: actual = %d, expected = %d\n", actual, expected);
@@ -78,7 +78,7 @@ int runTest(struct gameState *state, struct gameState *preState)
       };
     if (actual == expected) //Minion card updated coins
       {
-        printf("\nCoins SUCCESSFULLY: actual = %d, expected = %d\n", actual, expected\n);
+        printf("\nCoins SUCCESSFULLY: actual = %d, expected = %d\n", actual, expected);
         return 0;
       };
 	return 0;
