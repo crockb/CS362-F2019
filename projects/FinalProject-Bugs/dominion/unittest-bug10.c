@@ -21,7 +21,6 @@ int main(){
     int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
     int p = 0;
     int seed = 1000;
-    int r;
     // declare the game state
     struct gameState G;
 
@@ -61,7 +60,7 @@ int main(){
 
 
     // call the function
-    r = cardEffect(ambassador, 1, 2, 0, &G, 0, 0);
+    cardEffect(ambassador, 1, 2, 0, &G, 0, 0);
 
     // verify that your asserts pass, for the bugs your asserts may fail
     //cards discarded
@@ -88,7 +87,7 @@ int main(){
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize a new game
-    r = initializeGame(2, k, seed, &G); 
+    initializeGame(2, k, seed, &G); 
 
 
     // set any other variables
@@ -118,7 +117,7 @@ int main(){
 
 
     // call the function
-    r = cardEffect(ambassador, 1, 1, 0, &G, 0, 0);
+    cardEffect(ambassador, 1, 1, 0, &G, 0, 0);
 
     // verify that your asserts pass, for the bugs your asserts may fail
     //cards discarded
@@ -144,7 +143,7 @@ int main(){
     memset(&G, 23, sizeof(struct gameState));
 
     // initialize a new game
-    r = initializeGame(2, k, seed, &G); 
+    initializeGame(2, k, seed, &G); 
 
 
     // set any other variables
@@ -171,7 +170,7 @@ int main(){
     G.numBuys = 0;
     G.coins = 0;
 
-    r = cardEffect(ambassador, 4, 1, 0, &G, 0, 0);
+    cardEffect(ambassador, 4, 1, 0, &G, 0, 0);
 
     // verify that your asserts pass, for the bugs your asserts may fail
     //cards discarded
