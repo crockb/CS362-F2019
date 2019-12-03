@@ -62,6 +62,7 @@ int setState()
   printf("\n----- UNIT TEST - Bug#4 - isGameOver() does not check cards 26 and 27.");
 
   runTest(&G);
+  printAllSupplyCounts(&state);
 
   return 0;
 }
@@ -85,7 +86,7 @@ int runTest(struct gameState *state)
         return 0;
       };
 
-  printAllSupplyCounts(&state);
+
 	return 0;
 }
 
