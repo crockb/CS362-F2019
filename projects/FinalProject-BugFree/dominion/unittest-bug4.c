@@ -66,7 +66,6 @@ int setState()
   printf("\n----- UNIT TEST - Bug#4 - isGameOver() does not check cards 26 and 27.");
 
   runTest(&G);
-  printAllSupplyCounts(&G);
 
   return 0;
 }
@@ -81,12 +80,12 @@ int runTest(struct gameState *state)
   int actual = isGameOver(state);
     if (actual == 1) //game is over, even when it shouldn't be
       {
-        printf("Checking cards 26 and 27 - FAIL\n");
+        printf("\nChecking cards 26 and 27 - FAIL\n");
         return 1;
       };
     if (actual == 0) //game is not over
       {
-        printf("Checking cards 26 and 27 in loop - SUCCESS\n");
+        printf("\nChecking cards 26 and 27 in loop - SUCCESS\n");
         return 0;
       };
 
