@@ -50,7 +50,7 @@ int setState()
   //(this is a new, shortened function that removes any code that might grant coins)
   initializeGame(2, k, gameSeed, &G);
   updateCoins(0,&G,bonus);
-  memcpy(&preState, &state, sizeof(struct gameState));
+  memcpy(&preState, &G, sizeof(struct gameState));
 
   printf("\n----- UNIT TEST - Bug#8 - The number of bonus coins from actions does not appear to be recorded correctly in cardEffect. ");
 
@@ -69,8 +69,8 @@ int setState()
 int runTest(struct gameState *state, struct gameState *preState)
 {
 //compare resulting coin values to expected coin values
-  int actual = state.coins;
-  int expected = preState.coins + 2;
+  int actual = state->coins;
+  int expected = preState->coins + 2;
     if (actual != expected) //Minion card did not update coins
       {
         printf("\nCoins FAILED to update: actual = %d, expected = %d\n", actual, expected);
