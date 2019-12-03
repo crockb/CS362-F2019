@@ -59,7 +59,6 @@ int setState()
   G.supplyCount[minion]--;
 
   updateCoins(0, &G, 0);
-  G.coins = 0;
   memcpy(&preState, &G, sizeof(struct gameState));
 
   printPlayersCards(0, &G);
