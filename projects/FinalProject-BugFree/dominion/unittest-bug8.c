@@ -27,6 +27,7 @@
 // helper function signatures
 int setState();
 int runTest(struct gameState *state, struct gameState *preState);
+void printPlayersCards(int player, struct gameState *state);
 
 int main()
 {
@@ -58,8 +59,12 @@ int setState()
 
   memcpy(&preState, &G, sizeof(struct gameState));
 
+  printPlayersCards(0, &state);
+
 //player1 plays a card (guaranteed to be a Minion) with choice 1 (+2 coin)
   playCard(0, 1, 0, 0, &G);
+
+ printPlayersCards(0, &state);
 
 //run the test
   runTest(&G, &preState);
@@ -85,4 +90,16 @@ int runTest(struct gameState *state, struct gameState *preState)
         return 0;
       };
 	return 0;
+}
+
+
+void printPlayersCards(int player, struct gameState *state)
+{
+    int i;
+
+    // print the hand
+   printf("Player's hand:\n");
+   for (i = 0; i < state->handCount[player]; i++)
+    printf("  Card #%d: %d\n", i+1, state->hand[player][i]);
+
 }
