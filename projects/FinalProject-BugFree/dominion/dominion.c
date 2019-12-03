@@ -235,7 +235,7 @@ int shuffle(int player, struct gameState *state) {
 int playCard(int handPos, int choice1, int choice2, int choice3, struct gameState *state)
 {
     int card;
-    int coin_bonus = state->coins;         //tracks coins gain from actions
+    int coin_bonus = state->coins;   //tracks coins gain from actions
 
     //check if it is the right phase
     if (state->phase != 0)
@@ -259,7 +259,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     }
 
     //play card
-    if ( cardEffect(card, choice1, choice2, choice3, state, handPos, coin_bonus) < 0 )
+    if ( cardEffect(card, choice1, choice2, choice3, state, handPos, &coin_bonus) < 0 )
     {
         return -1;
     }
