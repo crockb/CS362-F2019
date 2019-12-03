@@ -964,8 +964,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
         if (choice1)
         {
-            printf("Did this run 2\n");
-            bonus = bonus + 2;
+            state->coins = state->coins + 2;
         }
         else if (choice2)       //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
 
