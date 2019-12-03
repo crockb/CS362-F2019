@@ -52,9 +52,10 @@ int setState()
 
   //(this is a new, shortened function that removes any code that might grant coins)
   initializeGame(2, k, gameSeed, &G);
-  state->coins = 0;
+
   
   // provide player1 with a minion card
+  G.coins = 0;
   G.hand[0][0] = minion;
   G.supplyCount[minion]--;
 
