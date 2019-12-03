@@ -21,6 +21,7 @@ int main(){
     int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
     int p = 0;
     int seed = 1000;
+    int r;
     // declare the game state
     struct gameState G;
 
