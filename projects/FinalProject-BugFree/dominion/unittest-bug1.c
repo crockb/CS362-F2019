@@ -15,7 +15,6 @@
  		    values: choice[1] = copper ($0), choice2 = silver ($3)
  		    
  	Expected Unittest Outcomes:
- 			Player1 hand:  -1 Copper
 			Player1 playedCards:  no change in Copper
 			Player1 discard:  no change in Copper
 			Player1 deck:  no change in Copper
@@ -79,28 +78,21 @@ int testPlayMine()
     playCard(0, 1, silver, 1, &state); 
 
 
-    // Assertion #1:  Player1 hand:  -1 Copper
-    result = assert(countCardType(copper, &preState,0)-1, countCardType(copper, &state,0));
-    if (result == 0)
-    	printf("Player1 hand: -1 Copper - FAIL: actual %d, expected: %d\n", countCardType(copper, &state,0), countCardType(copper, &preState,0)-1);
-    else
-    	printf("Player1 hand: -1 Copper - PASS: actual %d, expected: %d\n", countCardType(copper, &state,0), countCardType(copper, &preState,0)-1);
-
-    // Assertion #2:  playedCards:  no change in Copper
+    // Assertion #1:  playedCards:  no change in Copper
     result = assert(countCardType(copper, &preState,3), countCardType(copper, &state,3));
     if (result == 0)
     	printf("playedCards:  no change in Copper - FAIL: actual %d, expected: %d\n", countCardType(copper, &state,3), countCardType(copper, &preState,3));
     else
     	printf("playedCards:  no change in Copper - PASS: actual %d, expected: %d\n", countCardType(copper, &state,3), countCardType(copper, &preState,3));
 
-    // Assertion #3:  Player1 discard:  no change in Copper
+    // Assertion #2:  Player1 discard:  no change in Copper
     result = assert(countCardType(copper, &preState,1), countCardType(copper, &state,1));
     if (result == 0)
     	printf("Player1 discard:  no change in Copper - FAIL: actual %d, expected: %d\n", countCardType(copper, &state,1), countCardType(copper, &preState,1));
     else
     	printf("Player1 discard:  no change in Copper - PASS: actual %d, expected: %d\n", countCardType(copper, &state,1), countCardType(copper, &preState,1));
 
-    // Assertion #4:  Player1 deck:  no change in Copper
+    // Assertion #3:  Player1 deck:  no change in Copper
     result = assert(countCardType(copper, &preState,2), countCardType(copper, &state,2));
     if (result == 0)
     	printf("Player1 deck:  no change in Copper - FAIL: actual %d, expected: %d\n", countCardType(copper, &state,2), countCardType(copper, &preState,2));

@@ -61,12 +61,8 @@ int setState()
   updateCoins(0, &G, 0);
   memcpy(&preState, &G, sizeof(struct gameState));
 
-  printPlayersCards(0, &G);
-
 //player1 plays a card (guaranteed to be a Minion) with choice 1 (+2 coin)
   playCard(0, 1, 0, 0, &G);
-
- printPlayersCards(0, &G);
 
 //run the test
   runTest(&G, &preState);
