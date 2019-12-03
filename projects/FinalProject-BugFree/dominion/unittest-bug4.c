@@ -58,8 +58,9 @@ int setState()
     initializeGame(2, k, gameSeed, &G); 
 
 // set the supply pile
-  //G.supplyCount[province] = 1; //neccesary because province cards are required to continue the game
- //G.supplyCount[treasure_map] = 4; //this is what we are testing
+  G.supplyCount[adventurer] = 0; //neccesary because province cards are required to continue the game
+  G.supplyCount[council_room] = 0;
+  G.supplyCount[treasure_map] = 1; //this is what we are testing
 
 
   printf("\n----- UNIT TEST - Bug#4 - isGameOver() does not check cards 26 and 27.");
