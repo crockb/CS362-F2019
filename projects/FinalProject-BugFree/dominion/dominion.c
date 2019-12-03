@@ -267,7 +267,7 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     state->numActions--;
 
     //update coins (Treasure cards may be added with card draws)
-    printf("Did this run?\n");
+    printf("Did this run? coin_bonus = %d\n", coin_bonus);
     updateCoins(state->whoseTurn, state, coin_bonus);
 
     return 0;
