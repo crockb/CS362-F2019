@@ -42,7 +42,6 @@ int setState()
     int k[10] = {baron, gardens, ambassador, village, minion, mine, cutpurse,
                sea_hag, tribute, smithy
             };
-  //int bonus = 0;
   int gameSeed = 1234;
 
 //declare the game state
@@ -55,10 +54,12 @@ int setState()
 
   
   // provide player1 with a minion card
-  G.coins = 0;
+
   G.hand[0][0] = minion;
   G.supplyCount[minion]--;
 
+  updateCoins(0, &G, 0);
+  G.coins = 0;
   memcpy(&preState, &G, sizeof(struct gameState));
 
   printPlayersCards(0, &G);
