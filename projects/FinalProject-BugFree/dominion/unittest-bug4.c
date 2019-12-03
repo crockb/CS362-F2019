@@ -58,8 +58,9 @@ int setState()
     initializeGame(2, k, gameSeed, &G); 
 
 // set the supply pile
-  G.supplyCount[province] = 1; //neccesary because province cards are required to continue the game
-  G.supplyCount[treasure_map] = 4; //this is what we are testing
+  //G.supplyCount[province] = 1; //neccesary because province cards are required to continue the game
+ //G.supplyCount[treasure_map] = 4; //this is what we are testing
+
 
   printf("\n----- UNIT TEST - Bug#4 - isGameOver() does not check cards 26 and 27.");
 
@@ -95,7 +96,7 @@ int runTest(struct gameState *state)
 
 void printAllSupplyCounts(struct gameState *state)
 {
-  printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
+  //printf("supplyCount (curse): %d\n", state->supplyCount[curse]);
   printf("supplyCount (estate): %d\n", state->supplyCount[estate]);
   printf("supplyCount (duchy): %d\n", state->supplyCount[duchy]);
   printf("supplyCount (province): %d\n", state->supplyCount[province]);
@@ -123,3 +124,11 @@ void printAllSupplyCounts(struct gameState *state)
   printf("supplyCount (sea_hag): %d\n", state->supplyCount[sea_hag]);
   printf("supplyCount (sea_hag): %d\n", state->supplyCount[treasure_map]);
 }
+
+/*
+
+    int k[27] = { curse, estate, duchy, province, copper, silver, gold, adventurer, council_room, feast,
+    gardens, mine, remodel, smithy, village, baron, great_hall, minion, steward, tribute,
+    ambassador, cutpurse, embargo, outpost, salvager, sea_hag, treasure_map };
+
+*/

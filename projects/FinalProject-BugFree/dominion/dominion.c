@@ -106,7 +106,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 
     for (i = adventurer; i <= treasure_map; i++)        //loop all cards
     {
-        for (j = 0; j < 10; j++)                //loop chosen cards
+        for (j = 0; j < 27; j++)                //loop chosen cards
         {
             if (kingdomCards[j] == i)
             {
