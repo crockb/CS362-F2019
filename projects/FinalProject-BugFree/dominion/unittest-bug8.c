@@ -104,4 +104,6 @@ void printPlayersCards(int player, struct gameState *state)
    for (i = 0; i < state->handCount[player]; i++)
     printf("  Card #%d: %d\n", i+1, state->hand[player][i]);
 
+  printf("state->coins = %d\n", state->coins);
+
 }
