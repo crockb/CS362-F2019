@@ -56,10 +56,7 @@ int setState()
   G.hand[0][0] = minion;
   G.supplyCount[minion]--;
 
-  // copy the preconditions
-  updateCoins(0, &G , bonus);
   memcpy(&preState, &G, sizeof(struct gameState));
-
 
 //player1 plays a card (guaranteed to be a Minion) with choice 1 (+2 coin)
   playCard(0, 1, 0, 0, &G);
