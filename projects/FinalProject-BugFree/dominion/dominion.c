@@ -236,16 +236,18 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
 {
     int card;
     int coin_bonus = 0;   //tracks coins gain from actions
-     printf("Anything?\n");
+     printf("Anything1?\n");
     //check if it is the right phase
     if (state->phase != 0)
     {
+        printf("Anything2?\n");
         return -1;
     }
 
     //check if player has enough actions
     if ( state->numActions < 1 )
     {
+        printf("Anything3?\n");
         return -1;
     }
 
@@ -255,12 +257,14 @@ int playCard(int handPos, int choice1, int choice2, int choice3, struct gameStat
     //check if selected card is an action
     if ( card < adventurer || card > treasure_map )
     {
+        printf("Anything4?\n");
         return -1;
     }
 
     //play card
     if ( cardEffect(card, choice1, choice2, choice3, state, handPos, &coin_bonus) < 0 )
     {
+        printf("Anything5?\n");
         return -1;
     }
 
